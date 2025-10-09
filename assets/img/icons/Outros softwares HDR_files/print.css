@@ -1,0 +1,47 @@
+body {
+  font-family: "Times New Roman", Times, serif;
+  background: white;
+  color: black;
+  font-size: 12pt;
+  line-height: 1.2;
+  word-spacing: 1px;
+}
+div#news {
+  display: none;
+}
+div#banner {
+  margin: 2px 0;
+  height: 60px;
+  background-image: url("../images/tiled_background.png");
+  background-repeat: repeat-x;
+}
+a {
+  color: black;
+  text-decoration: underline;
+}
+a.extlink:after, a.intlink:after {
+   content: " ("attr(href)")";
+}
+.contents {
+  margin: 10px;
+}
+#nav {
+  display: none;
+}
+#lastmod {
+  font-size: 10px;
+}
+#copyright {
+  font-size: 11px;
+}
+div.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+div.figure, div.table {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+

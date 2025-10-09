@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/Camera_Icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+    <title>HDR WebSite </title>
+    
+    <link rel="stylesheet" href="../output.css">
+</head>
+
+<body>
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+   <header id="navbar" class="bg-cyan-800 fixed w-full top-0 left-0 z-50">
+    <nav class="container flex items-center justify-between h-16 sm:h-20">
+      <a href="../index.html"><div class="font-Lobster sm:text-2xl">Light Photo Analyzer</div></a>
+
+      <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-cyan-950/80
+      backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
+
+        <ul class="flex flex-col items-center gap-8 lg:flex-row">
+                 <li>
+            <a href="../index.html" class="nav-link active:">Home</a>
+          </li>
+
+          <li>
+            <a href="Roll-Your-Own.html" class="nav-link">Roll-Your-Own</a>
+          </li>
+
+          <li>
+            <a href="ryo.html" class="nav-link">WebHDR Roll-Your-Own</a>
+          </li>
+
+          <li>
+            <a href="Tone-mapping.html" class="nav-link">Mapeamento de Tons</a>
+          </li>
+      </ul>
+      
+      <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-1.png" alt="" class="w-32">
+      </div>
+
+      <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-2.png" alt="" class="w-32">
+      </div>
+    </div>
+
+      <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+        <i class="ri-menu-4-line" id="hamburger"></i>
+      </div>
+
+      
+    </nav>
+  </header>
+
+ <section id="home" class="relative bg-cyan-900">
+            <div class="container">
+              <!-- blob 1 -->
+               <div class="w-64 h-64 bg-emerald-700 rounded-full blur-3xl -z-10 opacity-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+
+               </div>
+
+                <!-- blob 2 -->
+               <div class="w-64 h-64 bg-emerald-700 rounded-full blur-3xl -z-10 opacity-40 absolute right-0 bottom-0">
+
+               </div>
+
+
+
+                <div class="flex flex-col items-center gap-5 lg:flex-row">
+                    <!-- content -->
+                    <div class="home__data w-full space-y-5 lg:w-1/2">
+             <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+   Mapeamento de Tons
+    <br>
+    <h2  class="text-4xl lg:text-4xl font-bold text-white mb-4"><span class="text-blue-50">A tecnologia de exibição atual tem uma faixa dinâmica muito limitada, portanto, se for uma imagem HDR se for exibida, a faixa dinâmica da imagem terá que ser compactada para o do dispositivo de exibição. Esse processo é conhecido como mapeamento de tons.</span>
+</h2></h1>
+
+
+                        <div class="flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-5 xl:pt-10">
+                        <a href="ryo.html" class="btn flex items-center justify-center gap-2 bg-emerald-800/40">
+                        <span>Roll-Your-Own</span>
+                        <i class="ri-video-on-line"></i>
+                        </a>
+                         
+
+                            <p class="text-xs font-Lobster text-slate-300"></p>
+
+                            <div class="flex items-center gap-5 text-lg lg:pt-10">
+                                <i class="ri-facebook-fill text-slate-300 hover:text-emerald-800/40 duration-300 cursor-pointer"></i>
+                                <i class="ri-twitter-x-line  text-slate-300 hover:text-emerald-800/40 duration-300 cursor-pointer text-base"></i>
+                                <i class="ri-instagram-line  text-slate-300 hover:text-emerald-800/40 duration-300 cursor-pointer"></i>
+                                <i class="ri-linkedin-fill  text-slate-300 hover:text-emerald-800/40 duration-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- image -->
+                     <div class="w-full relative  lg:w-1/2">
+                        <img src="../assets/img/fotos-hdr-conclusão.jpg" class="home__image">
+
+                        <!-- image-home -->
+
+                        <div class="absolute -top-10 right-0 opacity-30 animate-movingY xl:top-5">
+                            <i class="ri-camera-2-line text-6xl text-emerald-400"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute bottom-0 left-0 opacity-30 xl:bottom-12 animate-rotating">
+                            <i class="ri-dv-fill text-6xl text-emerald-400"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute -top-8 -left-5 opacity-30 lg:block animate-scalingUp">
+                            <i class="ri-vidicon-line text-6xl text-emerald-400"></i>
+                            
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+
+
+   <section id="radiance" class="relative overflow-hidden bg-blue-50">
+
+            <div class="about__top flex flex-col items-center gap-3 text-center mb-10 md:mb-20 ">
+             
+               <h1 class="text-4xl lg:text-5xl font-bold text-emerald-800/40 mb-4 font-Lobster"> Operadores de Mapeamento de Tons</h1>
+              <p class="max-w-2x1 text-emerald-950">Os operadores de mapeamento de tons são divididos em quatro categorias. Mais detalhes sobre mapeamento de tons e todos os aspectos relacionados ao HDR podem ser encontrados em Reinhard et al: Imagem de alta faixa dinâmica - Aquisição, Exibição e Iluminação Baseada em Imagem. </p>
+            </div>
+
+            
+
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/1-manequin_ldr_auto.jpg" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                  
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-emerald-950/90   font-Lobster">Operadores globais</span>
+                        <br>
+                      <p class="text-emerald-950 ">A mesma curva (não linear) é aplicada a todos os pixels <br></p>
+
+                    <span class="text-emerald-950/90   font-Lobster">Operadores locais</span>
+                        <br>
+                      <p class="text-emerald-950 ">O nível de adaptação é derivado para cada pixel individualmente considerando a vizinhança local, <br></p>
+
+
+                       <span class="text-emerald-950/90   font-Lobster">Operadores de domínio de frequência</span>
+                        <br>
+                      <p class="text-emerald-950 ">A faixa dinâmica é reduzida com base na frequência espacial da região da imagem,<br></p>
+
+                      <span class="text-emerald-950/90   font-Lobster">Operadores de domínio de gradiente</span>
+                        <br>
+                      <p class="text-emerald-950 ">Uma derivada da imagem é modificada.<br></p><br>
+
+                      <P  class="text-emerald-950 ">Existem vários operadores que tentam imitar o sistema visual humano. O humano a visão é um processo bastante complexo com uma resposta altamente não linear. Esses mapeamentos de tons os operadores exigem que a imagem esteja em unidades do mundo real, ou seja, cd/m². Porque o cones sensíveis à cor funcionam para alta iluminação, sendo as hastes responsáveis por ambientes com pouca luz, um dos efeitos dos operadores humanos de mapeamento de tons é o dessaturação de cores para baixas luminâncias. Da mesma forma, regiões muito brilhantes da imagem resultará em uma luminância velada, causando brilho.
+
+</P>
+
+<p class="text-emerald-950">Existem muitos operadores de mapeamento de tons diferentes e o operador ideal para uma aplicação específica e o dispositivo de saída pode exigir alguma experimentação do usuário.</p>
+
+<p class="text-emerald-800">Fotografia LDR exposta automaticamente para comparação</p>
+            
+
+                  </div>
+               </div>
+
+                
+            </div>
+            <hr class="bg-black">
+
+               </div>
+
+              
+
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/drago.png" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                  
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-emerald-950/90   font-Lobster">Global Operators</span>
+                        <br>
+                      <p class="text-emerald-950 ">O mapeamento de tons mais simples possível é o mapeamento linear, mas como a maioria exibe os dispositivos exibem uma resposta não linear, o que resultará em imagens muito escuras se o HDR a imagem tem uma ampla faixa dinâmica. Um mapeamento linear corrigido por gama tenta corrigir isso problema. Correções exponenciais e logarítmicas ao mapeamento linear também são possíveis.<br></p>
+
+                    <br><span class="text-emerald-950/90   font-Lobster">Drago</span><br><p class="text-emerald-950 ">Estende as curvas de resposta logarítmica para lidar com uma abordagem mais ampla faixa dinâmica. Uma compressão logarítmica é aplicada à luminância da imagem. A base de o logaritmo varia entre 2 e 10, com base no brilho das regiões dentro do imagem. Isto resulta numa preservação do contraste em regiões mais escuras e numa maior compressão para regiões brilhantes. <br></p>
+
+ <p class="text-emerald-800 ">Drago 2003 (esquerda), Reinhard 2002 (direita)</p>
+ <br>
+<span class="text-emerald-950/90   font-Lobster">Reinhard </span>
+                        <br>
+                      <p class="text-emerald-950 ">et. al. inspiraram-se em seu operador de mapeamento de tons a partir de técnicas conhecido pela fotografia tradicional de filme úmido. Para obter a melhor impressão visual de um negativo, não basta apenas combinar contraste e brilho. Conteúdo da cena, imagem médio, e as condições de visualização também devem ser frequentemente consideradas. Foi Ansel Adams quem desenvolveu o chamado Sistema de Zonas na década de 1940. Agora, 60 anos depois, ainda é usado com sucesso porque combina medições quantitativas com conteúdo de imagens artísticas.</p>
+
+                    
+
+
+
+            
+
+                  </div>
+               </div>
+
+                
+            </div>
+            <hr class="bg-black">
+
+               </div>
+       
+               <hr>
+
+               
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/2-manequin_ashikhmin02.jpg" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                  
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-emerald-950/90   font-Lobster">Operadores locais</span>
+                        <br>
+                      <p class="text-emerald-950 ">O Pattanaik o operador observador multiescala tenta modelar todas as etapas dentro do sistema visual humano atualmente conhecido o suficiente para ser modelado. É o mais completo estrutura até o momento, embora não seja estritamente necessária apenas para reduzir a faixa dinâmica. <br></p>
+
+
+<p class="text-emerald-950">Em contraste com o modelo de Pattanaik, Ashikhmin. O operador 's implementa apenas esses aspectos relevante para compressão de faixa dinâmica. Como resultado, o operador Ashikhmin é significativamente mais rápido.</p>
+
+<p class="text-emerald-800">Ashikhmin 2002</p>
+            
+
+                  </div>
+               </div>
+
+                
+            </div>
+
+            <hr>
+
+               <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/4-manequin_durand02.jpg" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                  
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-emerald-950/90   font-Lobster">Operadores de domínio de frequência</span>
+                        <br>
+                      <p class="text-emerald-950 ">Uma imagem pode ser considerada composta por um componente LDR com alto espaço frequência e um componente HDR para baixas frequências. Se os dois puderem ser separados, apenas um dos componentes tem que ser comprimido. Este conceito foi implementado por Durand e Dorsey. Baseia-se na filtragem bilateral, que é uma operação de preservação de bordas que desfoca a imagem mantendo as bordas intactas.
+
+. <br></p>
+
+<p class="text-emerald-800">Durand 2002</p>
+            
+
+                  </div>
+               </div>
+
+                
+            </div>
+
+            <hr>
+
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/5-manequin_fattal02.jpg" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                  
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-emerald-950/90   font-Lobster">Operadores de domínio de gradiente</span>
+                        <br>
+                      <p class="text-emerald-950 ">Enquanto os componentes de alta frequência dentro de uma imagem causam mudanças rápidas na luminância e gradientes altos, que são muito mais suaves com objetos de baixa frequência. O campo gradiente, ou seja, uma representação das mudanças de pixel é compactada com operadores como Fattalcompressão de domínio gradiente. Variando a quantidade de compressão, a quantidade os detalhes preservados na imagem exibida podem ser ajustados.</p>
+
+<p class="text-emerald-800">Fattal 2002</p>
+            
+
+                  </div>
+               </div>
+
+                
+            </div>
+
+            <hr>
+            
+        </section>
+
+       
+        
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+<script src="../assets/js/scrollreveal.min.js"></script>
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="../main.js"></script>
+    
+</body>
+</html>

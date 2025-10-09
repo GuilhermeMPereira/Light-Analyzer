@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/img/Camera_Icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+    <title>HDR WebSite </title>
+    
+    <link rel="stylesheet" href="../../output.css">
+</head>
+
+<body>
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+   <header id="navbar" class="bg-cyan-800 fixed w-full top-0 left-0 z-50">
+    <nav class="container flex items-center justify-between h-16 sm:h-20">
+      <a href="../../index.html"><div class="font-Lobster sm:text-2xl">Light Photo Analyzer</div></a>
+
+      <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-cyan-950/80
+      backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
+
+        <ul class="flex flex-col items-center gap-8 lg:flex-row">
+        <li>
+            <a href="../../index.html" class="nav-link active:">Home</a>
+          </li>
+
+          <li>
+            <a href="#radiance" class="nav-link">Radiance</a>
+          </li>
+
+          <li>
+            <a href="./doc.html" class="nav-link">Documentação</a>
+          </li>
+
+          <li>
+            <a href="./lighting.html" class="nav-link">Iluminação</a>
+          </li>
+
+          <li>
+            <a href="./lighting_natural.html" class="nav-link">Luz Natural</a>
+          </li>
+
+          <li>
+            <a href="sunpath.html" class="nav-link">Diagramas de trajetória solar</a>
+          </li>
+
+          <li>
+            <a href="documents.html" class="nav-link"> Apresentações e Artigos</a>
+          </li>
+      </ul>
+      
+      <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+        <img src="../../assets/img/leaf-1.png" alt="" class="w-32">
+      </div>
+
+      <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden">
+        <img src="../../assets/img/leaf-2.png" alt="" class="w-32">
+      </div>
+    </div>
+
+      <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+        <i class="ri-menu-4-line" id="hamburger"></i>
+      </div>
+
+      
+    </nav>
+  </header>
+
+ <section id="home" class="relative bg-cyan-900">
+            <div class="container">
+              <!-- blob 1 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+
+               </div>
+
+                <!-- blob 2 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute right-0 bottom-0">
+
+               </div>
+
+
+
+                <div class="flex flex-col items-center gap-5 lg:flex-row">
+                    <!-- content -->
+                    <div class="home__data w-full space-y-5 lg:w-1/2">
+             <h1 class="text-4xl lg:text-6xl font-bold text-yellow-500/90 mb-4">
+  Apresentações e Artigos
+    <br>
+    <h2  class="text-4xl lg:text-5xl font-bold text-white mb-4"><span class="text-blue-50"> Mestrado em Arquitetura, Energia e Sustentabilidade; LondonMet</span>
+</h2></h1>
+                        <div class="flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-5 xl:pt-10">
+                        <a href="../../index.html" class="btn flex items-center justify-center gap-2 bg-yellow-500/90">
+                        <span>Home</span>
+                        <i class="ri-video-on-line"></i>
+                        </a>
+  
+                            <p class="text-xs font-Lobster text-slate-300"></p>
+
+                            <div class="flex items-center gap-5 text-lg lg:pt-10">
+                                <i class="ri-facebook-fill text-slate-300 hover:text-yellow-500/90 duration-300 cursor-pointer"></i>
+                                <i class="ri-twitter-x-line  text-slate-300 hover:text-yellow-500/90 duration-300 cursor-pointer text-base"></i>
+                                <i class="ri-instagram-line  text-slate-300 hover:text-yellow-500/90 duration-300 cursor-pointer"></i>
+                                <i class="ri-linkedin-fill  text-slate-300 hover:text-yellow-500/90 duration-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- image -->
+                     <div class="w-full relative lg:w-1/2">
+                        <img src="../../assets/img/3-sv5s78h0-removebg-preview.png" class="home__image">
+
+                        <!-- image-home -->
+
+                        <div class="absolute -top-10 right-0 opacity-30 animate-movingY xl:top-5">
+                            <i class="ri-camera-2-line text-6xl text-yellow-500"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute bottom-0 left-0 opacity-30 xl:bottom-12 animate-rotating">
+                            <i class="ri-dv-fill text-6xl text-yellow-500"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute -top-8 -left-5 opacity-30 lg:block animate-scalingUp">
+                            <i class="ri-vidicon-line text-6xl text-yellow-500"></i>
+                            
+                        </div>
+                     </div>
+            </div>
+
+            
+        </section>
+         <section id="hdr" class="relative overflow-hidden bg-blue-50">
+
+           
+
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+             <section id="hdr" class="relative overflow-hidden bg-blue-50 py-16">
+
+    <div class="about__top flex flex-col items-center gap-3 text-center mb-10 md:mb-20">
+        <h1 class="text-4xl lg:text-5xl font-bold text-yellow-500/90 mb-4 font-Lobster">Documentação</h1>
+    </div>
+
+    <div class="container space-y-16">
+        <div class="flex flex-col items-center lg:flex-row gap-8">
+            <div class="w-full lg:w-1/2">
+                <img src="../../assets/img/lights-background-f5bl1jw3xxk281ge-removebg-preview.png" alt="UNIX for Radiance" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+            </div>
+
+            <div class="w-full lg:w-1/2">
+                <div class="space-y-3">
+                    <h3>
+                        <span class="text-yellow-500/90 text-2xl font-bold">Daylighting and Low Energy Artificial Lighting</span>
+                        <br>
+                        <p class="text-cyan-950">Artificial Lighting (PDF, 2.1 MB)</p>
+                         <p class="text-cyan-950">Daylighting (PDF, 3.0 MB)</p>
+                         <p class="text-cyan-950">Innovative Daylighting Systems (PDF, 1.9 MB)</p>
+                         <p class="text-cyan-950">Colour (PDF, 1.7 MB)</p>
+                        <p class="text-cyan-950"> Glare (PDF, 0.7 MB)</p>
+                        
+                    </h3>
+                    <a href="../../assets/img/DEEAL1_Jacobs-Artificial_Lighting-20121102.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Artificial Lighting</h2>
+                    </a>
+                     <a href="../../assets/img/DEEAL2_Jacobs-Daylighting-20121212.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Daylighting</h2>
+                    </a>
+                     <a href="../../assets/img/DEEAL3_Jacobs-Innovative_Daylighting-20121212.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Innovative Daylighting Systems</h2>
+                    </a>
+                     <a href="../../assets/img/DEEAL4_Jacobs-Colour-20121212.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Colour</h2>
+                    </a>
+                    <a href="../../assets/img/DEEAL5-Jacobs-Glare-20121212.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Glare</h2>
+                    </a>
+
+                    <h3>
+                        <span class="text-yellow-500/90 text-2xl font-bold">Construindo Simulações</span>
+                        <br>
+                        <a href="radiance.html"><p class="text-yellow-600">Radiance Tutorial</p></a>
+                   
+                        
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center lg:flex-row gap-8">
+            <div class="w-full lg:w-1/2">
+                <img src="../../assets/img/3274087_orig-removebg-preview.png" alt="Radiance Tutorial" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+            </div>
+
+            <div class="w-full lg:w-1/2">
+                <div class="space-y-3">
+                    <h3>
+                        <span class="text-yellow-500 text-xl font-bold">Conferências</span>
+                        <br>
+                        <p class="text-cyan-950">Balkan Lights - Conferência Nacional de Iluminação da Bulgária, Varna, BG, 2007
+Determinação de vinhetas de lentes com técnicas HDR (PDF, 2,8 MB)</p>
+                        <p class="text-cyan-950"> CIES 2006 – XIII Congresso Ibérico e VIII Congresso Ibero-Americano de Energia Solar, Novembro de 2006, Lisboa, PT:
+Imagens HDR na Luminância de Espaços (PDF, 1,9 MB)</p>
+                        <p class="text-cyan-950"> PALENC, Santorini, GR, 2005
+                        CLEAR, um pacote multimídia para arquitetura confortável de baixo consumo de energia (PDF, 0,5 MB)</p>
+                        <p class="text-cyan-950">RightLight 5, Nice, FR, 2002
+Criando salas iluminadas pelo sol em espaços sem iluminação natural (PDF, 0,4 MB)</p>
+                        <p class="text-cyan-950">ÉPICO, Lyon, FR, 2002
+                        Luz solar, fibras e óptica líquida: o projeto OVNI (PDF, 0,4 MB)
+                        Mídia e MulCom (PDF: 0,5 MB)</p>
+                        <p class="text-cyan-950">Conferência Nacional de Iluminação do CIBSE, Reino Unido, 2000
+DayMedia - Um pacote de ensino multimídia sobre iluminação natural (PDF, 2,4 MB)</p>
+
+                    </h3>
+                    <a href="../../assets/img/pres_jacobs_hdr_varna2007.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Determining Lens Vignetting with HDR Techniques</h2>
+                    </a>
+                    <a href="../../assets/img/jacobs_cies2006.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Imagens HDR na Luminancia de Espaços</h2>
+                    </a>
+                     <a href="../../assets/img/clear_palenc2005.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">CLEAR, A Multi-Media Package for Comfortable Low Energy Architecture</h2>
+                    </a>
+                    <a href="../../assets/img/ufo_rightlight2002.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Creating Sunlight RTooms in Non-Daylit Spaces</h2>
+                    </a>
+                    <a href="../../assets/img/ufo_epic2002.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Sunlight, Fibres and Liquid Optics: The UFO Project </h2>
+                    </a>
+
+                    <a href="../../assets/img/dm+mu_epic2002.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Media and MulCom </h2>
+                    </a>
+
+                    
+                    <a href="../../assets/img/cibse2000.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">DayMedia - A Multimedia Teaching Package on Daylighting </h2>
+                    </a>
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center lg:flex-row gap-8">
+            <div class="w-full lg:w-1/2">
+                <img src="../../assets/img/images-removebg-preview.png" alt="Radiance Tutorial" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+            </div>
+
+            <div class="w-full lg:w-1/2">
+                <div class="space-y-3">
+                    <h3>
+                        <span class="text-yellow-500 text-xl font-bold">Capítulos de livros</span>
+                        <br>
+                        <p class="text-cyan-950">ABER - Avanços na Pesquisa Energética de Edifícios, James & James, Londres, Vol.1, No.1, 2007:</p>
+                         
+                    </h3>
+                    <a href="../../assets/img/jacobs_aber2007.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">High Dynamic Range Imaging and its Application in Building Research (PDF, 1.5 MB)</h2>
+                    </a>
+                     
+                </div>
+            </div> 
+        </div>
+
+        
+
+        <div class="flex flex-col items-center lg:flex-row gap-8">
+            <div class="w-full lg:w-1/2">
+                <img src="../../assets/img/issuu.png" alt="Radiance Tutorial" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+            </div>
+
+            <div class="w-full lg:w-1/2">
+                <div class="space-y-3">
+                    <h3>
+                        <span class="text-yellow-500/90 text-xl font-bold">Artigos.</span>
+                        <br>
+                        <p class="text-cyan-950">Revista ILP Lighting, setembro de 2014:0</p>
+                        
+                    <a href="https://issuu.com/matrixprint/docs/lighting_journal_sept_14/17?e=2489332/9352821" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">O Cético Climático (HTML com Flash)</h2>
+                    </a>
+                     
+                </div>
+            </div>
+
+            
+
+            
+
+            
+        </div>
+
+        <div class="flex flex-col items-center lg:flex-row gap-8">
+            <div class="w-full lg:w-1/2">
+                <img src="../../assets/img/led.png" alt="Radiance Tutorial" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+            </div>
+
+            <div class="w-full lg:w-1/2">
+                <div class="space-y-3">
+                    <h3>
+                        <span class="text-yellow-500/90 text-xl font-bold">Eventos
+                        <p class="text-cyan-950">LuxLive, Londres, novembro de 2012</p>
+                        
+                    <a href="https://bit.ly/ZwwW69" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">LEDs - O que eles não dizem nas folhas de especificações (PDF, 2,9 MB)</h2>
+                    </a>
+
+                    <p class="text-yellow-500">Reunião conjunta do CIBSE Daylight Group e do CIBSE Building Simulation Group, Londres, Reino Unido, 1 de dezembro de 2010</p>
+                        
+                    <a href="../../assets/img/Jacobs-Daylight_Architect-20101201.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Projeto de luz do dia na perspectiva do arquiteto</h2>
+                    </a>
+                     
+                </div>
+            </div>
+            
+        </div>
+
+          <div class="flex flex-col items-center lg:flex-row gap-8">
+            <div class="w-full lg:w-1/2">
+                <img src="../../assets/img/p950-front.png" alt="Radiance Tutorial" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto">
+            </div>
+
+            <div class="w-full lg:w-1/2">
+                <div class="space-y-3">
+                    <h3>
+                        <span class="text-yellow-500/90 text-xl font-bold">Radiance Workshops
+                        <p class="text-cyan-950">2006, Leicester, UK</p>
+                        
+                    <a href="../../assets/img/AxelJacobs.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Tracing Forward, Bouncing Back</h2>
+                    </a>
+                     <a href="../../assets/img/LuisaBrotas.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">WebHDR</h2>
+                    </a>
+
+                    <p class="text-yellow-500">2008, Fribourg, CH</p>
+                        
+                    <a href="../../assets/img/jacobs-fribourg2008d.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Per-pixel sky luminance with HDR photography </h2>
+                    </a>
+                      <p class="text-cyan-950">2012, Copenhagen, DK</p>
+                        
+                    <a href="../../assets/img/Jacobs-AJ09-HDR_Radiance_WS-2012.pdf" class="text-cyan-950 cursor-pointer hover:text-yellow-700/90 duration-300">
+                        <h2 class="text-xl font-semibold">Glare measurement using HDR photography</h2>
+                    </a>
+                     
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</section>
+               
+
+
+               
+            </div>
+        </section>
+
+       
+        
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+<script src="../../assets/js/scrollreveal.min.js"></script>
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="../../main.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/img/Camera_Icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+    <title>HDR WebSite </title>
+    
+    <link rel="stylesheet" href="../../output.css">
+</head>
+
+<body>
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+  <header id="navbar" class="bg-cyan-800 fixed w-full top-0 left-0 z-50">
+    <nav class="container flex items-center justify-between h-16 sm:h-20">
+      <a href="../../index.html"><div class="font-Lobster sm:text-2xl">Light Photo Analyzer</div></a>
+
+      <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-cyan-950/80
+      backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
+
+        <ul class="flex flex-col items-center gap-8 lg:flex-row">
+          <li>
+            <a href="../../index.html" class="nav-link active:">Home</a>
+          </li>
+
+          <li>
+            <a href="#radiance" class="nav-link">Radiance</a>
+          </li>
+
+          <li>
+            <a href="./doc.html" class="nav-link">Documentação</a>
+          </li>
+
+          <li>
+            <a href="./lighting.html" class="nav-link">Iluminação</a>
+          </li>
+
+          <li>
+            <a href="./lighting_natural.html" class="nav-link">Luz Natural</a>
+          </li>
+
+          <li>
+            <a href="sunpath.html" class="nav-link">Diagramas de trajetória solar</a>
+          </li>
+
+          <li>
+            <a href="documents.html" class="nav-link"> Apresentações e Artigos</a>
+          </li>
+      </ul>
+      
+      <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+        <img src="../../assets/img/leaf-1.png" alt="" class="w-32">
+      </div>
+
+      <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden">
+        <img src="../../assets/img/leaf-2.png" alt="" class="w-32">
+      </div>
+    </div>
+
+      <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+        <i class="ri-menu-4-line" id="hamburger"></i>
+      </div>
+
+      
+    </nav>
+  </header>
+
+
+ <section id="home" class="relative bg-cyan-900">
+            <div class="container">
+              <!-- blob 1 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+
+               </div>
+
+                <!-- blob 2 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute right-0 bottom-0">
+
+               </div>
+
+
+
+                <div class="flex flex-col items-center gap-5 lg:flex-row">
+                    <!-- content -->
+                    <div class="home__data w-full space-y-5 lg:w-1/2">
+             <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+    Iluminação Natural
+    <br>
+    
+    <h2  class="text-4xl lg:text-3xl font-bold text-white mb-4"><span class="text-blue-50">A iluminação natural é a arte e a ciência de permitir a entrada de luz natural edifícios. Envolve a coordenação de diferentes disciplinas: arquitetura, engenharia, ciência da construção, planejamento entre muitos outros.</span>
+</h2></h1>
+
+
+                        <div class="flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-5 xl:pt-10">
+                        <a href="sunpath.html" class="btn flex items-center justify-center gap-2 bg-orange-600">
+                        <span>Sunpath</span>
+                        <i class="ri-sun-fill"></i>
+                        </a>
+                         
+
+                            <p class="text-xs font-Lobster text-slate-300"></p>
+
+                            <div class="flex items-center gap-5 text-lg lg:pt-10">
+                                <i class="ri-facebook-fill text-slate-300 hover:text-orange-500 duration-300 cursor-pointer"></i>
+                                <i class="ri-twitter-x-line  text-slate-300 hover:text-orange-500 duration-300 cursor-pointer text-base"></i>
+                                <i class="ri-instagram-line  text-slate-300 hover:text-orange-500 duration-300 cursor-pointer"></i>
+                                <i class="ri-linkedin-fill  text-slate-300 hover:text-orange-500 duration-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- image -->
+                     <div class="w-full relative  lg:w-1/2">
+                        <img src="../../assets/img/sun-clipart-lg.png" class="home__image">
+
+                        <!-- image-home -->
+
+                        <div class="absolute -top-10 right-0 opacity-30 animate-movingY xl:top-5">
+                            <i class="ri-camera-2-line text-6xl text-orange-500"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute bottom-0 left-0 opacity-30 xl:bottom-12 animate-rotating">
+                            <i class="ri-dv-fill text-6xl text-orange-500"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute -top-8 -left-5 opacity-30 lg:block animate-scalingUp">
+                            <i class="ri-vidicon-line text-6xl text-orange-500"></i>
+                            
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+
+
+<section id="lighting" class="relative overflow-hidden bg-blue-50 py-16">
+
+    <div class="about__top flex flex-col items-center gap-3 text-center mb-10 md:mb-20">
+        <h1 class="text-4xl lg:text-5xl font-bold text-orange-500 mb-4 font-Lobster">Iluminação Natural</h1>
+        <p class="max-w-2xl text-cyan-950">Durante milhares de anos, os homens criaram estruturas para se protegerem dos perigos e desconfortos do meio ambiente. Um abrigo protege de o clima, os animais e outros homens. É um lugar para trabalho e descanso.</p>
+    </div>
+
+    <div class="container">
+        <div class="flex flex-col items-center lg:flex-row gap-8">
+            
+             <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../../assets/img/tno_window_detail1.jpg" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                 </div>
+
+            <div class="w-full lg:w-1/2">
+                <div class="space-y-5">
+                    <h3 class="text-xl font-semibold text-orange-500/80 font-Lobster">
+                        Tecnologias de construção modernas, como ar condicionado e a iluminação elétrica nos permitiu adotar o conceito de abrigo do elementos aos extremos.
+                    </h3>
+                    
+                    <p class="text-cyan-950">
+                        Durante as décadas de 1960 e 70, muitos edifícios foram projetado para não ter nenhuma conexão com o exterior. Depois de milênios de luta, o homem finalmente conquistou a natureza. Ou assim ele pensou.
+
+
+                    <p class="text-cyan-950">
+                       Descobriu-se que viver e trabalhar em caixas lacradas não é em tudo o que as pessoas precisam ou querem. Edifícios climatizados e iluminados artificialmente não são apenas desagradáveis para viver e trabalhar, mas também nos deixam doentes. Ao longo do passado algumas décadas, a tendência tem sido permitir luz natural e ventilação no edifício, utilizando-o para economizar energia e melhorar o ambiente interno.
+
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+       
+        
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+<script src="../../assets/js/scrollreveal.min.js"></script>
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="../../main.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/Camera_Icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+    <title>HDR WebSite </title>
+    
+    <link rel="stylesheet" href="../output.css">
+</head>
+
+<body>
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+   <header id="navbar" class="bg-cyan-800 fixed w-full top-0 left-0 z-50">
+    <nav class="container flex items-center justify-between h-16 sm:h-20">
+      <a href="../index.html"><div class="font-Lobster sm:text-2xl">Light Photo Analyzer</div></a>
+
+      <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-cyan-950/80
+      backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
+
+        <ul class="flex flex-col items-center gap-8 lg:flex-row">
+                <li>
+            <a href="../index.html" class="nav-link active:">Home</a>
+          </li>
+
+          <li>
+            <a href="hdr.html" class="nav-link">HDR</a>
+          </li>
+
+          <li>
+            <a href="exemplo.html" class="nav-link">Exemplos</a>
+          </li>
+
+          <li>
+            <a href="hdri.html" class="nav-link">Formatos HDRI</a>
+          </li>
+
+          <li>
+            <a href="exif.html" class="nav-link">Cabeçalho EXIF</a>
+          </li>
+
+          <li>
+            <a href="softwares.html" class="nav-link">Outros Softwares HDR</a>
+          </li>
+      </ul>
+      
+      <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-1.png" alt="" class="w-32">
+      </div>
+
+      <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-2.png" alt="" class="w-32">
+      </div>
+    </div>
+
+      <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+        <i class="ri-menu-4-line" id="hamburger"></i>
+      </div>
+
+      
+    </nav>
+  </header>
+
+ <section id="home" class="relative bg-cyan-900">
+            <div class="container">
+              <!-- blob 1 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+
+               </div>
+
+                <!-- blob 2 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute right-0 bottom-0">
+
+               </div>
+
+
+
+                <div class="flex flex-col items-center gap-5 lg:flex-row">
+                    <!-- content -->
+                    <div class="home__data w-full space-y-5 lg:w-1/2">
+             <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+  Informações do cabeçalho EXIF
+    <br>
+    <h2  class="text-4xl lg:text-4xl font-bold text-white mb-4"><span class="text-blue-50">Uma fotografia digital contém mais do que apenas vermelho, verde e azul valores de pixel. Além disso, informações sobre a fotografia e a câmera é armazenado dentro da imagem JPEG.</span>
+</h2></h1>
+
+
+                        <div class="flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-5 xl:pt-10">
+                        <a href="exemplo.html" class="btn flex items-center justify-center gap-2 bg-orange-800">
+                        <span>Softwares HDR</span>
+                        <i class="ri-video-on-line"></i>
+                        </a>
+                         
+
+                            <p class="text-xs font-Lobster text-slate-300"></p>
+
+                            <div class="flex items-center gap-5 text-lg lg:pt-10">
+                                <i class="ri-facebook-fill text-slate-300 hover:text-orange-800 duration-300 cursor-pointer"></i>
+                                <i class="ri-twitter-x-line  text-slate-300 hover:text-orange-800 duration-300 cursor-pointer text-base"></i>
+                                <i class="ri-instagram-line  text-slate-300 hover:text-orange-800 duration-300 cursor-pointer"></i>
+                                <i class="ri-linkedin-fill  text-slate-300 hover:text-orange-800 duration-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- image -->
+                     <div class="w-full relative  lg:w-1/2">
+                        <img src="../assets/img/media_1e7c1d66de83e5cc5658765ced0b2a6c7f7f42ed7-removebg-preview.png" class="home__image">
+
+                        <!-- image-home -->
+
+                        <div class="absolute -top-10 right-0 opacity-30 animate-movingY xl:top-5">
+                            <i class="ri-camera-2-line text-6xl text-orange-500"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute bottom-0 left-0 opacity-30 xl:bottom-12 animate-rotating">
+                            <i class="ri-dv-fill text-6xl text-red-500"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute -top-8 -left-5 opacity-30 lg:block animate-scalingUp">
+                            <i class="ri-vidicon-line text-6xl text-red-500"></i>
+                            
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+
+
+   <section id="radiance" class="relative overflow-hidden bg-blue-50">
+
+            <div class="about__top flex flex-col items-center gap-3 text-center mb-10 md:mb-20 ">
+             
+               <h1 class="text-4xl lg:text-5xl font-bold text-orange-500/90 mb-4 font-Lobster">EXIF</h1>
+              <p class="max-w-2x1 text-cyan-950"> O formato desta meta informação segue o <a href="https://en.wikipedia.org/wiki/Exif" class="text-orange-500">EXIF</a> padrão. Além das informações padronizadas, algumas câmeras os fabricantes fazem uso de extensões proprietárias do padrão EXIF, conhecido como tags do fabricante.</p>
+            </div>
+
+            
+
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-orange-800/90  font-Jobs">Para que o WebHDR seja capaz de determinar a exposição da imagem, ele precisa saber a velocidade ISO, os tempos de exposição e as configurações de abertura com as quais as fotografias foram levados. Quase todas as câmeras que testamos podem ser usadas com WebHDR, mas isso ocorre apenas porque usamos algum software inteligente chamado Ferramenta Exif (veja abaixo) para 'arrumar' o cabeçalho EXIF antes de alimentar as fotografias hdrgen.</span> 
+
+                     
+            <div class="about__item__1-img w-full lg:w-1/2">
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table class="min-w-[900px] text-sm text-left text-gray-700">
+
+
+
+
+            <thead class="text-xs text-orange-700 uppercase bg-orange-100">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Marcação
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Valor
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Fabricante</td>
+                    <td class="px-6 py-4">FUJIFILM</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Modelo</td>
+                    <td class="px-6 py-4">DX-10</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Orientação</td>
+                    <td class="px-6 py-4">superior - esquerda</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Resolução X</td>
+                    <td class="px-6 py-4">72/1</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Resolução Y</td>
+                    <td class="px-6 py-4">72/1</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Unidade de Resolução</td>
+                    <td class="px-6 py-4">Polegada</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Software</td>
+                    <td class="px-6 py-4">Câmera Digital DX-10 Ver1.00</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Data e hora</td>
+                    <td class="px-6 py-4">1999:01:01 00:03:00</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Posicionamento YCbCr</td>
+                    <td class="px-6 py-4">co-sitado</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Direitos autorais</td>
+                    <td class="px-6 py-4">ANTHONY (Fotógrafo) - [Nenhum] (Editor)</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Compressão</td>
+                    <td class="px-6 py-4">Compressão JPEG</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">FNúmero</td>
+                    <td class="px-6 py-4">f/4.2</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Programa de Exposição</td>
+                    <td class="px-6 py-4">Programa normal</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Classificações de velocidade ISO</td>
+                    <td class="px-6 py-4">150</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Versão Exif</td>
+                    <td class="px-6 py-4">Exif Versão 2.1</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Data e hora (original)</td>
+                    <td class="px-6 py-4">1999:01:01 00:03:00</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Data e hora (digital)</td>
+                    <td class="px-6 py-4">1999:01:01 00:03:00</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Velocidade do obturador</td>
+                    <td class="px-6 py-4">68/10 seg. (ÁPICE: 10)</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Abertura</td>
+                    <td class="px-6 py-4">f/4.1</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Flash</td>
+                    <td class="px-6 py-4">O flash não disparou.</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Distância focal</td>
+                    <td class="px-6 py-4">5,8 mm</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Espaço de cores</td>
+                    <td class="px-6 py-4">sRGB</td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Dimensão PixelX</td>
+                    <td class="px-6 py-4">1024</td>
+                </tr>
+                <tr class="bg-orange-50 border-b hover:bg-orange-100">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Dimensão PixelY</td>
+                    <td class="px-6 py-4">768</td>
+                </tr>
+                 <tr class="bg-white border-b hover:bg-orange-50">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Método de detecção</td>
+                    <td class="px-6 py-4">Sensor de área de cor de um chip</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+                  </div>
+               </div>
+
+            
+               
+
+               
+               
+
+
+               
+            </div>
+
+             <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+               
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-orange-800  font-Lobster">Software para edição de informações EXIF
+</span>  
+ 
+                        <br>
+                      <h2><a href="https://johnst.org/sw/exiftags/" class="text-cyan-950 cursor-pointer hover:text-orange-700/90 duration-300 font-bold">EXIFTAGS - Ferramenta de linha de comando</a></h2>
+                     
+                      </h3>
+                      <a href="https://www.cpan.org/modules/by-module/Image/EXIFTOOL/" class="text-cyan-950 cursor-pointer hover:text-orange-700/90 duration-300  font-bold">
+                        <h2 class="text-xl font-semibold">ExifTool </h2>
+                    </a>
+                  </div>
+                  <p class="text-cyan-950">Módulo Perl com aplicativo de linha de comando incluído para leitura e escrita metainformações em arquivos de imagem. Ele reconhece mais de 1600 tags diferentes. Image::ExifTool é usado no site WebHDR.</p>
+
+               
+
+
+               
+            </div>
+        </section>
+
+       
+        
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+<script src="../assets/js/scrollreveal.min.js"></script>
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="../main.js"></script>
+    
+</body>
+</html>

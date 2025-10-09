@@ -1,0 +1,2591 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/Camera_Icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+    <title>HDR WebSite </title>
+    
+    <link rel="stylesheet" href="../output.css">
+</head>
+
+<body>
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+   <header id="navbar" class="bg-cyan-800 fixed w-full top-0 left-0 z-50">
+    <nav class="container flex items-center justify-between h-16 sm:h-20">
+      <a href="../index.html"><div class="font-Lobster sm:text-2xl">Light Photo Analyzer</div></a>
+
+      <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-cyan-950/80
+      backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
+
+        <ul class="flex flex-col items-center gap-8 lg:flex-row">
+                   <li>
+            <a href="../index.html" class="nav-link active:">Home</a>
+          </li>
+
+          <li>
+            <a href="camera.html" class="nav-link">Camera</a>
+          </li>
+
+          <li>
+            <a href="calibracao.html" class="nav-link">Calibração</a>
+          </li>
+
+          <li>
+            <a href="ryo.html" class="nav-link">Demonstração RYO</a>
+          </li>
+      </ul>
+      
+      <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-1.png" alt="" class="w-32">
+      </div>
+
+      <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-2.png" alt="" class="w-32">
+      </div>
+    </div>
+
+      <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+        <i class="ri-menu-4-line" id="hamburger"></i>
+      </div>
+
+      
+    </nav>
+  </header>
+
+ <section id="home" class="relative bg-cyan-900">
+            <div class="container">
+              <!-- blob 1 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+
+               </div>
+
+                <!-- blob 2 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute right-0 bottom-0">
+
+               </div>
+
+
+
+                <div class="flex flex-col items-center gap-5 lg:flex-row">
+                    <!-- content -->
+                    <div class="home__data w-full space-y-5 lg:w-1/2">
+             <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+  Compatibilidade da câmera
+    <br>
+    <h2  class="text-4xl lg:text-4xl font-bold text-white mb-4"><span class="text-blue-50">A última coluna da tabela abaixo, intitulada Status, indica com que frequência o modelo foi usado com WebHDR. Modelos listados como falhou não são adequados para geração automatizada de imagens HDR (bem, pelo menos não com WebHDR). </span>
+</h2></h1>
+
+
+                        <div class="flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-5 xl:pt-10">
+                        <a href="calibracao.html" class="btn flex items-center justify-center gap-2 bg-green-800/40">
+                        <span>Calibração</span>
+                        <i class="ri-camera-line"></i>
+                        </a>
+                         
+
+                            <p class="text-xs font-Lobster text-slate-300"></p>
+
+                            <div class="flex items-center gap-5 text-lg lg:pt-10">
+                                <i class="ri-facebook-fill text-slate-300 hover:text-green-800/40 duration-300 cursor-pointer"></i>
+                                <i class="ri-twitter-x-line  text-slate-300 hover:text-green-800/40 duration-300 cursor-pointer text-base"></i>
+                                <i class="ri-instagram-line  text-slate-300 hover:text-green-800/40 duration-300 cursor-pointer"></i>
+                                <i class="ri-linkedin-fill  text-slate-300 hover:text-green-800/40 duration-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- image -->
+                     <div class="w-full relative  lg:w-1/2">
+                        <img src="../assets/img/p950-front.png" class="home__image">
+
+                        <!-- image-home -->
+
+                        <div class="absolute -top-10 right-0 opacity-30 animate-movingY xl:top-5">
+                            <i class="ri-camera-2-line text-6xl text-green-400"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute bottom-0 left-0 opacity-30 xl:bottom-12 animate-rotating">
+                            <i class="ri-dv-fill text-6xl text-green-400"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute -top-8 -left-5 opacity-30 lg:block animate-scalingUp">
+                            <i class="ri-vidicon-line text-6xl text-green-400"></i>
+                            
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+
+
+   <section id="radiance" class="relative overflow-hidden bg-blue-50">
+
+            <div class="about__top flex flex-col items-center gap-3 text-center mb-10 md:mb-20 ">
+             
+               <h1 class="text-4xl lg:text-5xl font-bold text-green-800/40 mb-4 font-Lobster">Modelos Compativeis</h1>
+              <p class="max-w-2x1 text-cyan-950">  Muitos modelos mais antigos não implementam o conjunto completo de informações de cabeçalho EXIF, portanto a imagem a exposição das imagens não pode ser determinada pelo software.</p>
+            </div>
+
+            
+
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+     <div class="about__item__1-img w-full lg:w-1/2">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3">#</th>
+          <th scope="col" class="px-6 py-3">Marca</th>
+          <th scope="col" class="px-6 py-3">Modelo</th>
+          <th scope="col" class="px-6 py-3">Status EXIF</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">1</td>
+          <td class="px-6 py-4">Acer</td>
+          <td class="px-6 py-4">A1-810</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">70 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">2</td>
+          <td class="px-6 py-4">Apple</td>
+          <td class="px-6 py-4">iPhone 4</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">13 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">3</td>
+          <td class="px-6 py-4">Apple</td>
+          <td class="px-6 py-4">iPhone 4S</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">6 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">4</td>
+          <td class="px-6 py-4">Apple</td>
+          <td class="px-6 py-4">iPhone 5</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">5</td>
+          <td class="px-6 py-4">Asahi Optical Co.,Ltd</td>
+          <td class="px-6 py-4">PENTAX Optio 430</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">66 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">6</td>
+          <td class="px-6 py-4">BenQ Corporation</td>
+          <td class="px-6 py-4">DC E1420/E1430</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">7</td>
+          <td class="px-6 py-4">BenQ</td>
+          <td class="px-6 py-4">DC C510</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">8</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-F1</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">9</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-FH20</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">10</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD</td>
+          <td class="px-6 py-4">EX-P600</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">11</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD</td>
+          <td class="px-6 py-4">EX-S100</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">12</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-S600</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">14 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">13</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z1000</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">14</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z120</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">15</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z200</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">13 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">16</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD</td>
+          <td class="px-6 py-4">EX-Z30</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">17</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z35</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">18</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z60</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">19</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z70</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">20</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD</td>
+          <td class="px-6 py-4">EX-Z750</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">21</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z850</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">22</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z90</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">23</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD</td>
+          <td class="px-6 py-4">QV-R51</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">24</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-FC100</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">25</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-S10</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">26</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-S600</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">27</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-S770</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">28</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z1</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">29</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z1050</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">30</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z35</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">9 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">31</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z350</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">32</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z37</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">33</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z60</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">13 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">34</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z70</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">35</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z75</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">36</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z77</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">37</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z85</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">31 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">38</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z850</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">39</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z9</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">40</td>
+          <td class="px-6 py-4">CASIO COMPUTER CO.,LTD.</td>
+          <td class="px-6 py-4">EX-Z90</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">41</td>
+          <td class="px-6 py-4">CASIO</td>
+          <td class="px-6 py-4">QV-4000</td>
+          <td class="px-6 py-4"><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">failed</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">42</td>
+          <td class="px-6 py-4">CASIO</td>
+          <td class="px-6 py-4">QV-5700</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">43</td>
+          <td class="px-6 py-4">Camera</td>
+          <td class="px-6 py-4">8MP-9HC</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">44</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 110 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">45</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 330</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">46</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 40</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">47</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 400</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">48</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 430</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">49</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 50</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">10 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">50</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 500</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">51</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 55</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">52</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 60</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">53</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 65</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">54</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 70</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">113 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">55</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 700</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">56</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 75</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">82 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">57</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 750</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">58</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 800 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">59</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 80 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">17 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">60</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 850 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">13 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">61</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 85 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">62</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 860 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">56 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">63</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 950 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">80 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">64</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 95 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">23 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">65</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS 980 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">66</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS i</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">67</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS v2</td>
+          <td class="px-6 py-4"><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">failed</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">68</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon DIGITAL IXUS v3</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">69</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS-1DS</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">70</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS-1D Mark II</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">71</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS-1D Mark IV</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">72</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS-1Ds Mark II</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">73</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 1000D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">168 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">74</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 10D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">67 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">75</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 1100D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">43 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">76</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 1200D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">77</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 1300D</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">78</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 20D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">107 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">79</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 300D DIGITAL</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">76 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">80</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 30D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">36 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">81</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 350D DIGITAL</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">572 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">82</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 400D DIGITAL</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">179 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">83</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 40D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">240 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">84</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 450D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">640 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">85</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 500D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">223 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">86</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 50D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">17 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">87</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 550D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">926 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">88</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 5D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">323 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">89</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 5D Mark II</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">762 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">90</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 5D Mark III</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">57 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">91</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 600D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">260 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">92</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 60D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">169 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">93</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 650D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">64 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">94</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 6D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">40 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">95</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 70D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">93 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">96</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS 7D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">113 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">97</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS D30</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">10 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">98</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS DIGITAL REBEL</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">177 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">99</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS DIGITAL REBEL XS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">146 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">100</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS DIGITAL REBEL XSi</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">194 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">101</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS DIGITAL REBEL XT</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">167 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">102</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS DIGITAL REBEL XTi</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">73 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">103</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS Kiss Digital</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">104</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS Kiss Digital N</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">17 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">105</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS Kiss Digital X</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">20 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">106</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS Kiss X2</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">107</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS Kiss X3</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">108</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS Kiss X4</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">109</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS REBEL SL1</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">35 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">110</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS REBEL T1i</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">245 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">111</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS REBEL T2i</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">65 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">112</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS REBEL T3</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">234 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">113</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS REBEL T3i</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">232 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">114</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS REBEL T4i</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">24 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">115</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS REBEL T5</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">24 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">116</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon EOS REBEL T5i</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">75 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">117</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXUS 105</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">118</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXUS 115 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">119</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXUS 130</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">14 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">120</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXUS 140</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">121</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXUS 220HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">9 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">122</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXY 200F</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">6 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">123</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXY 30S</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">124</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXY DIGITAL 10</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">125</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXY DIGITAL 3000 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">126</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXY DIGITAL 70</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">94 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">127</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXY DIGITAL 800 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">8 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">128</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon IXY DIGITAL 930 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">129</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A1000 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">130</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A1100 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">131</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A2100 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">132</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A2200</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">23 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">133</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A2300</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">87 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">134</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A3000 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">135</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A3100 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">10 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">136</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A3200 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">53 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">137</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A3400 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">138</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A40</td>
+          <td class="px-6 py-4"><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">failed</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">139</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A430</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">8 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">140</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A460</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">141</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A470</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">142</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A480</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">143</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A495</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">18 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">144</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A510</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">145</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A520</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">58 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">146</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A530</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">147</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A540</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">148</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A550</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">149</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A560</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">150</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A570 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">84 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">151</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A590 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">26 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">152</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A60</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">153</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A610</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">53 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">154</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A620</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">155</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A630</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">156</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A640</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">92 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">157</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A650 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">433 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">158</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A70</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">47 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">159</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A700</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">160</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A710 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">161</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A720 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">34 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">162</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A75</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">163</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A80</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">164</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A800</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">19 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">165</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A810</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">42 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">166</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A85</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">167</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot A95</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">10 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">168</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot ELPH 100 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">169</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot ELPH 115 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">14 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">170</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot ELPH 130 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">171</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot ELPH 300HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">172</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot ELPH 300 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">8 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">173</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot ELPH 310 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">28 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">174</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G1</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">175</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G10</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">329 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">176</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G11</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">34 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">177</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G12</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">244 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">178</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G15</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">17 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">179</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G1 X</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">178 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">180</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G3</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">181</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G5</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">190 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">182</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G7</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">183</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G7 X</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">41 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">184</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot G9</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">23 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">185</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot Pro1</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">186</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S100</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">14 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">187</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S1 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">188</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S200</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">189</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S2 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">20 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">190</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S30</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">191</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S3 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">65 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">192</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S400</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">193</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S45</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">16 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">194</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S50</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">29 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">195</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S500</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">6 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">196</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S5 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">16 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">197</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S60</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">198</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S70</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">216 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">199</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S80</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">200</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S90</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">8 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">201</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot S95</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">46 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">202</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD1000</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">20 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">203</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD1100 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">32 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">204</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD1200 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">15 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">205</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD1300 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">16 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">206</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD200</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">207</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD300</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">14 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">208</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD400</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">209</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD430 WIRELESS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">210</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD450</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">211</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD600</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">39 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">212</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD630</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">213</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD700 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">214</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD750</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">18 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">215</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD780 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">17 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">216</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD790 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">19 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">217</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD800 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">218</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD870 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">21 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">219</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD880 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">220</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD940 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">221</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SD980 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">222</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX10 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">19 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">223</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX110 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">93 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">224</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX120 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">35 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">225</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX130 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">226</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX150 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">227</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX160 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">17 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">228</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX170 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">31 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">229</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX1 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">11 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">230</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX200 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">52 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">231</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX20 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">9 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">232</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX210 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">184 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">233</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX220 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">40 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">234</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX230 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">14 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">235</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX240 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">36 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">236</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX30 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">20 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">237</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX40 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">238</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX500 IS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">53 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">239</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX50 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">8 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">240</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX510 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">241</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">Canon PowerShot SX60 HS</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">17 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">242</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">EOS 10D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">243</td>
+          <td class="px-6 py-4">Canon</td>
+          <td class="px-6 py-4">PowerShot S70</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">244</td>
+          <td class="px-6 py-4">DOOGEE</td>
+          <td class="px-6 py-4">TURB02 DG900</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">6 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">245</td>
+          <td class="px-6 py-4">Digital Cam</td>
+          <td class="px-6 py-4">AV1400-HD</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">9 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">246</td>
+          <td class="px-6 py-4">Digital Camera</td>
+          <td class="px-6 py-4">5MP-9Y3</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">247</td>
+          <td class="px-6 py-4">Digital Camera</td>
+          <td class="px-6 py-4">ND-5040 Digital Camera</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">248</td>
+          <td class="px-6 py-4">Digital Camera</td>
+          <td class="px-6 py-4">5MP-9BH</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">11 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">249</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK C330 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">250</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK C340 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+      <div class="about__item__1-img w-full lg:w-1/2">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3">#</th>
+          <th scope="col" class="px-6 py-3">Marca</th>
+          <th scope="col" class="px-6 py-3">Modelo</th>
+          <th scope="col" class="px-6 py-3">Status EXIF</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">251</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK C875 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">252</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK CX7330 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">253</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK CX7530 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">254</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK DC4800 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">255</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK DX4530 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">failed</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">256</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK DX6340 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">15 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">257</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK DX6490 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">9 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">258</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK DX7590 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">30 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">259</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE C1013 DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">260</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE C180 Digital Camera</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">261</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE C182 Digital Camera</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">262</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE C613 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">263</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE C743 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">264</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE C813 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">265</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE CX6230 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">266</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE M1033 DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">267</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE M1063 DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">8 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">268</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE M530 Digital Camera</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">10 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">269</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE M580 DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">270</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE M853 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">48 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">271</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE M863 DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">14 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">272</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE M883 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">273</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EASYSHARE Z1012 IS Digital Camera</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">6 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">274</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK EasyShare Z981 Digital Camera</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">275</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK LS753 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">276</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK P850 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">277</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK P880 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">278</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK V570 DUAL LENS DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">279</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK Z612 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">280</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK Z650 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">102 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">281</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK Z700 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">25 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">282</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK Z740 ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">21 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">283</td>
+          <td class="px-6 py-4">EASTMAN KODAK COMPANY</td>
+          <td class="px-6 py-4">KODAK Z812 IS ZOOM DIGITAL CAMERA</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">284</td>
+          <td class="px-6 py-4">FLIR Systems AB</td>
+          <td class="px-6 py-4">FLIR b50</td>
+          <td class="px-6 py-4"><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">failed</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">285</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">A860</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">286</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">DX-10</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">287</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix2400Zoom</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">288</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix4700 ZOOM</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">289</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix6800 ZOOM</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">290</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePixS1Pro</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">291</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePixS2Pro</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">15 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">292</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix A303</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">293</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix A310</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">294</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix A340</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">295</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix A900</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">296</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix A900</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">19 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">297</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix AV150</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">298</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix E550</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">299</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix E900</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">300</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix F100fd</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">301</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix F11</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">302</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix F20</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">303</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix F30</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">304</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix F40fd</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">305</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix F47fd</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">25 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">306</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix F47fd</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">4 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">307</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix F810</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">308</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix HS10 HS11</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">309</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix HS20EXR</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">8 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">310</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix J10</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">9 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">311</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix JX180</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">312</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix JX200 JX210</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">313</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix JX280</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">6 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">314</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix JX300</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">315</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix JX580</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">316</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S1500</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">21 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">317</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S1600</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">318</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S1730</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">319</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S1800</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">125 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">320</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S2000HD S2100HD</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">321</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S2800HD</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">54 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">322</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S2980</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">8 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">323</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S304</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">324</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S3100</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">325</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S3Pro</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">326</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S4000</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">56 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">327</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S4080</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">328</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S5000</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">9 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">329</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S5100</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">330</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S5200</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">331</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S5600</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">332</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S5600</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">333</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S5700 S700</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">334</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S5Pro</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">335</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S602 ZOOM</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">19 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">336</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S6500fd</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">32 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">337</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S7000</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">338</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S8000fd</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">339</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S9000</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">340</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix S9500</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">341</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix SL1000</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">342</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix X100</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">343</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix Z10fd</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">344</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">FinePix Z90</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">345</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">MX-1700ZOOM</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">346</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">X-E1</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">347</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">X-E2</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">19 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">348</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">X-T1</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">349</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">X10</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">350</td>
+          <td class="px-6 py-4">FUJIFILM</td>
+          <td class="px-6 py-4">X100S</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">351</td>
+          <td class="px-6 py-4">GEDSC IMAGING CORP.</td>
+          <td class="px-6 py-4">A735</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">352</td>
+          <td class="px-6 py-4">GENERAL IMAGING CO.</td>
+          <td class="px-6 py-4">X5</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">11 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">353</td>
+          <td class="px-6 py-4">Unknown_Make</td>
+          <td class="px-6 py-4">Unknown_Model</td>
+          <td class="px-6 py-4"><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">failed</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">354</td>
+          <td class="px-6 py-4">Unknown_Make</td>
+          <td class="px-6 py-4">Unknown_Model</td>
+          <td class="px-6 py-4"><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">failed</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">355</td>
+          <td class="px-6 py-4">Hewlett-Packard</td>
+          <td class="px-6 py-4">Photosmart M407</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">356</td>
+          <td class="px-6 py-4">Hewlett-Packard</td>
+          <td class="px-6 py-4">Photosmart M415</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">357</td>
+          <td class="px-6 py-4">Hewlett-Packard</td>
+          <td class="px-6 py-4">Photosmart M425</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">358</td>
+          <td class="px-6 py-4">Hewlett-Packard</td>
+          <td class="px-6 py-4">Photosmart M627</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">359</td>
+          <td class="px-6 py-4">Hewlett-Packard</td>
+          <td class="px-6 py-4">HP Photosmart E317</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">360</td>
+          <td class="px-6 py-4">Hewlett-Packard</td>
+          <td class="px-6 py-4">hp photosmart 720</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">361</td>
+          <td class="px-6 py-4">Jag.gr</td>
+          <td class="px-6 py-4">645 PRO Mk III for Apple iPhone 5s</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">362</td>
+          <td class="px-6 py-4">KONICA MINOLTA CAMERA, Inc.</td>
+          <td class="px-6 py-4">DiMAGE G400</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">363</td>
+          <td class="px-6 py-4">KONICA MINOLTA CAMERA, Inc.</td>
+          <td class="px-6 py-4">Revio KD-420Z</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">364</td>
+          <td class="px-6 py-4">KONICA MINOLTA</td>
+          <td class="px-6 py-4">DiMAGE A200</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">365</td>
+          <td class="px-6 py-4">KONICA MINOLTA</td>
+          <td class="px-6 py-4">DiMAGE X50</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">6 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">366</td>
+          <td class="px-6 py-4">KONICA MINOLTA</td>
+          <td class="px-6 py-4">MAXXUM 7D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">367</td>
+          <td class="px-6 py-4">KONICA MINOLTA</td>
+          <td class="px-6 py-4">DYNAX 5D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">368</td>
+          <td class="px-6 py-4">KONICA MINOLTA</td>
+          <td class="px-6 py-4">DYNAX 7D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">369</td>
+          <td class="px-6 py-4">KONICA MINOLTA</td>
+          <td class="px-6 py-4">DiMAGE Z5</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">17 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">370</td>
+          <td class="px-6 py-4">KONICA MINOLTA</td>
+          <td class="px-6 py-4">MAXXUM 5D</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">371</td>
+          <td class="px-6 py-4">KONICA</td>
+          <td class="px-6 py-4">KONICA KD-20</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">372</td>
+          <td class="px-6 py-4">KYOCERA</td>
+          <td class="px-6 py-4">CONTAX SL300R T*</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">373</td>
+          <td class="px-6 py-4">KYOCERA</td>
+          <td class="px-6 py-4">Finecam M410R</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">374</td>
+          <td class="px-6 py-4">Konica Minolta Camera, Inc.</td>
+          <td class="px-6 py-4">DiMAGE A2</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">375</td>
+          <td class="px-6 py-4">Konica Minolta Camera, Inc.</td>
+          <td class="px-6 py-4">DiMAGE Xg</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">376</td>
+          <td class="px-6 py-4">Konica Minolta Camera, Inc.</td>
+          <td class="px-6 py-4">DiMAGE Z2</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">6 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">377</td>
+          <td class="px-6 py-4">Konica</td>
+          <td class="px-6 py-4">Konica Digital Camera KD-510Z</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">378</td>
+          <td class="px-6 py-4">LEICA</td>
+          <td class="px-6 py-4">C-LUX 3</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">19 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">379</td>
+          <td class="px-6 py-4">LEICA</td>
+          <td class="px-6 py-4">D-LUX 4</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">380</td>
+          <td class="px-6 py-4">LEICA</td>
+          <td class="px-6 py-4">D-LUX 6</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">381</td>
+          <td class="px-6 py-4">LEICA</td>
+          <td class="px-6 py-4">DIGILUX 2</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">382</td>
+          <td class="px-6 py-4">LEICA</td>
+          <td class="px-6 py-4">Digilux1</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">11 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">383</td>
+          <td class="px-6 py-4">LG Electronics</td>
+          <td class="px-6 py-4">KC910</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">384</td>
+          <td class="px-6 py-4">LG Electronics</td>
+          <td class="px-6 py-4">LG-D851</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">385</td>
+          <td class="px-6 py-4">LG Electronics</td>
+          <td class="px-6 py-4">LG-P655H</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">7 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">386</td>
+          <td class="px-6 py-4">LG Electronics</td>
+          <td class="px-6 py-4">VS986</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">387</td>
+          <td class="px-6 py-4">MINOLTA</td>
+          <td class="px-6 py-4">Dimage V</td>
+          <td class="px-6 py-4"><span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">failed</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">388</td>
+          <td class="px-6 py-4">MOTOROLA</td>
+          <td class="px-6 py-4">XT915</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">389</td>
+          <td class="px-6 py-4">MOTOROLA</td>
+          <td class="px-6 py-4">XT916</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">390</td>
+          <td class="px-6 py-4">MOTOROLA</td>
+          <td class="px-6 py-4">XT920</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">3 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">391</td>
+          <td class="px-6 py-4">Mercury Peripherals Inc.</td>
+          <td class="px-6 py-4">DigitalCam Pro</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">392</td>
+          <td class="px-6 py-4">Microsoft</td>
+          <td class="px-6 py-4">Lumia 435</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">393</td>
+          <td class="px-6 py-4">Minolta Co., Ltd.</td>
+          <td class="px-6 py-4">DiMAGE 7</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">394</td>
+          <td class="px-6 py-4">Minolta Co., Ltd.</td>
+          <td class="px-6 py-4">DiMAGE 7i</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">395</td>
+          <td class="px-6 py-4">Minolta Co., Ltd.</td>
+          <td class="px-6 py-4">DiMAGE A1</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">2 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">396</td>
+          <td class="px-6 py-4">Minolta Co., Ltd.</td>
+          <td class="px-6 py-4">DiMAGE F100</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">12 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">397</td>
+          <td class="px-6 py-4">Minolta Co., Ltd.</td>
+          <td class="px-6 py-4">DiMAGE F200</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">5 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">398</td>
+          <td class="px-6 py-4">Minolta Co., Ltd.</td>
+          <td class="px-6 py-4">DiMAGE F300</td>
+          <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">1 times</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">399</td>
+          <td class="px-6 py-4">Minolta Co., Ltd.</td>
+          <td class="px-6 py-4">DiMAGE S304</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.k.</span></td>
+        </tr>
+        <tr class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-medium text-gray-900">400</td>
+          <td class="px-6 py-4">Minolta Co., Ltd.</td>
+          <td class="px-6 py-4">DiMAGE Xt</td>
+          <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">test o.</span></td>
+        </tr>
+
+  </div>
+</div>
+        </div>
+</div>
+      
+
+
+               
+            </div>
+        </section>
+
+       
+        
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+<script src="../assets/js/scrollreveal.min.js"></script>
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="../main.js"></script>
+    
+</body>
+</html>

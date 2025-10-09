@@ -1,0 +1,288 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/Camera_Icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+    <title>HDR WebSite </title>
+    
+    <link rel="stylesheet" href="../output.css">
+</head>
+
+<body>
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+   <header id="navbar" class="bg-cyan-800 fixed w-full top-0 left-0 z-50">
+    <nav class="container flex items-center justify-between h-16 sm:h-20">
+      <a href="../index.html"><div class="font-Lobster sm:text-2xl">Light Photo Analyzer</div></a>
+
+      <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-cyan-950/80
+      backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
+
+        <ul class="flex flex-col items-center gap-8 lg:flex-row">
+                  <li>
+            <a href="../index.html" class="nav-link active:">Home</a>
+          </li>
+
+          <li>
+            <a href="camera.html" class="nav-link">Camera</a>
+          </li>
+
+          <li>
+            <a href="calibracao.html" class="nav-link">Calibração</a>
+          </li>
+
+          <li>
+            <a href="ryo.html" class="nav-link">Demonstração RYO</a>
+          </li>
+      </ul>
+      
+      <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-1.png" alt="" class="w-32">
+      </div>
+
+      <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-2.png" alt="" class="w-32">
+      </div>
+    </div>
+
+      <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+        <i class="ri-menu-4-line" id="hamburger"></i>
+      </div>
+
+      
+    </nav>
+  </header>
+
+ <section id="home" class="relative bg-cyan-900">
+            <div class="container">
+              <!-- blob 1 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+
+               </div>
+
+                <!-- blob 2 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute right-0 bottom-0">
+
+               </div>
+
+
+
+                <div class="flex flex-col items-center gap-5 lg:flex-row">
+                    <!-- content -->
+                    <div class="home__data w-full space-y-5 lg:w-1/2">
+             <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+   Calibração da câmera WebHDR
+    <br>
+    <h2  class="text-4xl lg:text-4xl font-bold text-white mb-4"><span class="text-blue-50">Enquanto hdrgen faz um bom trabalho ao tentar obter informações de luminância tão preciso quanto possível, depende inteiramente das informações EXIF nos arquivos JPEG. Os resultados, no entanto, dependem de muitas variáveis que o software não consegue avaliar. </span>
+</h2></h1>
+
+
+                        <div class="flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-5 xl:pt-10">
+                        <a href="exemplo.html" class="btn flex items-center justify-center gap-2 bg-sky-800/40">
+                        <span>Exemplos</span>
+                        <i class="ri-video-on-line"></i>
+                        </a>
+                         
+
+                            <p class="text-xs font-Lobster text-slate-300"></p>
+
+                            <div class="flex items-center gap-5 text-lg lg:pt-10">
+                                <i class="ri-facebook-fill text-slate-300 hover:text-sky-800/40 duration-300 cursor-pointer"></i>
+                                <i class="ri-twitter-x-line  text-slate-300 hover:text-sky-800/40 duration-300 cursor-pointer text-base"></i>
+                                <i class="ri-instagram-line  text-slate-300 hover:text-sky-800/40 duration-300 cursor-pointer"></i>
+                                <i class="ri-linkedin-fill  text-slate-300 hover:text-sky-800/40 duration-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- image -->
+                     <div class="w-full relative  lg:w-1/2">
+                        <img src="../assets/img/camera-hdr-o-que-e-01-removebg-preview.png" class="home__image">
+
+                        <!-- image-home -->
+
+                        <div class="absolute -top-10 right-0 opacity-30 animate-movingY xl:top-5">
+                            <i class="ri-camera-2-line text-6xl text-sky-400"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute bottom-0 left-0 opacity-30 xl:bottom-12 animate-rotating">
+                            <i class="ri-dv-fill text-6xl text-sky-400"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute -top-8 -left-5 opacity-30 lg:block animate-scalingUp">
+                            <i class="ri-vidicon-line text-6xl text-sky-400"></i>
+                            
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+
+
+   <section id="radiance" class="relative overflow-hidden bg-blue-50">
+
+            <div class="about__top flex flex-col items-center gap-3 text-center mb-10 md:mb-20 ">
+             
+               <h1 class="text-4xl lg:text-5xl font-bold text-sky-800/40 mb-4 font-Lobster">Calibração de Câmera</h1>
+              <p class="max-w-2x1 text-cyan-950">Adicionar para a complicação, mesmo câmeras da mesma marca e o modelo exibe diferenças nas curvas de resposta de seus fotossensíveis batatas fritas. Afinal, as câmeras digitais de consumo nunca foram feitas para medir a luminância valores com precisão.</p>
+            </div>
+
+            
+
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/courtyard_calibration.jpg" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-sky-950/90   font-Lobster">Curva de resposta
+</span>  
+                        <br>
+                      <p class="text-cyan-950 ">Uma vez conhecida a curva de resposta da câmera, ela pode ser reutilizada para execuções sucessivas de WebHDR. Em geral, as câmeras que permitem um grande ajuste manual são as mais adequadas para isso. Veja como: <br>
+
+1. Embora usando o Automatic Exposure Bracketing disponível com muitas câmeras parece tentador, use-o apenas quando estiver dentro Prioridade de abertura modo. Se isso não funciona, talvez você tenha que estar dentro Manual modo.<br>
+2. Desligar Balanceamento automático de branco e defina o Balanço de Branco à luz predominante fonte na cena.
+<br> 3. Desativar tudo realce de cor e contraste características.<br>
+4. Usar um tripé.<br>
+5. Descobri que desligar o modo de foco automático permite que a câmera opere um pouco mais rápido, pois não precisa gastar tempo para deslocar a lente de volta e adiante tentando focar a cena. Mas isso não é necessário.
+<br> 6. Se possível, controle as configurações de exposição através de um computador conectado à câmera, portanto, não é tocado entre exposições. No mínimo, use um controle remoto do obturador. Eles estão disponíveis sem cabos versões infravermelhas ou cabeadas no barramento USB ou interfaces de gatilho dedicadas.
+<br> 7. Escolha uma cena com grandes superfícies cinza ou brancas. Isso proporcionará uma boa continuidade gradientes para o software amostrar. Quanto mais próxima a cena estiver de a cinza neutro (não colorido), melhor.
+<br> 8. A cena deve ter áreas muito claras e muito escuras.<br>
+9. Pegue uma sequência de imagens entre colchetes de exposição separadas por 1 EV. Isto equivale a reduzir para metade ou duplicar a exposição.<br>
+10. A exposição mais escura não deve ter valores RGB acima de 200, enquanto a exposição mais clara não deve conter valores abaixo de 20. Ao fazer upload da sequência, não inclua imagens que estão fora disso.                     
+</p></h3>
+            
+
+                  </div>
+               </div>
+
+                
+            </div>
+
+             <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/sample_histogram.png" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                     
+ 
+                        <br>
+                     <h3> <p class="text-cyan-950 ">
+                        11. Para ajudar você com o ponto acima, um histograma será criado para cada foto enviada. As bordas cinza em ambos os lados do fundo preto indicam as faixas abaixo de 20 e acima de 200. Os pixels pretos estão à esquerda e os brancos à direita. Os pixels que são completamente pretos ou brancos (ou seja, que têm valores de 0 ou 256) são excluídos dos histogramas. Isso os torna mais fáceis de ler para exposições extremas.
+<br> 12. A curva de resposta é um polinômio. Seus coeficientes são armazenados em um arquivo de texto com a extensão .rsp isso pode ser assim:
+</p></h3>
+                     <p class="text-sky-900">3 1,57501 -1,01875 0,462603 -0,0188579<br>
+3 1,54919 -1,01298 0,480414 -0,0166318<br>
+3 1,49544 -0,897716 0,414424 -0,0121498</p>
+                   
+                  </div>
+                
+               </div>
+
+               
+
+
+               
+            </div>
+
+
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/rsp_curves.png" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-sky-950/90  font-Lobster">As três linhas são para o pixel Vermelho, Verde e Azul. O primeiro número de cada linha indica a ordem do polinon, por exemplo, o canal vermelho deste exemplo tem o seguinte curva de resposta (x é o valor do pixel):
+</span>  <br>
+ <p class="text-cyan-950 ">          luminância = 1,57501x3 - 1,01875x2 + 0,462603x - 0,0188579 </p></h3>
+    </div>
+
+
+                  
+               </div>
+
+            
+               </div>
+
+               </div>
+
+               
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/minolta.jpg" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-sky-950/90  font-Lobster"> Calibração Absoluta
+</span>  <br>
+ <p class="text-cyan-950 "> Com um pouco de esforço extra e um medidor de luminância conforme representado à direita, é possível também realizar uma calibração fotométrica absoluta (imagem de luminância medidor cortesia da Minolta):
+
+<br> 1. Produza uma imagem HDR de uma cena seguindo as instruções acima. Experimente até você não receba mensagens de erro ou avisos do WebHDR.
+<br> 2. Com um medidor de luminância, meça a luminância da sua cena em alguns pontos. Talvez você queira colocar alguns objetos uniformemente iluminados na cena, como folhas de papel de diversas refletâncias. A refletância real não precisa ser conhecida. Anote o medido luminâncias e salve o arquivo RSP para sua câmera.
+<br> 3. Determine a luminância na imagem HDR. Sugerimos que você use o RADIANCE ximagem visualizador, já que confiar apenas nas informações de cores falsas do WebHDR não é muito preciso. Dentro de ximagem, clique no cursor em qualquer lugar e depois pressione 'L'. Melhor, até, desenhar um retângulo sobre a área de interesse antes de clicar em 'L'. Isso calcula a média da leitura de luminância sobre o retângulo. Consulte a página de manual de ximagem para mais detalhes.
+<br> 4. Agora você tem duas leituras: uma da cena real e outra da imagem HDR. Idealmente, os dois deveriam ser iguais e, se de fato o forem (dentro de alguns por cento), então você tem sorte e pronto. Hora de ir ao pub e trazer a primeira rodada para aqueles que também terão que passar pelas etapas restantes.
+<br> 5. Calcule o fator de calibração, que é simplesmente a razão da luminância HDR sobre a luminância real:
+ </p></h3>
+ <p  class="text-cyan-950">CF = LuminânciaReal / LuminânciaHDR</p>
+
+ <h3><p class="text-cyan-950">Este fator será em torno de 1,0. Se estiver muito longe então algo deu terrivelmente errado, e você deve começar de novo com o passo 1.
+<br>6. Existe um campo na página de upload do WebHDR que permite enviar o CF. Você também deve fazer upload do arquivo RSP produzido na etapa 1.
+<br>7. Por exemplo, o CF é 1,11 para minha Nikon CoolPix 990 e 1,32 para uma CoolPix 995, ambos sob luz do dia nublada.</p></h3>
+    </div>
+
+
+                  
+               </div>
+
+            
+               </div>
+
+               </div>
+               
+            
+        </section>
+
+       
+        
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+<script src="../assets/js/scrollreveal.min.js"></script>
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="../main.js"></script>
+    
+</body>
+</html>

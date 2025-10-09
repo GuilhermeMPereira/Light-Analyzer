@@ -1,0 +1,383 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/Camera_Icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+    <title>HDR WebSite </title>
+    
+    <link rel="stylesheet" href="../output.css">
+</head>
+
+<body>
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+   <header id="navbar" class="bg-cyan-800 fixed w-full top-0 left-0 z-50">
+    <nav class="container flex items-center justify-between h-16 sm:h-20">
+      <a href="../index.html"><div class="font-Lobster sm:text-2xl">Light Photo Analyzer</div></a>
+
+      <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-cyan-950/80
+      backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
+
+        <ul class="flex flex-col items-center gap-8 lg:flex-row">
+                  <li>
+            <a href="../index.html" class="nav-link active:">Home</a>
+          </li>
+
+          <li>
+            <a href="hdr.html" class="nav-link">HDR</a>
+          </li>
+
+          <li>
+            <a href="exemplo.html" class="nav-link">Exemplos</a>
+          </li>
+
+          <li>
+            <a href="hdri.html" class="nav-link">Formatos HDRI</a>
+          </li>
+
+          <li>
+            <a href="exif.html" class="nav-link">Cabeçalho EXIF</a>
+          </li>
+
+          <li>
+            <a href="softwares.html" class="nav-link">Outros Softwares HDR</a>
+          </li>
+      </ul>
+      
+      <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-1.png" alt="" class="w-32">
+      </div>
+
+      <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden">
+        <img src="../assets/img/leaf-2.png" alt="" class="w-32">
+      </div>
+    </div>
+
+      <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+        <i class="ri-menu-4-line" id="hamburger"></i>
+      </div>
+
+      
+    </nav>
+  </header>
+
+ <section id="home" class="relative bg-cyan-900">
+            <div class="container">
+              <!-- blob 1 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+
+               </div>
+
+                <!-- blob 2 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute right-0 bottom-0">
+
+               </div>
+
+
+
+                <div class="flex flex-col items-center gap-5 lg:flex-row">
+                    <!-- content -->
+                    <div class="home__data w-full space-y-5 lg:w-1/2">
+             <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+  Formatos HDRI
+    <br>
+    <h2  class="text-4xl lg:text-4xl font-bold text-white mb-4"><span class="text-blue-50">Nesta etapa vamos apresentar uma sequencia de imagens e explicar de como é aplicado o HDR.</span>
+</h2></h1>
+
+
+                        <div class="flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-5 xl:pt-10">
+                        <a href="exif.html" class="btn flex items-center justify-center gap-2 bg-pink-600">
+                        <span>Cabeçalho EXIF</span>
+                        <i class="ri-video-on-line"></i>
+                        </a>
+                         
+
+                            <p class="text-xs font-Lobster text-slate-300"></p>
+
+                            <div class="flex items-center gap-5 text-lg lg:pt-10">
+                                <i class="ri-facebook-fill text-slate-300 hover:text-pink-600 duration-300 cursor-pointer"></i>
+                                <i class="ri-twitter-x-line  text-slate-300 hover:text-pink-600 duration-300 cursor-pointer text-base"></i>
+                                <i class="ri-instagram-line  text-slate-300 hover:text-pink-600 duration-300 cursor-pointer"></i>
+                                <i class="ri-linkedin-fill  text-slate-300 hover:text-pink-600 duration-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- image -->
+                     <div class="w-full relative  lg:w-1/2">
+                        <img src="../assets/img/ec4e22a5-15aa-4d35-a577-7696f8967561_rw_1200.png" class="home__image">
+
+                        <!-- image-home -->
+
+                        <div class="absolute -top-10 right-0 opacity-30 animate-movingY xl:top-5">
+                            <i class="ri-camera-2-line text-6xl text-pink-600"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute bottom-0 left-0 opacity-30 xl:bottom-12 animate-rotating">
+                            <i class="ri-dv-fill text-6xl text-pink-600"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute -top-8 -left-5 opacity-30 lg:block animate-scalingUp">
+                            <i class="ri-vidicon-line text-6xl text-pink-600"></i>
+                            
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+
+
+   <section id="radiance" class="relative overflow-hidden bg-blue-50">
+
+            <div class="about__top flex flex-col items-center gap-3 text-center mb-10 md:mb-20 ">
+             
+               <h1 class="text-4xl lg:text-5xl font-bold text-pink-600 mb-4 font-Lobster">Formatos HDRI</h1>
+            </div>
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/pngwing.com.png" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-pink-800/40  font-Lobster">Formatos de log da Pixar</span>
+
+                        <br>
+                      <p class="text-cyan-950 "><a href="https://www.pixar.com/" class="text-pink-700">Pixar</a> reconheceu a necessidade de faixa dinâmica no filme gravação, então eles desenvolveram uma codificação de log de 33 bits/pixel para valores RGB, que é implementado como parte do TIFF de Sam Leffler biblioteca. A codificação cobre cerca de 3,5 ordens de magnitude, com precisão relativa de 0,4%.</p>
+                      </h3>
+                
+                  </div>
+               </div>
+            </div>
+  </div>
+
+    <div class="container space-y-10 mt-16">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/images (2).jpg" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-pink-800/40  font-Lobster">Formato LogLuv da SGI</span>
+
+                        <br>
+                      <p class="text-cyan-950 ">Desde a sua criação em 1987, a renderização RADIANCE O sistema usou um formato de ponto flutuante de 32 bits/pixel. <A class="text-pink-700" href="../assets/img/filefmts.pdf">O formato de imagem </A> é descrito no <a href="https://radsite.lbl.gov/radiance/" class="text-pink-700">Web RADIANCE</a> site. A codificação cobre cerca de 76 ordens de grandeza com 1% de precisão relativa.</p>
+                      </h3>
+                
+                  </div>
+               </div>
+            </div>
+  </div>
+
+  
+    <div class="container space-y-10 mt-16">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../assets/img/display.png" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-pink-800/40  font-Lobster">OpenEXR da Industrial Light and Magic</span>
+
+                        <br>
+                      <p class="text-cyan-950 "><a href="https://openexr.com/en/latest/" class="text-pink-700">O formato de arquivo </a> era desenvolvido para superar a faixa dinâmica e a cor limitadas precisão em aplicações de imagens computacionais. As especificações foram publicados sob uma licença Open Source, software e as bibliotecas estão disponíveis sob uma licença BSD modificada.</p>
+                      </h3>
+                
+                  </div>
+               </div>
+
+               
+            </div>
+            
+  </div>
+
+   <div class="container space-y-10 mt-16">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                <div class="about__item__1-img w-full lg:w-1/2">
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-700">
+            <thead class="text-xs text-pink-700 uppercase bg-pink-100">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Formato
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Faixa Dinâmica
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Precisão
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Bits/pixel
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-white border-b hover:bg-pink-50">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        RADIANCE RGBE
+                    </th>
+                    <td class="px-6 py-4">
+                        76
+                    </td>
+                    <td class="px-6 py-4">
+                        1.0%
+                    </td>
+                    <td class="px-6 py-4">
+                        8R + 8G + 8B + 8E
+                    </td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-pink-50">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        Pixar Log TIFF
+                    </th>
+                    <td class="px-6 py-4">
+                        3.8
+                    </td>
+                    <td class="px-6 py-4">
+                        0.4%
+                    </td>
+                    <td class="px-6 py-4">
+                        11R + 11G + 11B
+                    </td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-pink-50">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        LogLuv 24-bit
+                    </th>
+                    <td class="px-6 py-4">
+                        4.8
+                    </td>
+                    <td class="px-6 py-4">
+                        1.1%
+                    </td>
+                    <td class="px-6 py-4">
+                        10logL + 14(u′,v′)
+                    </td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-pink-50">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        LogLuv 32-bit
+                    </th>
+                    <td class="px-6 py-4">
+                        38
+                    </td>
+                    <td class="px-6 py-4">
+                        0.3%
+                    </td>
+                    <td class="px-6 py-4">
+                        16logL + 2×8(u′,v′)
+                    </td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-pink-50">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        ILM OpenEXR
+                    </th>
+                    <td class="px-6 py-4">
+                        9.6
+                    </td>
+                    <td class="px-6 py-4">
+                        0.1%
+                    </td>
+                    <td class="px-6 py-4">
+                        16R + 16G + 16B
+                    </td>
+                </tr>
+                <tr class="bg-white border-b hover:bg-pink-50">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        TIFF 48-bit
+                    </th>
+                    <td class="px-6 py-4">
+                        5.4
+                    </td>
+                    <td class="px-6 py-4">
+                        1.0%
+                    </td>
+                    <td class="px-6 py-4">
+                        16logR + 16logG + 16logB
+                    </td>
+                </tr>
+                <tr class="bg-white hover:bg-pink-50">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        IEEE TIFF 96-bit
+                    </th>
+                    <td class="px-6 py-4">
+                        79
+                    </td>
+                    <td class="px-6 py-4">
+                        —
+                    </td>
+                    <td class="px-6 py-4">
+                        32R + 32G + 32B
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-pink-800/40  font-Lobster">JPEG-HDR</span>
+
+                        <br>
+                      <p class="text-cyan-950 "><a href="../assets/img/cic05.pdf">JPEG-HDR</a>  O formato de arquivo foi desenvolvido por Greg Ward para ser compatível com versões anteriores dos existentes Programas. Ele cria arquivos de tamanhos muito pequenos.</p>                
+                  </div>
+               </div>
+
+               
+            </div>
+            
+  </div>
+
+
+  
+           
+         
+
+
+               
+
+
+        </section>
+
+      
+        
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+<script src="../assets/js/scrollreveal.min.js"></script>
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="../main.js"></script>
+    
+</body>
+</html>

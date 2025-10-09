@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/img/Camera_Icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+    <title>HDR WebSite </title>
+    
+    <link rel="stylesheet" href="../../output.css">
+</head>
+
+<body>
+    <!--~~~~~~~~~~~~~~~ Header ~~~~~~~~~~~~~~~-->
+   <header id="navbar" class="bg-cyan-800 fixed w-full top-0 left-0 z-50">
+    <nav class="container flex items-center justify-between h-16 sm:h-20">
+      <a href="../../index.html"><div class="font-Lobster sm:text-2xl">Light Photo Analyzer</div></a>
+
+      <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-cyan-950/80
+      backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
+
+        <ul class="flex flex-col items-center gap-8 lg:flex-row">
+          <li>
+            <a href="../../index.html" class="nav-link active:">Home</a>
+          </li>
+
+          <li>
+            <a href="#radiance" class="nav-link">Radiance</a>
+          </li>
+
+          <li>
+            <a href="./doc.html" class="nav-link">Documentação</a>
+          </li>
+
+          <li>
+            <a href="./lighting.html" class="nav-link">Iluminação</a>
+          </li>
+
+          <li>
+            <a href="./lighting_natural.html" class="nav-link">Luz Natural</a>
+          </li>
+
+          <li>
+            <a href="sunpath.html" class="nav-link">Diagramas de trajetória solar</a>
+          </li>
+
+          <li>
+            <a href="documents.html" class="nav-link"> Apresentações e Artigos</a>
+          </li>
+      </ul>
+      
+      <div class="absolute bottom-0 -right-10 opacity-90 lg:hidden">
+        <img src="../../assets/img/leaf-1.png" alt="" class="w-32">
+      </div>
+
+      <div class="absolute -top-5 -left-5 rotate-90 opacity-90 lg:hidden">
+        <img src="../../assets/img/leaf-2.png" alt="" class="w-32">
+      </div>
+    </div>
+
+      <div class="text-xl sm:text-3xl cursor-pointer z-50 lg:hidden">
+        <i class="ri-menu-4-line" id="hamburger"></i>
+      </div>
+
+      
+    </nav>
+  </header>
+
+ <section id="home" class="relative bg-cyan-900">
+            <div class="container">
+              <!-- blob 1 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+
+               </div>
+
+                <!-- blob 2 -->
+               <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl -z-10 opacity-40 absolute right-0 bottom-0">
+
+               </div>
+
+
+
+                <div class="flex flex-col items-center gap-5 lg:flex-row">
+                    <!-- content -->
+                    <div class="home__data w-full space-y-5 lg:w-1/2">
+             <h1 class="text-4xl lg:text-5xl font-bold text-white mb-4">
+    Recursos de Radiância
+    <br>
+    <h2  class="text-4xl lg:text-4xl font-bold text-white mb-4"><span class="text-blue-50">Radiance é um traçador de raios reverso fisicamente preciso. É mentira forte com simulações de luz natural, mas também faz iluminação artificial.</span>
+</h2></h1>
+
+
+                        <div class="flex flex-col gap-2 sm:flex-row md:gap-4 lg:pt-5 xl:pt-10">
+                        <a href="doc.html" class="btn flex items-center justify-center gap-2 bg-purple-800/40">
+                        <span>Documentação</span>
+                        <i class="ri-video-on-line"></i>
+                        </a>
+                         
+
+                            <p class="text-xs font-Lobster text-slate-300"></p>
+
+                            <div class="flex items-center gap-5 text-lg lg:pt-10">
+                                <i class="ri-facebook-fill text-slate-300 hover:text-purple-800/40 duration-300 cursor-pointer"></i>
+                                <i class="ri-twitter-x-line  text-slate-300 hover:text-purple-800/40 duration-300 cursor-pointer text-base"></i>
+                                <i class="ri-instagram-line  text-slate-300 hover:text-purple-800/40 duration-300 cursor-pointer"></i>
+                                <i class="ri-linkedin-fill  text-slate-300 hover:text-purple-800/40 duration-300 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- image -->
+                     <div class="w-full relative  lg:w-1/2">
+                        <img src="../../assets/img/4042f7928c2a822faf87c0477e1d0d8e-removebg-preview.png" class="home__image">
+
+                        <!-- image-home -->
+
+                        <div class="absolute -top-10 right-0 opacity-30 animate-movingY xl:top-5">
+                            <i class="ri-camera-2-line text-6xl text-purple-400"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute bottom-0 left-0 opacity-30 xl:bottom-12 animate-rotating">
+                            <i class="ri-dv-fill text-6xl text-purple-400"></i>
+                        </div>
+                       
+
+                         <!-- image-home -->
+
+                        <div class="absolute -top-8 -left-5 opacity-30 lg:block animate-scalingUp">
+                            <i class="ri-vidicon-line text-6xl text-purple-400"></i>
+                            
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+
+
+   <section id="radiance" class="relative overflow-hidden bg-blue-50">
+
+            <div class="about__top flex flex-col items-center gap-3 text-center mb-10 md:mb-20 ">
+             
+               <h1 class="text-4xl lg:text-5xl font-bold text-purple-800/40 mb-4 font-Lobster">Radiance</h1>
+              <p class="max-w-2x1 text-cyan-950"> Traçador de raios reverso fisicamente preciso</p>
+            </div>
+
+            <div class="container space-y-10 ">
+              <!-- item 1-->
+               <div class="flex flex-col items-center lg:flex-row gap-5">
+                <!-- image -->
+                 <div class="about__item__1-img w-full lg:w-1/2">
+                  <img src="../../assets/img/bre16.jpg" alt="" srcset="" class="w-full sm:w-2/3 lg:w-full xl:w-2/3 mx-auto border-b-slate-200 ">
+                 </div>
+
+                 <!-- conteudo-->
+                  <div class="about__item__1-content w-full lg:w-1/2">
+                    <div class="space-y-5">
+                      <h3>
+                      <span class="text-purple-800/40  font-Lobster">Uma das minhas primeiras renderizações do Radiance.
+</span>  
+                        <br>
+                      <p class="text-cyan-950 ">Este é o Edifício 16 do BRE em Garston, Reino Unido.></p>
+                      </h3>
+                      <p class="text-slate-3300 text-cyan-950">A maioria das pessoas associa 'rastreamento de raios' a 'imagens bonitas', mas isso nem sempre é necessariamente o caso. Os números podem ser igualmente informativos. Na verdade, na maioria das vezes, eu uso o Radiance não para produzir imagens, mas para calcular valores de iluminância e fatores de luz natural. Existem não há muitos cálculos de iluminação que a Radiance não possa fazer.
+                    </div>
+
+                  </div>
+               </div>
+
+               
+
+
+               
+            </div>
+        </section>
+
+       
+        
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!--~~~~~~~~~~ SCROLLREVEAL ~~~~~~~~~~-->
+<script src="../../assets/js/scrollreveal.min.js"></script>
+    <!--~~~~~~~~~~ mainjs ~~~~~~~~~~-->
+    <script src="../../main.js"></script>
+    
+</body>
+</html>
