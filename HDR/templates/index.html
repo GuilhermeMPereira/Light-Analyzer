@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDR Unicamp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center py-10">
+
+    <div class="max-w-4xl w-full p-6 bg-gray-800 rounded-lg shadow-xl">
+        <h1 class="text-3xl font-bold mb-2 text-blue-400">Analisador HDR</h1>
+        <p class="text-gray-400 mb-6">Envie fotos com exposições diferentes.</p>
+
+        <div class="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center" id="dropzone">
+            <input type="file" id="fileInput" multiple accept="image/*" class="hidden">
+            <label for="fileInput" class="cursor-pointer">
+                <div class="text-xl font-semibold">Clique para selecionar imagens</div>
+                <p class="text-sm text-gray-500 mt-2">(Mínimo 2: uma escura e uma clara)</p>
+            </label>
+        </div>
+        
+        <div id="status" class="mt-4 text-yellow-400 hidden">Processando... isso exige muita CPU.</div>
+        <div id="error" class="mt-4 text-red-500 font-bold hidden"></div>
+
+        <div id="results" class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
+            <div>
+                <h3 class="text-lg font-bold mb-2">HDR Resultante (Tone Mapped)</h3>
+                <img id="imgHDR" class="w-full rounded border border-gray-600" />
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-2">Análise de Falsas Cores</h3>
+                <img id="imgFalseColor" class="w-full rounded border border-gray-600" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const status = document.getElementById('status');
+        const errorDiv = document.getElementById('error');
+        const results = document.getElementById('results');
+
+        fileInput.addEventListener('change', async (e) => {
+            const files = e.target.files;
+            if (files.length < 2) {
+                alert("Por favor, selecione pelo menos 2 imagens.");
+                return;
+            }
+
+            // Preparar envio
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('images', files[i]);
+            }
+
+            // UI Update
+            status.classList.remove('hidden');
+            errorDiv.classList.add('hidden');
+            results.classList.add('hidden');
+
+            try {
+                const response = await fetch('/process', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Erro desconhecido");
+                }
+
+                // Mostrar Imagens
+                document.getElementById('imgHDR').src = 'data:image/jpeg;base64,' + data.hdr_preview;
+                document.getElementById('imgFalseColor').src = 'data:image/jpeg;base64,' + data.false_color;
+                
+                status.classList.add('hidden');
+                results.classList.remove('hidden');
+
+            } catch (err) {
+                status.classList.add('hidden');
+                errorDiv.textContent = err.message;
+                errorDiv.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
