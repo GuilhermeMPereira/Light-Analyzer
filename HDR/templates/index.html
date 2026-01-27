@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clone HDR Unicamp</title>
+    <title>HDR Unicamp</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="bg-gray-900 text-white min-h-screen flex flex-col items-center py-10">
 
     <div class="max-w-4xl w-full p-6 bg-gray-800 rounded-lg shadow-xl">
         <h1 class="text-3xl font-bold mb-2 text-blue-400">Analisador HDR</h1>
-        <p class="text-gray-400 mb-6">Recriação do Light Photo Analyzer. Envie fotos e configure os parâmetros.</p>
+        <p class="text-gray-400 mb-6">Light Photo Analyzer. Envie fotos e configure os parâmetros.</p>
 
         <div class="mb-4">
-            <label class="block text-sm font-bold mb-2">1. Imagens da Câmera</label>
-            <div class="border-2 border-dashed border-blue-500 rounded-lg p-8 text-center hover:bg-gray-700 transition" id="dropzone">
+            <div class="flex justify-between items-end mb-2">
+                <label class="block text-sm font-bold">1. Imagens da Câmera (<span id="countFiles">0</span>)</label>
+                <button id="btnClear" class="text-xs text-red-400 hover:text-red-300 underline hidden">Limpar tudo</button>
+            </div>
+
+            <div class="border-2 border-dashed border-blue-500 rounded-lg p-8 text-center hover:bg-gray-700 transition relative" id="dropzone">
                 <input type="file" id="fileInput" multiple accept="image/*" class="hidden">
-                <label for="fileInput" class="cursor-pointer block">
+                <label for="fileInput" class="cursor-pointer block w-full h-full">
                     <div class="text-xl font-semibold text-blue-300">Clique para selecionar imagens</div>
                     <p class="text-sm text-gray-500 mt-2">(JPG, PNG - Mínimo 2 arquivos)</p>
                 </label>
             </div>
-            <div id="preview-area" class="flex flex-wrap mt-2 gap-2"></div>
+            
+            <div id="preview-area" class="flex flex-wrap mt-4 gap-3"></div>
         </div>
 
         <div class="mb-4 bg-gray-700 p-4 rounded border border-gray-600">
@@ -57,12 +63,12 @@
             </div>
         </div>
         
-        <button id="btnProcessar" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded transition hidden">
+        <button id="btnProcessar" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded transition opacity-50 cursor-not-allowed" disabled>
             Processar HDR
         </button>
 
-        <div id="status" class="mt-4 text-yellow-400 hidden font-mono"></div>
-        <div id="error" class="mt-4 text-red-500 font-bold hidden bg-red-900/30 p-2 rounded"></div>
+        <div id="status" class="mt-4 text-yellow-400 hidden font-mono text-center"></div>
+        <div id="error" class="mt-4 text-red-500 font-bold hidden bg-red-900/30 p-2 rounded text-center"></div>
 
         <div id="results" class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
             <div>
@@ -84,36 +90,93 @@
         const status = document.getElementById('status');
         const errorDiv = document.getElementById('error');
         const results = document.getElementById('results');
+        
+       
+        const countSpan = document.getElementById('countFiles');
+        const btnClear = document.getElementById('btnClear');
 
         // Checkboxes
         const chkAlign = document.getElementById('chkAlign');
         const chkFlare = document.getElementById('chkFlare');
         const chkGhost = document.getElementById('chkGhost');
 
-        let selectedFiles = [];
+        // LISTA DE ARQUIVOS
+        let allFiles = [];
 
         fileInput.addEventListener('change', (e) => {
-            selectedFiles = Array.from(e.target.files);
-            previewArea.innerHTML = '';
-            if (selectedFiles.length > 0) {
-                btnProcessar.classList.remove('hidden');
-                selectedFiles.forEach(file => {
-                    const img = document.createElement('img');
-                    img.src = URL.createObjectURL(file);
-                    img.className = 'h-16 w-16 object-cover rounded border border-gray-500';
-                    previewArea.appendChild(img);
-                });
-            }
+            const newFiles = Array.from(e.target.files);
+            
+            // Adiciona sem substituir
+            newFiles.forEach(file => {
+                // Evita duplicatas exatas
+                if (!allFiles.some(f => f.name === file.name && f.size === file.size)) {
+                    allFiles.push(file);
+                }
+            });
+
+            // Limpa o input
+            fileInput.value = '';
+            updateUI();
         });
 
+        function removeFile(index) {
+            allFiles.splice(index, 1);
+            updateUI();
+        }
+
+        btnClear.addEventListener('click', () => {
+            allFiles = [];
+            updateUI();
+        });
+
+        function updateUI() {
+            //contador
+            countSpan.textContent = allFiles.length;
+
+            
+            previewArea.innerHTML = '';
+            
+            allFiles.forEach((file, index) => {
+                const div = document.createElement('div');
+                div.className = 'relative group w-20 h-20'; 
+
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.className = 'w-full h-full object-cover rounded border border-gray-500 shadow-sm';
+                
+                
+                const btnRemove = document.createElement('button');
+                btnRemove.innerHTML = '<i class="fas fa-times"></i>';
+                btnRemove.className = 'absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition shadow-lg cursor-pointer hover:bg-red-600 z-10';
+                btnRemove.onclick = () => removeFile(index);
+
+                div.appendChild(img);
+                div.appendChild(btnRemove);
+                previewArea.appendChild(div);
+            });
+
+            
+            if (allFiles.length >= 2) {
+                btnProcessar.disabled = false;
+                btnProcessar.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnClear.classList.remove('hidden');
+            } else {
+                btnProcessar.disabled = true;
+                btnProcessar.classList.add('opacity-50', 'cursor-not-allowed');
+                if (allFiles.length === 0) btnClear.classList.add('hidden');
+            }
+        }
+
         btnProcessar.addEventListener('click', async () => {
-            if (selectedFiles.length < 2) {
+            if (allFiles.length < 2) {
                 alert("Selecione pelo menos 2 imagens.");
                 return;
             }
 
             const formData = new FormData();
-            selectedFiles.forEach(file => formData.append('images', file));
+            
+            // variavel para armazenar os arquivos
+            allFiles.forEach(file => formData.append('images', file));
             
             if (rspInput.files.length > 0) {
                 formData.append('rsp_file', rspInput.files[0]);

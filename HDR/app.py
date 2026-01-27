@@ -13,7 +13,6 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # --- FUNÇÕES AUXILIARES ---
 
 def resize_to_reference(img_list):
-  
     if not img_list: return []
     ref_h, ref_w = img_list[0].shape[:2]
     resized_list = []
@@ -25,21 +24,45 @@ def resize_to_reference(img_list):
     return resized_list
 
 def bio_inspired_hdr(images):
-    
-    # Mertens fusion: pondera pixels por Contraste, Saturação e Bem-estar (Exposure)
+    # Mertens 
     merge_mertens = cv2.createMergeMertens()
-    
-    # O resultado é uma imagem float32 entre 0 e 1
     hdr_image = merge_mertens.process(images)
-    
-    # Converter para 8-bit (0-255) para visualização
     hdr_8bit = np.clip(hdr_image * 255, 0, 255).astype('uint8')
     return hdr_8bit
 
+def generate_custom_blue_red_lut():
+    lut = np.zeros((256, 1, 3), dtype=np.uint8)
+    
+    for i in range(256):
+        # (Mantém a regra de só Azul e Vermelho misturados, Verde = 0)
+        lut[i, 0, 1] = 0
+        
+        if i < 128:
+            # Baixa luz (Azul -> Magenta)
+            lut[i, 0, 0] = 255                # Azul fixo
+            lut[i, 0, 2] = i * 2              # Vermelho sobe
+        else:
+            # Alta luz (Magenta -> Vermelho)
+            lut[i, 0, 0] = max(0, 255 - (i - 128) * 2)  # Azul desce
+            lut[i, 0, 2] = 255                          # Vermelho fixo
+            
+    return lut
+
 def generate_false_color(image_8bit):
+    # 1. Converter para escala de cinza
     gray = cv2.cvtColor(image_8bit, cv2.COLOR_BGR2GRAY)
+    
+    # 2. Normalizar
     norm_img = cv2.normalize(gray, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
-    return cv2.applyColorMap(norm_img, cv2.COLORMAP_JET)
+    
+    # 3. Converter para 3 canais (Hack para cv2.LUT funcionar)
+    img_3ch = cv2.cvtColor(norm_img, cv2.COLOR_GRAY2BGR)
+    
+    # 4. Gerar e Aplicar a LUT
+    custom_lut = generate_custom_blue_red_lut()
+    false_color_img = cv2.LUT(img_3ch, custom_lut)
+    
+    return false_color_img
 
 def array_to_base64(img_array):
     _, buffer = cv2.imencode('.jpg', img_array)
@@ -54,8 +77,6 @@ def index():
 @app.route('/process', methods=['POST'])
 def process():
     uploaded_files = request.files.getlist("images")
-    
-    # Checkboxes opcionais
     opt_align = request.form.get('auto_align') == 'true'
     
     if len(uploaded_files) < 2:
@@ -64,7 +85,7 @@ def process():
     images_cv = []
 
     try:
-        # 1. Carregar imagens
+        # Carregar imagens
         for file in uploaded_files:
             file_bytes = file.read()
             nparr = np.frombuffer(file_bytes, np.uint8)
@@ -72,20 +93,17 @@ def process():
             if img is not None:
                 images_cv.append(img)
 
-        # 2. Normalizar tamanhos
         images_cv = resize_to_reference(images_cv)
 
-        # 3. Alinhamento
         if opt_align:
-            print("Alinhando imagens (Spatial Alignment)...")
+            print("Alinhando imagens...")
             alignMTB = cv2.createAlignMTB()
             alignMTB.process(images_cv, images_cv)
 
-        # 4. Processamento "Bio-Inspirado" (Mertens)
-        print("Processando HDR via Fusão Espacial (Método Mertens)...")
+        print("Processando HDR (Mertens)...")
         result_hdr = bio_inspired_hdr(images_cv)
 
-     
+        # Gerar Falsa cor
         false_color = generate_false_color(result_hdr)
 
         return jsonify({
@@ -95,7 +113,8 @@ def process():
         })
 
     except Exception as e:
-        print(f"Erro: {e}")
+        import traceback
+        traceback.print_exc()
         return jsonify({"error": f"Erro interno: {str(e)}"}), 500
 
 if __name__ == '__main__':
