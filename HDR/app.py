@@ -30,37 +30,53 @@ def bio_inspired_hdr(images):
     hdr_8bit = np.clip(hdr_image * 255, 0, 255).astype('uint8')
     return hdr_8bit
 
-def generate_custom_blue_red_lut():
+def generate_soft_coolwarm_lut():
+    
     lut = np.zeros((256, 1, 3), dtype=np.uint8)
     
     for i in range(256):
-        # (Mantém a regra de só Azul e Vermelho misturados, Verde = 0)
-        lut[i, 0, 1] = 0
+        # t vai de 0.0 a 1.0
+        t = i / 255.0
         
-        if i < 128:
-            # Baixa luz (Azul -> Magenta)
-            lut[i, 0, 0] = 255                # Azul fixo
-            lut[i, 0, 2] = i * 2              # Vermelho sobe
-        else:
-            # Alta luz (Magenta -> Vermelho)
-            lut[i, 0, 0] = max(0, 255 - (i - 128) * 2)  # Azul desce
-            lut[i, 0, 2] = 255                          # Vermelho fixo
+        if t < 0.5:
+            # Metade inferior: transição de Azul Suave para Branco/Cinza Claro
+            t_adj = t * 2.0 # Normaliza para 0.0 a 1.0 dentro desta metade
             
+            # Cor inicial (Azul suave): B=220, G=120, R=50
+            # Cor do meio (Branco lavado): B=240, G=240, R=240
+            b = int(220 * (1 - t_adj) + 240 * t_adj)
+            g = int(120 * (1 - t_adj) + 240 * t_adj)
+            r = int(50  * (1 - t_adj) + 240 * t_adj)
+            
+        else:
+            # Metade superior: transição de Branco/Cinza Claro para Laranja/Vermelho
+            t_adj = (t - 0.5) * 2.0 # Normaliza para 0.0 a 1.0 dentro desta metade
+            
+            # Cor do meio (Branco lavado): B=240, G=240, R=240
+            # Cor final (Laranja/Vermelho): B=40, G=100, R=230
+            b = int(240 * (1 - t_adj) + 40  * t_adj)
+            g = int(240 * (1 - t_adj) + 100 * t_adj)
+            r = int(240 * (1 - t_adj) + 230 * t_adj)
+            
+        lut[i, 0, 0] = max(0, min(255, b)) # Canal Blue
+        lut[i, 0, 1] = max(0, min(255, g)) # Canal Green
+        lut[i, 0, 2] = max(0, min(255, r)) # Canal Red
+        
     return lut
 
 def generate_false_color(image_8bit):
     # 1. Converter para escala de cinza
     gray = cv2.cvtColor(image_8bit, cv2.COLOR_BGR2GRAY)
     
-    # 2. Normalizar
+    # 2. Normalizar a imagem
     norm_img = cv2.normalize(gray, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
     
     # 3. Converter para 3 canais (Hack para cv2.LUT funcionar)
     img_3ch = cv2.cvtColor(norm_img, cv2.COLOR_GRAY2BGR)
     
-    # 4. Gerar e Aplicar a LUT
-    custom_lut = generate_custom_blue_red_lut()
-    false_color_img = cv2.LUT(img_3ch, custom_lut)
+    # 4. Gerar e Aplicar a nova LUT 'Clarinha'
+    soft_lut = generate_soft_coolwarm_lut()
+    false_color_img = cv2.LUT(img_3ch, soft_lut)
     
     return false_color_img
 
@@ -78,6 +94,10 @@ def index():
 def process():
     uploaded_files = request.files.getlist("images")
     opt_align = request.form.get('auto_align') == 'true'
+    
+    # Recebendo as outras opções do frontend (ainda não implementadas na lógica do HDR)
+    opt_flare = request.form.get('lens_flare') == 'true'
+    opt_ghost = request.form.get('ghost_removal') == 'true'
     
     if len(uploaded_files) < 2:
         return jsonify({"error": "Envie pelo menos 2 imagens."}), 400
