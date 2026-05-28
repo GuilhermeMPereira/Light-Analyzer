@@ -1,833 +1,480 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="assets/img/Camera_Icon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../assets/img/Camera_Icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Lobster&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <title>Light Photo Analyzer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            Jost: ['Jost', 'sans-serif'],
-            Lobster: ['Lobster', 'cursive'],
-            Mono: ['Space Mono', 'monospace'],
-          },
-          animation: {
-            movingY: 'movingY 3s ease-in-out infinite',
-            rotating: 'rotating 8s linear infinite',
-            scalingUp: 'scalingUp 4s ease-in-out infinite',
-            fadeIn: 'fadeIn 0.4s ease',
-          },
-          keyframes: {
-            movingY: { '0%,100%': {transform:'translateY(0)'}, '50%': {transform:'translateY(-18px)'} },
-            rotating: { '0%': {transform:'rotate(0deg)'}, '100%': {transform:'rotate(360deg)'} },
-            scalingUp: { '0%,100%': {transform:'scale(1)'}, '50%': {transform:'scale(1.15)'} },
-            fadeIn: { from:{opacity:'0',transform:'translateY(8px)'}, to:{opacity:'1',transform:'translateY(0)'} },
-          }
-        }
-      }
+      theme: { extend: { fontFamily: { Jost:['Jost','sans-serif'], Lobster:['Lobster','cursive'], Mono:['Space Mono','monospace'] } } }
     }
   </script>
+  <title>Analisador HDR — Light Photo Analyzer</title>
   <style>
-    html { overflow-x: hidden; scroll-behavior: smooth; }
-    body { background-color: #164e63; color: white; font-family: 'Jost', sans-serif; letter-spacing: 0.05em; }
-    section { padding: 5rem 0; }
-    @media(min-width:768px){ section { padding: 7rem 0; } }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-    .nav-link { font-size: 1.05rem; font-weight: 600; transition: color .3s; }
-    .nav-link:hover, .nav-link.active { color: #eab308; }
-    h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; }
-    h2 { font-size: clamp(1.4rem, 3vw, 2.2rem); }
-    h3 { font-size: clamp(1.1rem, 2vw, 1.6rem); }
-    .btn { border: 1px solid #eab308; background: #eab308; border-radius: 6px; padding: 0.5rem 1.25rem; font-weight: 700; transition: opacity .3s; display: inline-flex; align-items: center; gap: 6px; color: #1a1a1a; }
-    .btn:hover { opacity: 0.88; }
-    .btn-outline { background: transparent; color: white; border-color: #eab308; }
-    .btn-outline:hover { background: #eab308; color: #1a1a1a; }
-    .title { font-family: 'Lobster', cursive; color: #eab308; }
-    .service__card { transition: box-shadow .3s, transform .3s; }
-    .service__card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.3); transform: translateY(-4px); }
-    .popular__card img { transition: top .5s; }
-    .popular__card:hover img { top: -2rem; }
+    html { scroll-behavior: smooth; }
+    body { background: #0a1a24; color: #e2e8f0; font-family: 'Jost', sans-serif; min-height: 100vh; }
+    .nav-link { transition: color .2s; }
+    .nav-link:hover { color: #eab308; }
 
-    /* ===== ANALYZER SECTION ===== */
-    #analyzer { background: #0e3a4a; }
-    .ana-wrap { display: grid; grid-template-columns: 1fr 300px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); background: #0a2a36; }
-    @media(max-width:900px){ .ana-wrap { grid-template-columns: 1fr; } }
-    .ana-left { display: flex; flex-direction: column; border-right: 1px solid rgba(255,255,255,0.08); }
-    .ana-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 10px 14px; background: #0d3344; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .ana-toolbar-title { font-size: 13px; font-weight: 600; color: #eab308; font-family: 'Space Mono', monospace; margin-right: 6px; }
-    .tb-sep { width: 1px; height: 18px; background: rgba(255,255,255,0.15); margin: 0 4px; }
-    .tb-btn { font-size: 11px; padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: #ccc; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all .15s; }
-    .tb-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
-    .tb-btn.active { background: #0f766e; color: #ccfbf1; border-color: #0f766e; }
-    .canvas-area { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; background: #050e14; min-height: 360px; cursor: crosshair; overflow: hidden; }
-    .canvas-area canvas { max-width: 100%; max-height: 420px; display: block; }
-    .drop-zone { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
-    .drop-zone i { font-size: 3rem; color: #2d6a7f; }
-    .drop-zone p { font-size: 13px; color: #4a8fa6; }
-    .drop-zone label { font-size: 12px; padding: 6px 18px; border-radius: 6px; border: 1px solid #2d6a7f; color: #7ab8cc; cursor: pointer; background: rgba(13,51,68,.6); transition: all .2s; }
-    .drop-zone label:hover { border-color: #eab308; color: #eab308; }
-    .probe-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 7px 14px; background: #0d3344; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11px; font-family: 'Space Mono', monospace; color: #7ab8cc; min-height: 36px; }
-    .probe-dot { width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.5); display: inline-block; flex-shrink: 0; }
-    .probe-val { color: #fff; font-weight: 700; }
-    .ana-right { display: flex; flex-direction: column; overflow-y: auto; max-height: 600px; }
-    .side-section { padding: 13px 14px; border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .side-title { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #4a8fa6; margin-bottom: 9px; font-family: 'Space Mono', monospace; }
-    .legend-table { width: 100%; border-collapse: collapse; font-size: 11px; }
-    .legend-table td { padding: 3px 4px; vertical-align: middle; }
-    .swatch { width: 26px; height: 15px; border-radius: 3px; display: inline-block; border: 1px solid rgba(255,255,255,0.1); }
-    .cd-range { color: #4a8fa6; font-family: 'Space Mono', monospace; font-size: 10px; }
-    .cd-label { color: #cce8f0; font-weight: 500; }
-    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-    .stat-card { background: rgba(255,255,255,0.05); border-radius: 6px; padding: 8px 10px; }
-    .s-label { font-size: 10px; color: #4a8fa6; }
-    .s-val { font-size: 15px; font-weight: 700; color: #fff; margin-top: 2px; font-family: 'Space Mono', monospace; }
-    .ramp-bar { height: 16px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.15); margin-bottom: 5px; }
-    .ramp-labels { display: flex; justify-content: space-between; font-size: 9px; color: #4a8fa6; font-family: 'Space Mono', monospace; }
-    .mode-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
-    .mode-tab { font-size: 10px; padding: 3px 9px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.15); background: transparent; color: #7ab8cc; cursor: pointer; transition: all .15s; }
-    .mode-tab.active { background: #0f766e; color: #ccfbf1; border-color: #0f766e; }
-    .iso-control { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
-    .iso-control label { font-size: 11px; color: #7ab8cc; flex: 1; }
-    .iso-control input[type=range] { flex: 2; accent-color: #eab308; }
-    .iso-control span { font-size: 11px; color: #fff; min-width: 30px; text-align: right; font-family: 'Space Mono', monospace; }
-    .export-btn { width: 100%; padding: 7px; border-radius: 6px; background: #eab308; border: none; color: #1a1a1a; font-weight: 700; font-size: 12px; cursor: pointer; transition: opacity .2s; display: flex; align-items: center; justify-content: center; gap: 6px; }
-    .export-btn:hover { opacity: 0.85; }
-    .histogram { width: 100%; height: 60px; border-radius: 4px; background: #050e14; border: 1px solid rgba(255,255,255,0.1); display: block; }
+    /* DROPZONE */
+    .dropzone { border: 2px dashed rgba(14,116,144,0.6); border-radius: 12px; padding: 2.5rem 1rem; text-align: center; transition: all .2s; cursor: pointer; background: rgba(14,116,144,0.06); }
+    .dropzone:hover, .dropzone.drag-over { border-color: #eab308; background: rgba(234,179,8,0.06); }
+    .dropzone input { display: none; }
+
+    /* PREVIEW GRID */
+    .preview-item { position: relative; }
+    .preview-item .remove-btn { position: absolute; top: -6px; right: -6px; background: #ef4444; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; cursor: pointer; opacity: 0; transition: opacity .15s; border: none; }
+    .preview-item:hover .remove-btn { opacity: 1; }
+
+    /* OPTION TOGGLE */
+    .opt-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .opt-row:last-child { border-bottom: none; }
+    .toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; inset: 0; border-radius: 22px; background: #1e3a4a; cursor: pointer; transition: background .2s; }
+    .toggle input:checked + .toggle-slider { background: #0f766e; }
+    .toggle-slider:before { content: ''; position: absolute; width: 16px; height: 16px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: transform .2s; }
+    .toggle input:checked + .toggle-slider:before { transform: translateX(18px); }
+
+    /* RESULTS */
+    .result-panel { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; }
+    .result-label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 10px 14px; background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.08); font-family: 'Space Mono', monospace; color: #4a8fa6; }
+
+    /* PROCESS BTN */
+    .process-btn { background: #0f766e; color: white; border: none; border-radius: 8px; padding: 13px; width: 100%; font-weight: 700; font-size: 15px; cursor: pointer; transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 8px; letter-spacing: .04em; }
+    .process-btn:hover:not(:disabled) { background: #0d6b64; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(15,118,110,0.4); }
+    .process-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* STAT BAR */
+    .stat-pill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 8px 12px; }
+
+    /* LOG */
+    .log-box { background: #050e14; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px 14px; font-family: 'Space Mono', monospace; font-size: 11px; color: #4a8fa6; min-height: 40px; white-space: pre-wrap; }
+
+    /* HISTOGRAM */
+    .histo { width: 100%; height: 80px; border-radius: 6px; background: #050e14; display: block; border: 1px solid rgba(255,255,255,0.08); }
+
+    /* LEGEND TABLE */
+    .lc-table { width: 100%; font-size: 11px; border-collapse: collapse; }
+    .lc-table td { padding: 4px 6px; vertical-align: middle; }
+    .lc-swatch { display: inline-block; width: 28px; height: 16px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.12); }
+    .lc-range { color: #4a8fa6; font-family: 'Space Mono', monospace; font-size: 10px; }
+    .lc-label { color: #cce8f0; }
   </style>
 </head>
-
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <header id="navbar" class="bg-cyan-900 fixed w-full top-0 left-0 z-50 transition-all duration-300">
-    <nav class="container flex items-center justify-between h-16 sm:h-20">
-      <a href="#home" class="font-Lobster text-xl sm:text-2xl text-white hover:text-yellow-400 transition-colors">Light Photo Analyzer</a>
-
-      <div id="nav-menu" class="absolute top-0 left-[-100%] min-h-[80vh] w-full bg-cyan-950/95 backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto">
-        <ul class="flex flex-col items-center gap-8 lg:flex-row">
-          <li><a href="#home"       class="nav-link active">Home</a></li>
-          <li><a href="#resources"  class="nav-link">Recursos</a></li>
-          <li><a href="#analyzer"   class="nav-link">Analisador</a></li>
-          <li><a href="#hdr"        class="nav-link">HDR</a></li>
-          <li><a href="#webhdr"     class="nav-link">WebHDR</a></li>
-          <li><a href="#mirrors"    class="nav-link">Avaliações</a></li>
-          <li><a href="#contact"    class="nav-link">Contato</a></li>
-        </ul>
-      </div>
-
-      <div class="text-2xl sm:text-3xl cursor-pointer z-50 lg:hidden" id="hamburger">
-        <i class="ri-menu-4-line"></i>
+  <!-- NAV -->
+  <header class="bg-cyan-900/90 backdrop-blur-sm sticky top-0 z-50 border-b border-cyan-800/50">
+    <nav class="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
+      <a href="../index.html" class="font-Lobster text-lg text-white hover:text-yellow-400 transition-colors flex items-center gap-2">
+        <i class="ri-camera-3-fill text-yellow-400"></i> Light Photo Analyzer
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a href="../index.html#analyzer" class="nav-link text-cyan-300">Luminance Analyzer</a>
+        <a href="../webhdr/hdr.html"     class="nav-link text-cyan-300">WebHDR</a>
+        <a href="../resources/radiance/radiance.html" class="nav-link text-cyan-300">Radiance</a>
       </div>
     </nav>
   </header>
 
-  <main>
+  <main class="max-w-6xl mx-auto px-6 py-10">
 
-    <!-- ===== HOME ===== -->
-    <section id="home" class="relative pt-32 pb-20">
-      <div class="container">
-        <div class="w-64 h-64 bg-cyan-700 rounded-full blur-3xl opacity-30 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10"></div>
-        <div class="w-48 h-48 bg-yellow-600 rounded-full blur-3xl opacity-10 absolute right-10 bottom-10 -z-10"></div>
+    <div class="mb-8">
+      <h1 class="font-Lobster text-3xl text-yellow-400 mb-1">Analisador HDR</h1>
+      <p class="text-cyan-400 text-sm">Fusão de múltiplas exposições (Mertens) + mapa de falsas cores de luminância</p>
+    </div>
 
-        <div class="flex flex-col items-center gap-10 lg:flex-row">
-          <div class="home__data w-full space-y-6 lg:w-1/2">
-            <h1>Bem-vindo(a) ao <br>
-              <span class="text-yellow-400">Light Photo Analyzer</span>
-            </h1>
-            <p class="text-slate-300 font-Lobster text-lg leading-relaxed">
-              Um projeto que revoluciona a análise de <strong class="text-yellow-400">Iluminação Natural</strong>, Radiance e fotografia HDR — com mapeamento de luminância, isolinhas e false color em tempo real.
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- ===== COLUNA ESQUERDA: INPUTS ===== -->
+      <div class="lg:col-span-1 flex flex-col gap-5">
+
+        <!-- IMAGENS -->
+        <div class="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-sm font-bold text-cyan-200">
+              <i class="ri-images-line mr-1"></i> Imagens da câmera
+              <span class="ml-2 bg-cyan-700/50 text-cyan-300 text-xs px-2 py-0.5 rounded-full" id="countBadge">0 selecionadas</span>
             </p>
-            <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
-              <a href="#analyzer" class="btn">
-                <i class="ri-bar-chart-2-line"></i> Analisar Imagem
-              </a>
-              <a href="HDR/templates/index.html" class="btn btn-outline">
-                <i class="ri-image-2-line"></i> Processar HDR
-              </a>
-            </div>
-            <div class="flex items-center gap-5 text-xl pt-2">
-              <i class="ri-facebook-fill text-slate-400 hover:text-yellow-400 duration-300 cursor-pointer"></i>
-              <i class="ri-twitter-x-line text-slate-400 hover:text-yellow-400 duration-300 cursor-pointer"></i>
-              <i class="ri-instagram-line text-slate-400 hover:text-yellow-400 duration-300 cursor-pointer"></i>
-              <i class="ri-linkedin-fill text-slate-400 hover:text-yellow-400 duration-300 cursor-pointer"></i>
+            <button id="btnClear" class="text-xs text-red-400 hover:text-red-300 hidden" onclick="clearAll()">
+              <i class="ri-delete-bin-line"></i> Limpar
+            </button>
+          </div>
+
+          <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" multiple accept="image/*">
+            <i class="ri-upload-cloud-2-line text-3xl text-cyan-600 mb-2 block"></i>
+            <p class="text-sm text-cyan-400 font-semibold">Clique ou arraste as imagens aqui</p>
+            <p class="text-xs text-slate-500 mt-1">JPG, PNG · mínimo 2 arquivos · exposições diferentes</p>
+          </div>
+
+          <div id="previewArea" class="flex flex-wrap gap-2 mt-3"></div>
+        </div>
+
+        <!-- RSP -->
+        <div class="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50">
+          <p class="text-sm font-bold text-cyan-200 mb-3"><i class="ri-equalizer-2-line mr-1 text-yellow-400"></i> Curva de resposta (.rsp) — opcional</p>
+          <input type="file" id="rspInput" accept=".rsp"
+            class="block w-full text-xs text-slate-400 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-yellow-500/20 file:text-yellow-400 hover:file:bg-yellow-500/30 cursor-pointer">
+          <p class="text-xs text-slate-500 mt-2">Se omitida, o algoritmo Mertens não usa curva de resposta</p>
+        </div>
+
+        <!-- OPÇÕES -->
+        <div class="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50">
+          <p class="text-sm font-bold text-cyan-200 mb-1"><i class="ri-settings-3-line mr-1"></i> Opções de processamento</p>
+          <div class="opt-row">
+            <label class="toggle mt-0.5"><input type="checkbox" id="chkAlign" checked><span class="toggle-slider"></span></label>
+            <div>
+              <p class="text-sm font-semibold text-white">Auto-align images</p>
+              <p class="text-xs text-slate-400">Desative apenas se usou tripé estável.</p>
             </div>
           </div>
-          <div class="w-full relative lg:w-1/2">
-            <img src="assets/img/2015-11-09-zoom2.webp" class="home__image w-full rounded-xl shadow-2xl" alt="HDR Sample">
-            <div class="absolute -top-10 right-0 opacity-20 animate-movingY">
-              <i class="ri-camera-2-line text-7xl text-yellow-400"></i>
+          <div class="opt-row">
+            <label class="toggle mt-0.5"><input type="checkbox" id="chkFlare"><span class="toggle-slider"></span></label>
+            <div>
+              <p class="text-sm font-semibold text-white">Remove lens flare</p>
+              <p class="text-xs text-slate-400">Melhora contraste, leva mais tempo.</p>
             </div>
-            <div class="absolute bottom-4 left-0 opacity-20 animate-rotating">
-              <i class="ri-dv-fill text-6xl text-yellow-400"></i>
+          </div>
+          <div class="opt-row">
+            <label class="toggle mt-0.5"><input type="checkbox" id="chkGhost"><span class="toggle-slider"></span></label>
+            <div>
+              <p class="text-sm font-semibold text-white">Ghost removal</p>
+              <p class="text-xs text-slate-400">Remove objetos em movimento entre frames.</p>
             </div>
           </div>
         </div>
+
+        <!-- BOTÃO -->
+        <button id="btnProcessar" class="process-btn" disabled onclick="processar()">
+          <i class="ri-cpu-line text-lg"></i> Processar HDR
+        </button>
+
+        <div id="logBox" class="log-box hidden">Aguardando...</div>
+        <div id="errorBox" class="hidden text-sm text-red-400 bg-red-900/20 rounded-lg p-3 border border-red-800/50"></div>
       </div>
-    </section>
 
-    <!-- ===== RESOURCES ===== -->
-    <section id="resources" class="bg-white text-cyan-900">
-      <div class="container">
-        <div class="flex flex-col items-center gap-3 text-center mb-14">
-          <h2 class="title">Recursos</h2>
-          <p class="max-w-xl text-cyan-700">Ferramentas e materiais sobre iluminação, Radiance e fotografia HDR</p>
-        </div>
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <a href="resources/radiance/radiance.html" class="service__card border border-cyan-200 p-5 rounded-xl cursor-pointer space-y-4 hover:border-cyan-500">
-            <div class="flex items-center gap-4">
-              <i class="ri-lightbulb-flash-line text-4xl text-cyan-700"></i>
-              <p class="font-bold text-yellow-600 text-lg">Radiance</p>
-            </div>
-            <p class="font-Lobster text-cyan-700">Traçador de raios reverso fisicamente preciso para simulações de luz natural e artificial.</p>
-          </a>
-          <a href="resources/radiance/lighting.html" class="service__card border border-cyan-200 p-5 rounded-xl cursor-pointer space-y-4 hover:border-cyan-500">
-            <div class="flex items-center gap-4">
-              <i class="ri-lightbulb-line text-4xl text-yellow-500"></i>
-              <p class="font-bold text-yellow-600 text-lg">Iluminação</p>
-            </div>
-            <p class="font-Lobster text-cyan-700">Recursos relacionados a iluminação artificial e conceitos fotométricos.</p>
-          </a>
-          <a href="resources/radiance/lighting_natural.html" class="service__card border border-cyan-200 p-5 rounded-xl cursor-pointer space-y-4 hover:border-cyan-500">
-            <div class="flex items-center gap-4">
-              <i class="ri-sun-fill text-4xl text-yellow-500"></i>
-              <p class="font-bold text-yellow-600 text-lg">Ilum. Natural</p>
-            </div>
-            <p class="font-Lobster text-cyan-700">A ciência de permitir entrada de luz natural nos edifícios de forma eficiente.</p>
-          </a>
-          <a href="resources/radiance/documents.html" class="service__card border border-cyan-200 p-5 rounded-xl cursor-pointer space-y-4 hover:border-cyan-500">
-            <div class="flex items-center gap-4">
-              <i class="ri-file-pdf-2-line text-4xl text-cyan-700"></i>
-              <p class="font-bold text-yellow-600 text-lg">Documentos</p>
-            </div>
-            <p class="font-Lobster text-cyan-700">Artigos, tutoriais e materiais de referência em iluminação e HDR.</p>
-          </a>
-        </div>
-      </div>
-    </section>
+      <!-- ===== COLUNA DIREITA: RESULTADOS ===== -->
+      <div class="lg:col-span-2 flex flex-col gap-5">
 
-    <!-- ===== LUMINANCE ANALYZER ===== -->
-    <section id="analyzer">
-      <div class="container">
-        <div class="flex flex-col items-center gap-3 text-center mb-12">
-          <h2 class="title">Luminance Analyzer</h2>
-          <p class="max-w-2xl text-cyan-200">
-            Carregue qualquer imagem para visualizar o mapa de luminância em falsas cores, isolinhas e estatísticas — no estilo RADDisplay / LuminanceHDR.
-          </p>
+        <!-- RESULTADO VAZIO -->
+        <div id="emptyState" class="flex-1 flex flex-col items-center justify-center min-h-80 text-center gap-4 bg-slate-800/30 rounded-xl border border-slate-700/30">
+          <i class="ri-image-2-line text-5xl text-slate-600"></i>
+          <p class="text-slate-500 text-sm max-w-xs">Os resultados aparecerão aqui após o processamento HDR</p>
         </div>
 
-        <div class="ana-wrap">
-          <!-- ESQUERDA: canvas + toolbar -->
-          <div class="ana-left">
-            <div class="ana-toolbar">
-              <span class="ana-toolbar-title"><i class="ri-bar-chart-box-line"></i> Luminance Map</span>
-              <div class="tb-sep"></div>
-              <button class="tb-btn active" id="btnFC"   onclick="setMode('falsecolor')"><i class="ri-palette-line"></i> False Color</button>
-              <button class="tb-btn"        id="btnGray" onclick="setMode('gray')"><i class="ri-image-line"></i> Greyscale</button>
-              <button class="tb-btn"        id="btnLum"  onclick="setMode('lum')"><i class="ri-contrast-2-line"></i> Log Lum</button>
-              <div class="tb-sep"></div>
-              <button class="tb-btn"        id="btnIso"  onclick="toggleIso()"><i class="ri-route-line"></i> Isolinhas</button>
-              <div class="tb-sep"></div>
-              <label class="tb-btn" for="ana-img-input" style="cursor:pointer"><i class="ri-upload-cloud-line"></i> Abrir imagem</label>
-              <input type="file" id="ana-img-input" accept="image/*" style="display:none">
-            </div>
+        <!-- RESULTADOS REAIS -->
+        <div id="resultsArea" class="hidden flex flex-col gap-5">
 
-            <div class="canvas-area" id="canvasArea">
-              <div class="drop-zone" id="dropZone">
-                <i class="ri-image-add-line"></i>
-                <p>Carregue uma imagem para iniciar a análise</p>
-                <label for="ana-img-input">Selecionar arquivo</label>
-              </div>
-              <canvas id="anaCanvas" style="display:none"></canvas>
-            </div>
+          <!-- STATS -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="statsRow"></div>
 
-            <div class="probe-bar" id="probeBar">
-              <span class="probe-dot" id="probeDot" style="background:#333"></span>
-              <span>Cursor: <span class="probe-val" id="probeXY">—</span></span>
-              <span style="margin-left:8px">Lum: <span class="probe-val" id="probeLum">—</span> cd/m²</span>
-              <span style="margin-left:8px">Zona: <span class="probe-val" id="probeZone">—</span></span>
+          <!-- CANVAS: HDR + FALSE COLOR -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="result-panel">
+              <div class="result-label"><i class="ri-image-line mr-1"></i> HDR Visual (Mertens)</div>
+              <img id="imgHDR" class="w-full block" alt="HDR">
+            </div>
+            <div class="result-panel">
+              <div class="result-label"><i class="ri-palette-line mr-1"></i> False Color / Luminância</div>
+              <img id="imgFalseColor" class="w-full block" alt="False Color">
             </div>
           </div>
 
-          <!-- DIREITA: legenda + stats + controles -->
-          <div class="ana-right">
-
-            <div class="side-section">
-              <div class="side-title">Paleta de cores</div>
-              <div class="mode-tabs" id="paletteTabs">
-                <button class="mode-tab active" onclick="setPalette('radiance',this)">Radiance</button>
-                <button class="mode-tab"        onclick="setPalette('raddisplay',this)">RADDisplay</button>
-                <button class="mode-tab"        onclick="setPalette('heat',this)">Heat</button>
-                <button class="mode-tab"        onclick="setPalette('coolwarm',this)">CoolWarm</button>
-              </div>
-              <div class="ramp-bar" id="rampBar"></div>
-              <div class="ramp-labels">
-                <span>0</span><span>10</span><span>100</span><span>1k</span><span>10k</span><span>∞ cd/m²</span>
-              </div>
+          <!-- HISTOGRAMA + LEGENDA -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="result-panel">
+              <div class="result-label"><i class="ri-bar-chart-line mr-1"></i> Histograma de luminância</div>
+              <div class="p-3"><canvas class="histo" id="histCanvas2"></canvas></div>
             </div>
-
-            <div class="side-section">
-              <div class="side-title">Progressão de cores (false color)</div>
-              <table class="legend-table" id="legendTable"></table>
-            </div>
-
-            <div class="side-section">
-              <div class="side-title">Histograma de luminância</div>
-              <canvas class="histogram" id="histCanvas"></canvas>
-            </div>
-
-            <div class="side-section">
-              <div class="side-title">Estatísticas</div>
-              <div class="stat-grid">
-                <div class="stat-card"><div class="s-label">Máx. luminância</div><div class="s-val" id="statMax">—</div></div>
-                <div class="stat-card"><div class="s-label">Mín. luminância</div><div class="s-val" id="statMin">—</div></div>
-                <div class="stat-card"><div class="s-label">Média (cd/m²)</div><div class="s-val" id="statMean">—</div></div>
-                <div class="stat-card"><div class="s-label">Razão dinâmica</div><div class="s-val" id="statDR">—</div></div>
-              </div>
-            </div>
-
-            <div class="side-section">
-              <div class="side-title">Isolinhas</div>
-              <div class="iso-control">
-                <label>Nível (cd/m²)</label>
-                <input type="range" id="isoLevel" min="1" max="9" value="5" step="1" oninput="updateIso()">
-                <span id="isoLabel">5</span>
-              </div>
-              <div class="iso-control">
-                <label>Opacidade</label>
-                <input type="range" id="isoOpacity" min="20" max="100" value="70" step="5" oninput="updateIso()">
-                <span id="isoOpLabel">70%</span>
-              </div>
-            </div>
-
-            <div class="side-section">
-              <div class="side-title">Exportar</div>
-              <button class="export-btn" onclick="exportImage()">
-                <i class="ri-download-2-line"></i> Salvar False Color (PNG)
-              </button>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Tabela explicativa abaixo do analisador -->
-        <div class="mt-10 overflow-x-auto rounded-xl border border-cyan-700/40">
-          <table class="w-full text-sm border-collapse">
-            <thead>
-              <tr class="bg-cyan-900/80">
-                <th class="text-left px-4 py-3 text-yellow-400 font-Mono text-xs uppercase tracking-widest">Cor</th>
-                <th class="text-left px-4 py-3 text-yellow-400 font-Mono text-xs uppercase tracking-widest">Zona</th>
-                <th class="text-left px-4 py-3 text-yellow-400 font-Mono text-xs uppercase tracking-widest">Luminância (cd/m²)</th>
-                <th class="text-left px-4 py-3 text-yellow-400 font-Mono text-xs uppercase tracking-widest">Descrição</th>
-                <th class="text-left px-4 py-3 text-yellow-400 font-Mono text-xs uppercase tracking-widest">Referência típica</th>
-              </tr>
-            </thead>
-            <tbody id="refTableBody">
-              <!-- preenchida pelo JS -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== HDR ABOUT ===== -->
-    <section id="hdr" class="bg-white text-cyan-900">
-      <div class="container">
-        <div class="flex flex-col items-center gap-3 text-center mb-14">
-          <h2 class="title">O que é HDR?</h2>
-          <p class="max-w-2xl text-cyan-700">High Dynamic Range imaging — capturando a amplitude total da luz como o olho humano a vê</p>
-        </div>
-        <div class="flex flex-col gap-16">
-          <div class="flex flex-col items-center lg:flex-row gap-10">
-            <div class="w-full lg:w-1/2">
-              <img src="assets/img/gulb_tower_ldr_sm.jpg" alt="LDR" class="w-full rounded-xl shadow-lg">
-            </div>
-            <div class="w-full lg:w-1/2 space-y-5">
-              <h3>Da câmera ao <span class="text-yellow-500 font-Lobster">mapa de luminância</span></h3>
-              <p class="text-cyan-700">A fotografia HDR combina múltiplas exposições para capturar a totalidade das informações de luz de uma cena. Cada pixel pode representar com precisão a luminância do objeto, permitindo seu uso como medidor de luminância de alta resolução.</p>
-              <a href="webhdr/hdr.html" class="btn">Saiba mais <i class="ri-arrow-right-line"></i></a>
-            </div>
-          </div>
-          <div class="flex flex-col items-center lg:flex-row-reverse gap-10">
-            <div class="w-full lg:w-1/2">
-              <img src="assets/img/gulb_tower_tm_sm.jpg" alt="HDR TM" class="w-full rounded-xl shadow-lg">
-            </div>
-            <div class="w-full lg:w-1/2 space-y-5">
-              <h3>Sequência de fotografias entre <span class="text-yellow-500 font-Lobster">colchetes de exposição</span></h3>
-              <p class="text-cyan-700">Embora mais comumente usado para efeitos artísticos com operadores de mapeamento de tons, o fato de que cada pixel pode representar com precisão a luminância do objeto permite seu uso como medidores de luminância de alta resolução.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== WEBHDR ===== -->
-    <section id="webhdr" class="bg-cyan-950">
-      <div class="container">
-        <div class="flex flex-col items-center gap-3 text-center mb-20">
-          <h2 class="title">WebHDR</h2>
-          <p class="max-w-xl text-cyan-300">Recursos e guias para fotografia HDR</p>
-        </div>
-        <div class="grid grid-cols-1 gap-x-8 gap-y-28 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          <div class="popular__card bg-cyan-900 p-8 pt-24 rounded-xl relative flex flex-col items-center gap-4 h-full hover:-translate-y-1 transition-transform duration-300">
-            <img src="assets/img/fotografia-1-scaled-removebg-preview.png" alt="" class="w-44 absolute -top-5 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-lg font-bold text-center">Introdução</h2>
-            <a href="webhdr/introducao.html" class="mt-auto btn text-sm"><i class="ri-camera-lens-line"></i></a>
-          </div>
-          <div class="popular__card bg-cyan-900 p-8 pt-24 rounded-xl relative flex flex-col items-center gap-4 h-full hover:-translate-y-1 transition-transform duration-300">
-            <img src="assets/img/unnamed-removebg-preview.png" alt="" class="w-44 absolute -top-5 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-lg font-bold text-center">High Dynamic Range</h2>
-            <a href="webhdr/hdr.html" class="mt-auto btn text-sm"><i class="ri-camera-lens-line"></i></a>
-          </div>
-          <div class="popular__card bg-cyan-900 p-8 pt-24 rounded-xl relative flex flex-col items-center gap-4 h-full hover:-translate-y-1 transition-transform duration-300">
-            <img src="assets/img/p950-front.png" alt="" class="w-44 absolute -top-5 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-lg font-bold text-center">Câmera</h2>
-            <a href="webhdr/camera.html" class="mt-auto btn text-sm"><i class="ri-camera-lens-line"></i></a>
-          </div>
-          <div class="popular__card bg-cyan-900 p-8 pt-24 rounded-xl relative flex flex-col items-center gap-4 h-full hover:-translate-y-1 transition-transform duration-300">
-            <img src="assets/img/camera-hdr-o-que-e-01-removebg-preview.png" alt="" class="w-44 absolute -top-5 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-lg font-bold text-center">Roll-Your-Own</h2>
-            <a href="webhdr/Roll-Your-Own.html" class="mt-auto btn text-sm"><i class="ri-camera-lens-line"></i></a>
-          </div>
-          <div class="popular__card bg-cyan-900 p-8 pt-24 rounded-xl relative flex flex-col items-center gap-4 h-full hover:-translate-y-1 transition-transform duration-300">
-            <img src="assets/img/camera-hdr-o-que-e-01-removebg-preview.png" alt="" class="w-44 absolute -top-5 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <h2 class="text-lg font-bold text-center">Dicas</h2>
-            <a href="webhdr/dicas.html" class="mt-auto btn text-sm"><i class="ri-camera-lens-line"></i></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== AVALIAÇÕES ===== -->
-    <section id="mirrors" class="relative overflow-hidden">
-      <div class="flex flex-col items-center gap-3 text-center mb-16">
-        <h2 class="title">Avaliações</h2>
-        <p class="max-w-xl text-cyan-200">O que estão dizendo sobre esta ferramenta</p>
-      </div>
-      <div class="container">
-        <div class="swiper py-10">
-          <ul class="swiper-wrapper">
-            <li class="swiper-slide">
-              <div class="flex flex-col gap-4 bg-cyan-700/60 rounded-xl p-6 backdrop-blur-sm">
-                <p class="font-Lobster text-cyan-100">"O analisador de luminância me poupou horas de trabalho manual. Ver o false color em tempo real direto no browser é incrível."</p>
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center font-bold text-cyan-900">AJ</div>
-                  <div><p class="text-yellow-400 font-bold">Axel Jacobs</p><p class="text-xs text-cyan-300">Pesquisador em Iluminação</p></div>
+            <div class="result-panel">
+              <div class="result-label"><i class="ri-route-line mr-1"></i> Escala de cores</div>
+              <div class="p-3">
+                <div id="rampBar2" class="h-4 rounded mb-2" style="background:linear-gradient(to right,#000080,#0000FF,#0080FF,#00FFFF,#00FF00,#FFFF00,#FF8000,#FF0000,#FFFFFF)"></div>
+                <div class="flex justify-between text-xs text-slate-500 font-Mono mb-3">
+                  <span>0</span><span>100</span><span>1k</span><span>10k</span><span>∞ cd/m²</span>
                 </div>
-                <i class="ri-double-quotes-r text-3xl text-cyan-400 ml-auto"></i>
+                <table class="lc-table" id="lcTable">
+                  <tr><td><span class="lc-swatch" style="background:#000080"></span></td><td class="lc-label">Muito escuro</td><td class="lc-range">&lt; 10</td></tr>
+                  <tr><td><span class="lc-swatch" style="background:#0000FF"></span></td><td class="lc-label">Escuro</td><td class="lc-range">10–50</td></tr>
+                  <tr><td><span class="lc-swatch" style="background:#0080FF"></span></td><td class="lc-label">Baixo</td><td class="lc-range">50–100</td></tr>
+                  <tr><td><span class="lc-swatch" style="background:#00FFFF"></span></td><td class="lc-label">Médio-baixo</td><td class="lc-range">100–200</td></tr>
+                  <tr><td><span class="lc-swatch" style="background:#00FF00"></span></td><td class="lc-label">Conforto visual</td><td class="lc-range">200–500</td></tr>
+                  <tr><td><span class="lc-swatch" style="background:#FFFF00"></span></td><td class="lc-label">Alto</td><td class="lc-range">500–1k cd/m²</td></tr>
+                  <tr><td><span class="lc-swatch" style="background:#FF8000"></span></td><td class="lc-label">Muito alto</td><td class="lc-range">1k–5k</td></tr>
+                  <tr><td><span class="lc-swatch" style="background:#FF0000"></span></td><td class="lc-label">Extremo</td><td class="lc-range">5k–30k</td></tr>
+                  <tr><td><span class="lc-swatch" style="background:#FFFFFF"></span></td><td class="lc-label">Saturado</td><td class="lc-range">&gt; 30k</td></tr>
+                </table>
               </div>
-            </li>
-            <li class="swiper-slide">
-              <div class="flex flex-col gap-4 bg-cyan-700/60 rounded-xl p-6 backdrop-blur-sm">
-                <p class="font-Lobster text-cyan-100">"A integração entre o processamento HDR e o mapa de luminância é exatamente o que eu precisava para meu projeto de daylighting."</p>
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-cyan-500 flex items-center justify-center font-bold text-white">LB</div>
-                  <div><p class="text-yellow-400 font-bold">Luísa Brotas</p><p class="text-xs text-cyan-300">Arquiteta</p></div>
-                </div>
-                <i class="ri-double-quotes-r text-3xl text-cyan-400 ml-auto"></i>
-              </div>
-            </li>
-            <li class="swiper-slide">
-              <div class="flex flex-col gap-4 bg-cyan-700/60 rounded-xl p-6 backdrop-blur-sm">
-                <p class="font-Lobster text-cyan-100">"Ferramenta muito bem estruturada. As isolinhas e a tabela de zonas de luminância tornam o diagnóstico visual muito mais claro."</p>
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center font-bold text-white">MF</div>
-                  <div><p class="text-yellow-400 font-bold">Maria F.</p><p class="text-xs text-cyan-300">Engenheira de Iluminação</p></div>
-                </div>
-                <i class="ri-double-quotes-r text-3xl text-cyan-400 ml-auto"></i>
-              </div>
-            </li>
-          </ul>
-          <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <!-- DOWNLOAD -->
+          <div class="flex gap-3 flex-wrap">
+            <button onclick="downloadImg('imgHDR','hdr_mertens.jpg')" class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-cyan-800 hover:bg-cyan-700 transition-colors font-semibold">
+              <i class="ri-download-2-line"></i> Baixar HDR
+            </button>
+            <button onclick="downloadImg('imgFalseColor','false_color.jpg')" class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-teal-800 hover:bg-teal-700 transition-colors font-semibold">
+              <i class="ri-palette-line"></i> Baixar False Color
+            </button>
+          </div>
         </div>
+
       </div>
-    </section>
+    </div>
+
+    <!-- TABELA DE REFERÊNCIA -->
+    <div class="mt-12">
+      <h2 class="font-Lobster text-2xl text-yellow-400 mb-4">Zonas de luminância — referência RADDisplay</h2>
+      <div class="overflow-x-auto rounded-xl border border-slate-700/50">
+        <table class="w-full text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-800">
+              <th class="text-left px-4 py-3 text-yellow-400 font-Mono uppercase tracking-widest">Cor</th>
+              <th class="text-left px-4 py-3 text-yellow-400 font-Mono uppercase tracking-widest">Zona</th>
+              <th class="text-left px-4 py-3 text-yellow-400 font-Mono uppercase tracking-widest">Luminância (cd/m²)</th>
+              <th class="text-left px-4 py-3 text-yellow-400 font-Mono uppercase tracking-widest">Descrição</th>
+              <th class="text-left px-4 py-3 text-yellow-400 font-Mono uppercase tracking-widest">Contexto típico</th>
+              <th class="text-left px-4 py-3 text-yellow-400 font-Mono uppercase tracking-widest">Norma ref.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-slate-800/40 border-b border-slate-700/30">
+              <td class="px-4 py-2"><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:#000080;border:1px solid rgba(255,255,255,0.15)"></span></td>
+              <td class="px-4 py-2 text-yellow-400 font-Mono">Z0</td>
+              <td class="px-4 py-2 text-cyan-300 font-Mono">&lt; 10</td>
+              <td class="px-4 py-2 text-white font-semibold">Muito escuro</td>
+              <td class="px-4 py-2 text-slate-400">Noite sem lua / corredor sem iluminação</td>
+              <td class="px-4 py-2 text-slate-500">—</td>
+            </tr>
+            <tr class="bg-slate-800/20 border-b border-slate-700/30">
+              <td class="px-4 py-2"><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:#0000FF;border:1px solid rgba(255,255,255,0.15)"></span></td>
+              <td class="px-4 py-2 text-yellow-400 font-Mono">Z1</td>
+              <td class="px-4 py-2 text-cyan-300 font-Mono">10 – 50</td>
+              <td class="px-4 py-2 text-white font-semibold">Escuro</td>
+              <td class="px-4 py-2 text-slate-400">Ambiente noturno residencial, jardins</td>
+              <td class="px-4 py-2 text-slate-500">—</td>
+            </tr>
+            <tr class="bg-slate-800/40 border-b border-slate-700/30">
+              <td class="px-4 py-2"><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:#0080FF;border:1px solid rgba(255,255,255,0.15)"></span></td>
+              <td class="px-4 py-2 text-yellow-400 font-Mono">Z2</td>
+              <td class="px-4 py-2 text-cyan-300 font-Mono">50 – 100</td>
+              <td class="px-4 py-2 text-white font-semibold">Baixo</td>
+              <td class="px-4 py-2 text-slate-400">Corredores, halls, áreas de circulação</td>
+              <td class="px-4 py-2 text-slate-500">NBR 8995: 100 lux mín.</td>
+            </tr>
+            <tr class="bg-slate-800/20 border-b border-slate-700/30">
+              <td class="px-4 py-2"><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:#00FFFF"></span></td>
+              <td class="px-4 py-2 text-yellow-400 font-Mono">Z3</td>
+              <td class="px-4 py-2 text-cyan-300 font-Mono">100 – 200</td>
+              <td class="px-4 py-2 text-white font-semibold">Médio-baixo</td>
+              <td class="px-4 py-2 text-slate-400">Sala de estar com luz indireta</td>
+              <td class="px-4 py-2 text-slate-500">CIBSE: 150–200</td>
+            </tr>
+            <tr class="bg-slate-800/40 border-b border-slate-700/30">
+              <td class="px-4 py-2"><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:#00FF00"></span></td>
+              <td class="px-4 py-2 text-yellow-400 font-Mono">Z4</td>
+              <td class="px-4 py-2 text-cyan-300 font-Mono">200 – 500</td>
+              <td class="px-4 py-2 text-white font-semibold">Conforto visual ✓</td>
+              <td class="px-4 py-2 text-slate-400">Escritórios, salas de aula (≈ 300 lux)</td>
+              <td class="px-4 py-2 text-slate-500">ABNT / EN 12464</td>
+            </tr>
+            <tr class="bg-slate-800/20 border-b border-slate-700/30">
+              <td class="px-4 py-2"><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:#FFFF00"></span></td>
+              <td class="px-4 py-2 text-yellow-400 font-Mono">Z5</td>
+              <td class="px-4 py-2 text-cyan-300 font-Mono">500 – 1.000</td>
+              <td class="px-4 py-2 text-white font-semibold">Alto</td>
+              <td class="px-4 py-2 text-slate-400">Vitrines, showrooms, áreas de exposição</td>
+              <td class="px-4 py-2 text-slate-500">CIBSE: 500+</td>
+            </tr>
+            <tr class="bg-slate-800/40 border-b border-slate-700/30">
+              <td class="px-4 py-2"><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:#FF8000"></span></td>
+              <td class="px-4 py-2 text-yellow-400 font-Mono">Z6</td>
+              <td class="px-4 py-2 text-cyan-300 font-Mono">1.000 – 5.000</td>
+              <td class="px-4 py-2 text-white font-semibold">Muito alto</td>
+              <td class="px-4 py-2 text-slate-400">Luz solar indireta, janela em dia nublado</td>
+              <td class="px-4 py-2 text-slate-500">Radiance ref.</td>
+            </tr>
+            <tr class="bg-slate-800/20 border-b border-slate-700/30">
+              <td class="px-4 py-2"><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:#FF0000"></span></td>
+              <td class="px-4 py-2 text-yellow-400 font-Mono">Z7</td>
+              <td class="px-4 py-2 text-cyan-300 font-Mono">5.000 – 30.000</td>
+              <td class="px-4 py-2 text-white font-semibold">Extremo</td>
+              <td class="px-4 py-2 text-slate-400">Céu claro, janelas em dia de sol</td>
+              <td class="px-4 py-2 text-slate-500">Radiance / RADDisplay</td>
+            </tr>
+            <tr class="bg-slate-800/40">
+              <td class="px-4 py-2"><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:#FFFFFF;border:1px solid rgba(255,255,255,0.3)"></span></td>
+              <td class="px-4 py-2 text-yellow-400 font-Mono">Z8</td>
+              <td class="px-4 py-2 text-cyan-300 font-Mono">&gt; 30.000</td>
+              <td class="px-4 py-2 text-white font-semibold">Saturado</td>
+              <td class="px-4 py-2 text-slate-400">Sol direto, reflexo de superfície especular</td>
+              <td class="px-4 py-2 text-slate-500">Saturação de sensor</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
   </main>
 
-  <!-- ===== FOOTER ===== -->
-  <footer id="contact" class="bg-white text-cyan-950 pt-24 pb-10 relative">
-    <div class="container text-white absolute top-0 right-0 left-0 -translate-y-1/2">
-      <div class="bg-cyan-700 px-10 pt-6 pb-10 space-y-5 rounded-xl shadow-xl">
-        <h3><span class="text-yellow-400">Envie-nos um</span> email com seu feedback</h3>
-        <div class="flex flex-col md:flex-row gap-2">
-          <input type="email" placeholder="Seu email" class="w-full px-5 py-3 text-cyan-900 rounded-lg outline-none">
-          <button class="flex items-center justify-center gap-2 bg-cyan-950 px-6 py-3 rounded-lg hover:opacity-80 transition-opacity">
-            <span>Enviar</span><i class="ri-send-plane-2-fill"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="container mt-20 mb-10">
-      <div class="border-b border-cyan-400/30 relative">
-        <div class="absolute top-0 -translate-y-1/2 left-0 right-0 max-w-40 mx-auto">
-          <div class="bg-yellow-50 text-xl text-center space-x-3 py-1 rounded-full">
-            <i class="ri-facebook-fill hover:text-yellow-500 transition cursor-pointer"></i>
-            <i class="ri-twitter-x-line hover:text-yellow-500 transition cursor-pointer"></i>
-            <i class="ri-instagram-line hover:text-yellow-500 transition cursor-pointer"></i>
-            <i class="ri-linkedin-fill hover:text-yellow-500 transition cursor-pointer"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
-      <div class="flex flex-col items-center md:items-start gap-2">
-        <i class="ri-camera-3-fill text-6xl text-cyan-600"></i>
-        <p class="font-Lobster text-xl text-cyan-700">Light Photo Analyzer</p>
-      </div>
-      <div>
-        <p class="mb-4 font-bold text-lg text-cyan-900">Recursos</p>
-        <div class="flex flex-col gap-2 text-cyan-600">
-          <a href="resources/radiance/radiance.html" class="hover:text-cyan-900 transition">Radiance</a>
-          <a href="resources/radiance/lighting.html" class="hover:text-cyan-900 transition">Iluminação</a>
-          <a href="resources/radiance/lighting_natural.html" class="hover:text-cyan-900 transition">Iluminação Natural</a>
-          <a href="resources/radiance/documents.html" class="hover:text-cyan-900 transition">Documentos</a>
-        </div>
-      </div>
-      <div>
-        <p class="mb-4 font-bold text-lg text-cyan-900">WebHDR</p>
-        <div class="flex flex-col gap-2 text-cyan-600">
-          <a href="webhdr/introducao.html" class="hover:text-cyan-900 transition">Introdução</a>
-          <a href="webhdr/hdr.html" class="hover:text-cyan-900 transition">O que é HDR</a>
-          <a href="webhdr/camera.html" class="hover:text-cyan-900 transition">Câmera</a>
-          <a href="webhdr/softwares.html" class="hover:text-cyan-900 transition">Outros Softwares</a>
-        </div>
-      </div>
-      <div>
-        <p class="mb-4 font-bold text-lg text-cyan-900">Contato</p>
-        <div class="flex flex-col gap-2 text-cyan-600">
-          <a href="tel:11984361276" class="hover:text-cyan-900 transition">+55 11 98436-1276</a>
-          <a href="mailto:lightcodecamp@gmail.com" class="hover:text-cyan-900 transition">lightcodecamp@gmail.com</a>
-          <p class="text-sm">São Paulo, SP — Brasil</p>
-        </div>
-      </div>
-    </div>
-    <p class="text-center text-xs text-cyan-400 mt-10">© 2025 Light Photo Analyzer. Todos os direitos reservados.</p>
+  <footer class="text-center text-xs text-slate-600 py-6 border-t border-slate-800 mt-12">
+    <a href="../index.html" class="text-cyan-700 hover:text-cyan-500 transition-colors">← Voltar para Light Photo Analyzer</a>
+    <span class="mx-3">·</span>
+    © 2025 Light Photo Analyzer
   </footer>
 
-  <a href="#" id="scroll-up" class="fixed right-4 -bottom-20 bg-yellow-500 shadow-lg inline-flex items-center justify-center w-10 h-10 rounded-lg text-lg z-50 hover:-translate-y-1 transition-all duration-300">
-    <i class="ri-arrow-up-line text-cyan-900"></i>
-  </a>
-
-  <!-- SCRIPTS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-
   <script>
-  // ===== NAVBAR TOGGLE =====
-  const navMenu = document.getElementById('nav-menu');
-  const hamburger = document.getElementById('hamburger');
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('left-[0]');
-      hamburger.querySelector('i').className = 'ri-menu-4-line';
+  let allFiles = [];
+
+  const fileInput   = document.getElementById('fileInput');
+  const dropzone    = document.getElementById('dropzone');
+  const previewArea = document.getElementById('previewArea');
+  const countBadge  = document.getElementById('countBadge');
+  const btnClear    = document.getElementById('btnClear');
+  const btnProcessar= document.getElementById('btnProcessar');
+  const logBox      = document.getElementById('logBox');
+  const errorBox    = document.getElementById('errorBox');
+  const resultsArea = document.getElementById('resultsArea');
+  const emptyState  = document.getElementById('emptyState');
+
+  // ===== DRAG & DROP =====
+  dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('drag-over'); });
+  dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag-over'));
+  dropzone.addEventListener('drop', e => {
+    e.preventDefault(); dropzone.classList.remove('drag-over');
+    addFiles(Array.from(e.dataTransfer.files));
+  });
+  fileInput.addEventListener('change', e => { addFiles(Array.from(e.target.files)); fileInput.value=''; });
+
+  function addFiles(files) {
+    files.forEach(f => {
+      if (f.type.startsWith('image/') && !allFiles.some(x => x.name===f.name && x.size===f.size)) {
+        allFiles.push(f);
+      }
     });
-  });
-  hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('left-[0]');
-    const icon = hamburger.querySelector('i');
-    icon.className = navMenu.classList.contains('left-[0]') ? 'ri-close-large-line' : 'ri-menu-4-line';
-  });
+    updateUI();
+  }
+  function removeFile(i) { allFiles.splice(i,1); updateUI(); }
+  function clearAll() { allFiles=[]; updateUI(); }
 
-  // ===== SCROLL =====
-  window.addEventListener('scroll', () => {
-    const scrollUpBtn = document.getElementById('scroll-up');
-    const header = document.getElementById('navbar');
-    if (window.scrollY >= 250) {
-      scrollUpBtn.classList.remove('-bottom-20');
-      scrollUpBtn.classList.add('bottom-4');
-      header.classList.add('border-b','border-yellow-500/30','shadow-lg');
-    } else {
-      scrollUpBtn.classList.add('-bottom-20');
-      scrollUpBtn.classList.remove('bottom-4');
-      header.classList.remove('border-b','border-yellow-500/30','shadow-lg');
+  function updateUI() {
+    countBadge.textContent = allFiles.length + (allFiles.length===1?' selecionada':' selecionadas');
+    previewArea.innerHTML = '';
+    allFiles.forEach((f,i) => {
+      const div = document.createElement('div');
+      div.className = 'preview-item';
+      div.innerHTML = `<img src="${URL.createObjectURL(f)}" class="w-16 h-16 object-cover rounded-lg border border-slate-600">
+        <button class="remove-btn" onclick="removeFile(${i})"><i class="ri-close-line"></i></button>`;
+      previewArea.appendChild(div);
+    });
+    btnClear.classList.toggle('hidden', allFiles.length===0);
+    btnProcessar.disabled = allFiles.length < 2;
+  }
+
+  // ===== PROCESS =====
+  async function processar() {
+    if (allFiles.length < 2) return;
+    const formData = new FormData();
+    allFiles.forEach(f => formData.append('images', f));
+    const rspInput = document.getElementById('rspInput');
+    if (rspInput.files.length>0) formData.append('rsp_file', rspInput.files[0]);
+    formData.append('auto_align',    document.getElementById('chkAlign').checked);
+    formData.append('lens_flare',    document.getElementById('chkFlare').checked);
+    formData.append('ghost_removal', document.getElementById('chkGhost').checked);
+
+    logBox.textContent = 'Processando… (isso pode levar alguns segundos)';
+    logBox.classList.remove('hidden');
+    errorBox.classList.add('hidden');
+    resultsArea.classList.add('hidden');
+    emptyState.classList.remove('hidden');
+    btnProcessar.disabled = true;
+    btnProcessar.innerHTML = '<i class="ri-loader-4-line animate-spin text-lg"></i> Processando…';
+
+    try {
+      const res  = await fetch('/process', { method:'POST', body: formData });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro desconhecido');
+
+      document.getElementById('imgHDR').src        = 'data:image/jpeg;base64,' + data.hdr_preview;
+      document.getElementById('imgFalseColor').src = 'data:image/jpeg;base64,' + data.false_color;
+
+      if (data.stats) buildStats(data.stats);
+      logBox.textContent = '✓ ' + (data.log || 'Concluído com sucesso');
+      emptyState.classList.add('hidden');
+      resultsArea.classList.remove('hidden');
+      // draw histogram from false color img
+      drawHistFromFalseColor(data.false_color);
+    } catch(err) {
+      errorBox.textContent = '✗ ERRO: ' + err.message;
+      errorBox.classList.remove('hidden');
+      logBox.classList.add('hidden');
+    } finally {
+      btnProcessar.disabled = allFiles.length < 2;
+      btnProcessar.innerHTML = '<i class="ri-cpu-line text-lg"></i> Processar HDR';
     }
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-    let current = 'home';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
-    navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#'+current); });
-  });
+  }
 
-  // ===== SWIPER =====
-  new Swiper('.swiper', {
-    speed: 500, spaceBetween: 24, grabCursor: true,
-    autoplay: { delay: 4000, disableOnInteraction: false },
-    pagination: { el: '.swiper-pagination', clickable: true },
-    breakpoints: { 640:{slidesPerView:1}, 768:{slidesPerView:2}, 1024:{slidesPerView:3} }
-  });
+  function buildStats(stats) {
+    const row = document.getElementById('statsRow');
+    const items = [
+      {label:'Mín. lum.', val: stats.min_lum?.toFixed(1)+' cd/m²'},
+      {label:'Máx. lum.', val: stats.max_lum?.toFixed(0)+' cd/m²'},
+      {label:'Média',     val: stats.mean_lum?.toFixed(1)},
+      {label:'Dyn. range',val: stats.dynamic_range},
+    ];
+    row.innerHTML = items.map(it => `
+      <div class="stat-pill text-center">
+        <p class="text-xs text-slate-400 mb-1">${it.label}</p>
+        <p class="font-Mono text-sm font-bold text-white">${it.val||'—'}</p>
+      </div>`).join('');
+  }
 
-  // ===== LUMINANCE ANALYZER =====
-  const PALETTES = {
-    radiance: [
-      {t:0,    r:0,  g:0,   b:128, label:'Muito escuro', range:'< 10',    zone:'Z0', ref:'Noite sem lua'},
-      {t:0.13, r:0,  g:0,   b:255, label:'Escuro',       range:'10–50',   zone:'Z1', ref:'Ambiente com pouca luz'},
-      {t:0.25, r:0,  g:128, b:255, label:'Baixo',        range:'50–100',  zone:'Z2', ref:'Ilum. de corredor'},
-      {t:0.37, r:0,  g:255, b:255, label:'Médio-baixo',  range:'100–200', zone:'Z3', ref:'Escritório com luz indireta'},
-      {t:0.50, r:0,  g:255, b:0,   label:'Conforto',     range:'200–500', zone:'Z4', ref:'Escritório padrão (≈300)'},
-      {t:0.63, r:255,g:255, b:0,   label:'Alto',         range:'500–1k',  zone:'Z5', ref:'Vitrine / fachada'},
-      {t:0.75, r:255,g:128, b:0,   label:'Muito alto',   range:'1k–5k',   zone:'Z6', ref:'Luz solar indireta'},
-      {t:0.87, r:255,g:0,   b:0,   label:'Extremo',      range:'5k–30k',  zone:'Z7', ref:'Céu claro'},
-      {t:1.0,  r:255,g:255, b:255, label:'Saturado',     range:'> 30k',   zone:'Z8', ref:'Sol direto'},
-    ],
-    raddisplay: [
-      {t:0,    r:20, g:0,  b:60,  label:'Muito escuro', range:'< 5',     zone:'Z0', ref:'Noite sem lua'},
-      {t:0.15, r:80, g:0,  b:120, label:'Escuro',       range:'5–30',    zone:'Z1', ref:'Ambiente mínimo'},
-      {t:0.30, r:0,  g:60, b:180, label:'Baixo',        range:'30–100',  zone:'Z2', ref:'Iluminação básica'},
-      {t:0.45, r:0,  g:180,b:220, label:'Médio-baixo',  range:'100–300', zone:'Z3', ref:'Escritório indireto'},
-      {t:0.58, r:0,  g:220,b:80,  label:'Conforto',     range:'300–800', zone:'Z4', ref:'Escritório padrão'},
-      {t:0.70, r:220,g:220,b:0,   label:'Alto',         range:'800–2k',  zone:'Z5', ref:'Showroom'},
-      {t:0.82, r:255,g:120,b:0,   label:'Muito alto',   range:'2k–10k',  zone:'Z6', ref:'Luz solar indireta'},
-      {t:0.93, r:230,g:20, b:20,  label:'Extremo',      range:'10k–50k', zone:'Z7', ref:'Céu claro'},
-      {t:1.0,  r:255,g:240,b:240, label:'Saturado',     range:'> 50k',   zone:'Z8', ref:'Sol direto'},
-    ],
-    heat: [
-      {t:0,   r:0,  g:0,  b:0,   label:'Preto',    range:'< 5',    zone:'Z0', ref:'Escuridão'},
-      {t:0.2, r:80, g:0,  b:80,  label:'Roxo',     range:'5–50',   zone:'Z1', ref:'Pouca luz'},
-      {t:0.4, r:200,g:0,  b:0,   label:'Vermelho', range:'50–200', zone:'Z2', ref:'Baixa ilum.'},
-      {t:0.6, r:255,g:128,b:0,   label:'Laranja',  range:'200–1k', zone:'Z3', ref:'Conforto'},
-      {t:0.8, r:255,g:255,b:0,   label:'Amarelo',  range:'1k–5k',  zone:'Z4', ref:'Alto'},
-      {t:1.0, r:255,g:255,b:255, label:'Branco',   range:'> 5k',   zone:'Z5', ref:'Saturado'},
-    ],
-    coolwarm: [
-      {t:0,    r:50, g:120,b:220, label:'Azul frio',  range:'< 50',    zone:'Z0', ref:'Escuro'},
-      {t:0.25, r:120,g:180,b:240, label:'Azul claro', range:'50–200',  zone:'Z1', ref:'Baixo'},
-      {t:0.5,  r:240,g:240,b:240, label:'Neutro',     range:'200–500', zone:'Z2', ref:'Conforto'},
-      {t:0.75, r:240,g:140,b:60,  label:'Laranja',    range:'500–5k',  zone:'Z3', ref:'Alto'},
-      {t:1.0,  r:230,g:40, b:40,  label:'Vermelho',   range:'> 5k',    zone:'Z4', ref:'Extremo'},
-    ]
-  };
-
-  const REF_ROWS = [
-    {color:'#000080', zone:'Z0', lum:'< 10 cd/m²',    desc:'Muito escuro',  ref:'Noite sem lua / corredor sem luz'},
-    {color:'#0000FF', zone:'Z1', lum:'10 – 50 cd/m²', desc:'Escuro',        ref:'Ambiente noturno residencial'},
-    {color:'#0080FF', zone:'Z2', lum:'50 – 100',       desc:'Baixo',         ref:'Corredores, áreas de circulação'},
-    {color:'#00FFFF', zone:'Z3', lum:'100 – 200',      desc:'Médio-baixo',   ref:'Sala com luz indireta (ABNT NBR 8995)'},
-    {color:'#00FF00', zone:'Z4', lum:'200 – 500',      desc:'Conforto visual',ref:'Escritórios padrão ≈ 300 lux'},
-    {color:'#FFFF00', zone:'Z5', lum:'500 – 1.000',    desc:'Alto',          ref:'Vitrines, fachadas comerciais'},
-    {color:'#FF8000', zone:'Z6', lum:'1.000 – 5.000',  desc:'Muito alto',    ref:'Luz solar indireta / nublado'},
-    {color:'#FF0000', zone:'Z7', lum:'5.000 – 30.000', desc:'Extremo',       ref:'Céu claro / janela'},
-    {color:'#FFFFFF', zone:'Z8', lum:'> 30.000 cd/m²', desc:'Saturado',      ref:'Sol direto'},
-  ];
-
-  const tbody = document.getElementById('refTableBody');
-  REF_ROWS.forEach((r,i) => {
-    const tr = document.createElement('tr');
-    tr.className = i%2===0 ? 'bg-cyan-900/30' : 'bg-cyan-900/10';
-    tr.innerHTML = `
-      <td class="px-4 py-2"><span style="display:inline-block;width:28px;height:16px;border-radius:3px;background:${r.color};border:1px solid rgba(255,255,255,0.15)"></span></td>
-      <td class="px-4 py-2 text-yellow-400 font-Mono text-xs">${r.zone}</td>
-      <td class="px-4 py-2 text-cyan-200 font-Mono text-xs">${r.lum}</td>
-      <td class="px-4 py-2 text-white text-sm font-semibold">${r.desc}</td>
-      <td class="px-4 py-2 text-cyan-300 text-xs">${r.ref}</td>`;
-    tbody.appendChild(tr);
-  });
-
-  let palette = 'radiance', mode = 'falsecolor', showIso = false;
-  let luminanceMap = null, imgW = 0, imgH = 0;
-  const canvas = document.getElementById('anaCanvas');
-  const ctx = canvas.getContext('2d');
-  const histCanvas = document.getElementById('histCanvas');
-  const histCtx = histCanvas.getContext('2d');
-
-  function setPalette(p, btn) {
-    palette = p;
-    document.querySelectorAll('.mode-tab').forEach(b => b.classList.remove('active'));
-    if(btn) btn.classList.add('active');
-    updateRampBar(); buildLegend();
-    if (luminanceMap) render();
-  }
-  function setMode(m) {
-    mode = m;
-    document.getElementById('btnFC').classList.toggle('active', m==='falsecolor');
-    document.getElementById('btnGray').classList.toggle('active', m==='gray');
-    document.getElementById('btnLum').classList.toggle('active', m==='lum');
-    if (luminanceMap) render();
-  }
-  function toggleIso() {
-    showIso = !showIso;
-    document.getElementById('btnIso').classList.toggle('active', showIso);
-    if (luminanceMap) render();
-  }
-  function updateIso() {
-    document.getElementById('isoLabel').textContent = document.getElementById('isoLevel').value;
-    document.getElementById('isoOpLabel').textContent = document.getElementById('isoOpacity').value + '%';
-    if (luminanceMap && showIso) render();
-  }
-  function lerpColor(stops, t) {
-    let a = stops[0], b = stops[stops.length-1];
-    for (let i = 0; i < stops.length-1; i++) {
-      if (t >= stops[i].t && t <= stops[i+1].t) { a = stops[i]; b = stops[i+1]; break; }
-    }
-    const f = a.t===b.t ? 0 : (t-a.t)/(b.t-a.t);
-    return [Math.round(a.r+(b.r-a.r)*f), Math.round(a.g+(b.g-a.g)*f), Math.round(a.b+(b.b-a.b)*f)];
-  }
-  function lumToT(lum) {
-    return Math.max(0, Math.min(1, Math.log10(Math.max(lum,1)/1) / Math.log10(50000)));
-  }
-  function rgbToLum(r,g,b) {
-    const lin = c => { c/=255; return c<=0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055,2.4); };
-    return 100*(0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b));
-  }
-  function getZoneByLum(lum) {
-    if(lum<10) return 'Z0 · Muito escuro';
-    if(lum<50) return 'Z1 · Escuro';
-    if(lum<100) return 'Z2 · Baixo';
-    if(lum<200) return 'Z3 · Médio-baixo';
-    if(lum<500) return 'Z4 · Conforto';
-    if(lum<1000) return 'Z5 · Alto';
-    if(lum<5000) return 'Z6 · Muito alto';
-    if(lum<30000) return 'Z7 · Extremo';
-    return 'Z8 · Saturado';
-  }
-  function render() {
-    if(!luminanceMap) return;
-    const stops = PALETTES[palette];
-    const out = ctx.createImageData(imgW, imgH);
-    const d = out.data;
-    for (let i = 0; i < imgW*imgH; i++) {
-      const lum = luminanceMap[i];
-      let r,g,b;
-      if (mode==='gray') {
-        const v = Math.min(255, Math.round(Math.sqrt(lum/300)*220));
-        r=g=b=v;
-      } else if (mode==='lum') {
-        const v = Math.min(255, Math.round(lumToT(lum)*255));
-        r=g=b=v;
-      } else {
-        [r,g,b] = lerpColor(stops, lumToT(lum));
+  function drawHistFromFalseColor(b64) {
+    const img = new Image();
+    img.onload = () => {
+      const c2 = document.getElementById('histCanvas2');
+      const W = c2.width = c2.offsetWidth || 300;
+      const H = c2.height = 80;
+      const oc = document.createElement('canvas');
+      oc.width = img.width; oc.height = img.height;
+      const ox = oc.getContext('2d');
+      ox.drawImage(img,0,0);
+      const data = ox.getImageData(0,0,img.width,img.height).data;
+      const bins = 64; const counts = new Float32Array(bins);
+      for(let i=0;i<data.length;i+=4) {
+        const v = (data[i]/255+data[i+1]/255+data[i+2]/255)/3;
+        counts[Math.min(bins-1,Math.floor(v*bins))]++;
       }
-      d[i*4]=r; d[i*4+1]=g; d[i*4+2]=b; d[i*4+3]=255;
-    }
-    ctx.putImageData(out,0,0);
-    if (showIso) drawIsolines();
-  }
-  function drawIsolines() {
-    const nLevels = parseInt(document.getElementById('isoLevel').value);
-    const op = parseInt(document.getElementById('isoOpacity').value)/100;
-    const allLevels = [5,10,50,100,200,500,1000,5000,30000];
-    const levels = allLevels.slice(0, nLevels);
-    const imgData = ctx.getImageData(0,0,imgW,imgH);
-    const d = imgData.data;
-    for (let y=1; y<imgH-1; y++) {
-      for (let x=1; x<imgW-1; x++) {
-        const idx = y*imgW+x;
-        const lum = luminanceMap[idx];
-        const lumR = luminanceMap[idx+1];
-        const lumD = luminanceMap[(y+1)*imgW+x];
-        for (const lv of levels) {
-          if ((lum<lv&&lumR>=lv)||(lum>=lv&&lumR<lv)||(lum<lv&&lumD>=lv)||(lum>=lv&&lumD<lv)) {
-            d[idx*4]   = Math.round(d[idx*4]*(1-op)+255*op);
-            d[idx*4+1] = Math.round(d[idx*4+1]*(1-op)+255*op);
-            d[idx*4+2] = Math.round(d[idx*4+2]*(1-op)+255*op);
-            break;
-          }
-        }
+      const mx = Math.max(...counts);
+      const hctx = c2.getContext('2d');
+      hctx.clearRect(0,0,W,H);
+      const stops = [
+        [0,'#000080'],[0.13,'#0000FF'],[0.25,'#0080FF'],[0.37,'#00FFFF'],
+        [0.5,'#00FF00'],[0.63,'#FFFF00'],[0.75,'#FF8000'],[0.87,'#FF0000'],[1,'#FFFFFF']
+      ];
+      for(let b=0;b<bins;b++){
+        const t = b/bins;
+        let col = stops[0][1];
+        for(let s=0;s<stops.length-1;s++) if(t>=stops[s][0]&&t<=stops[s+1][0]) { col=stops[s][1]; break; }
+        hctx.fillStyle = col;
+        const bh = Math.round((counts[b]/mx)*H*0.9);
+        hctx.fillRect(b*(W/bins),H-bh,W/bins-0.5,bh);
       }
-    }
-    ctx.putImageData(imgData,0,0);
-  }
-  function drawHistogram(lumMap) {
-    const bins = 64;
-    const counts = new Float32Array(bins);
-    const lo = Math.log10(1), hi = Math.log10(50000);
-    for (let i=0; i<lumMap.length; i++) {
-      const t = (Math.log10(Math.max(lumMap[i],1))-lo)/(hi-lo);
-      const bin = Math.min(bins-1, Math.floor(t*bins));
-      counts[bin]++;
-    }
-    const max = Math.max(...counts);
-    const W = histCanvas.width = histCanvas.offsetWidth || 270;
-    const H = histCanvas.height = 60;
-    histCtx.clearRect(0,0,W,H);
-    const stops = PALETTES[palette];
-    for (let b=0; b<bins; b++) {
-      const t = b/bins;
-      const [r,g,bl] = lerpColor(stops, t);
-      const bh = Math.round((counts[b]/max)*H*0.92);
-      histCtx.fillStyle = `rgba(${r},${g},${bl},0.85)`;
-      const bw = W/bins;
-      histCtx.fillRect(b*bw, H-bh, bw-0.5, bh);
-    }
-  }
-  function buildLegend() {
-    const stops = PALETTES[palette];
-    document.getElementById('legendTable').innerHTML = stops.map(s => `
-      <tr>
-        <td><span class="swatch" style="background:rgb(${s.r},${s.g},${s.b})"></span></td>
-        <td class="cd-label">${s.label}</td>
-        <td class="cd-range">${s.range} cd/m²</td>
-      </tr>`).join('');
-  }
-  function updateRampBar() {
-    const stops = PALETTES[palette];
-    const g = stops.map(s=>`rgb(${s.r},${s.g},${s.b}) ${Math.round(s.t*100)}%`).join(',');
-    document.getElementById('rampBar').style.background = `linear-gradient(to right,${g})`;
-  }
-
-  document.getElementById('ana-img-input').addEventListener('change', e => {
-    const file = e.target.files[0]; if(!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-      const img = new Image();
-      img.onload = () => {
-        imgW = img.width; imgH = img.height;
-        canvas.width = imgW; canvas.height = imgH;
-        ctx.drawImage(img,0,0);
-        const raw = ctx.getImageData(0,0,imgW,imgH).data;
-        luminanceMap = new Float32Array(imgW*imgH);
-        let mn=Infinity, mx=0, sum=0;
-        for (let i=0; i<imgW*imgH; i++) {
-          const lum = rgbToLum(raw[i*4],raw[i*4+1],raw[i*4+2]) || 0.1;
-          luminanceMap[i] = lum;
-          if(lum<mn) mn=lum; if(lum>mx) mx=lum; sum+=lum;
-        }
-        document.getElementById('statMin').textContent  = mn.toFixed(1)+' cd/m²';
-        document.getElementById('statMax').textContent  = mx>1000?(mx/1000).toFixed(1)+'k cd/m²':mx.toFixed(0)+' cd/m²';
-        document.getElementById('statMean').textContent = (sum/(imgW*imgH)).toFixed(1);
-        const dr = mx/mn;
-        document.getElementById('statDR').textContent   = dr>1000?(dr/1000).toFixed(1)+'k:1':dr.toFixed(0)+':1';
-        document.getElementById('dropZone').style.display = 'none';
-        canvas.style.display = 'block';
-        drawHistogram(luminanceMap);
-        render();
-      };
-      img.src = ev.target.result;
     };
-    reader.readAsDataURL(file);
-  });
-
-  canvas.addEventListener('mousemove', e => {
-    if(!luminanceMap) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = Math.floor((e.clientX-rect.left)*(imgW/rect.width));
-    const y = Math.floor((e.clientY-rect.top)*(imgH/rect.height));
-    if(x<0||x>=imgW||y<0||y>=imgH) return;
-    const lum = luminanceMap[y*imgW+x];
-    const [r,g,b] = lerpColor(PALETTES[palette], lumToT(lum));
-    document.getElementById('probeXY').textContent  = `(${x}, ${y})`;
-    document.getElementById('probeLum').textContent = lum<10?lum.toFixed(2):lum.toFixed(0);
-    document.getElementById('probeZone').textContent = getZoneByLum(lum);
-    document.getElementById('probeDot').style.background = `rgb(${r},${g},${b})`;
-  });
-
-  function exportImage() {
-    if(!luminanceMap) { alert('Carregue uma imagem primeiro.'); return; }
-    const a = document.createElement('a');
-    a.download = 'luminance_falsecolor.png';
-    a.href = canvas.toDataURL('image/png');
-    a.click();
+    img.src = 'data:image/jpeg;base64,' + b64;
   }
 
-  buildLegend();
-  updateRampBar();
+  function downloadImg(imgId, filename) {
+    const src = document.getElementById(imgId).src;
+    const a = document.createElement('a');
+    a.download = filename; a.href = src; a.click();
+  }
   </script>
 </body>
 </html>
