@@ -22,7 +22,6 @@
     html { scroll-behavior: smooth; }
     body { background: #0a1a24; color: #e2e8f0; font-family: 'Jost', sans-serif; min-height: 100vh; }
 
-    /* NAV */
     .nav-link { transition: color .2s; }
     .nav-link:hover { color: #eab308; }
 
@@ -37,7 +36,6 @@
       border-color: #eab308; background: rgba(234,179,8,0.06);
     }
 
-    /* PREVIEW THUMBS */
     .preview-item { position: relative; }
     .preview-item .remove-btn {
       position: absolute; top: -6px; right: -6px;
@@ -77,7 +75,7 @@
       text-transform: uppercase; padding: 10px 14px;
       background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.08);
       font-family: 'Space Mono', monospace; color: #4a8fa6;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
     }
 
     /* PROCESS BTN */
@@ -93,13 +91,15 @@
     }
     .process-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 
-    /* STAT PILLS */
+    /* STAT PILLS — números maiores p/ leitura */
     .stat-pill {
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 10px 12px;
     }
+    .stat-pill .sv { font-family:'Space Mono',monospace; font-weight:700; color:#fff;
+      font-size: 20px; line-height: 1.1; }
+    body.big-num .stat-pill .sv { font-size: 26px; }
 
-    /* LOG */
     .log-box {
       background: #050e14; border: 1px solid rgba(255,255,255,0.08);
       border-radius: 8px; padding: 12px 14px;
@@ -107,14 +107,13 @@
       color: #4a8fa6; min-height: 40px; white-space: pre-wrap;
     }
 
-    /* HISTOGRAM CANVAS */
     .histo {
-      width: 100%; height: 80px; border-radius: 6px;
+      width: 100%; height: 90px; border-radius: 6px;
       background: #050e14; display: block; border: 1px solid rgba(255,255,255,0.08);
     }
 
     /* LEGEND TABLE */
-    .lc-table { width: 100%; font-size: 11px; border-collapse: collapse; }
+    .lc-table { width: 100%; font-size: 12px; border-collapse: collapse; }
     .lc-table td { padding: 5px 6px; vertical-align: middle; }
     .lc-table tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
     .lc-table tr:last-child { border-bottom: none; }
@@ -123,42 +122,45 @@
       display: inline-block; width: 30px; height: 16px;
       border-radius: 3px; border: 1px solid rgba(255,255,255,0.12);
     }
-    .lc-range { color: #4a8fa6; font-family: 'Space Mono', monospace; font-size: 10px; }
+    .lc-range { color: #7ab8cc; font-family: 'Space Mono', monospace; font-size: 11px; }
     .lc-label { color: #cce8f0; }
 
-    /* VIEW TABS */
-    .view-tabs { display: flex; gap: 4px; }
+    /* VIEW TABS / SEG BUTTONS */
+    .view-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
     .view-tab {
-      font-size: 10px; padding: 3px 9px; border-radius: 4px;
+      font-size: 11px; padding: 4px 10px; border-radius: 5px;
       border: 1px solid rgba(255,255,255,0.12); background: transparent;
       color: #8b949e; cursor: pointer; font-family: 'Space Mono', monospace;
-      transition: all .15s; letter-spacing: .04em;
+      transition: all .15s; letter-spacing: .03em;
     }
+    .view-tab:hover { color:#cbd5e1; border-color: rgba(255,255,255,0.25); }
     .view-tab.active {
-      background: rgba(14,116,144,0.25); border-color: #0e7490; color: #67e8f9;
-    }
-    .view-tab.has-data {
-      border-color: rgba(234,179,8,0.5); color: #eab308;
-    }
-    .view-tab.has-data.active {
-      background: rgba(234,179,8,0.12);
+      background: rgba(14,116,144,0.28); border-color: #0e7490; color: #67e8f9;
     }
 
-    /* SELECT / INPUT */
+    /* SEGMENTED small pills (paleta/filtro) */
+    .seg { display:flex; flex-wrap:wrap; gap:5px; }
+    .seg-btn {
+      font-size: 11px; padding: 5px 10px; border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04);
+      color:#9fb3c0; cursor:pointer; transition: all .15s; display:inline-flex; align-items:center; gap:5px;
+    }
+    .seg-btn:hover { background: rgba(255,255,255,0.09); color:#e2e8f0; }
+    .seg-btn.active { background:#0f766e; border-color:#0f766e; color:#ccfbf1; }
+    .seg-btn.warm.active  { background:#b91c1c; border-color:#ef4444; color:#fff; }
+    .seg-btn.cool.active  { background:#1d4ed8; border-color:#3b82f6; color:#fff; }
+    .seg-btn.neut.active  { background:#475569; border-color:#94a3b8; color:#fff; }
+
     .form-select, .form-input {
       background: #061420; border: 1px solid rgba(14,116,144,0.4);
       border-radius: 6px; color: #e2e8f0; font-size: 12px;
       padding: 7px 10px; width: 100%; transition: border-color .2s;
       font-family: 'Space Mono', monospace;
     }
-    .form-select:focus, .form-input:focus {
-      outline: none; border-color: #0e7490;
-    }
+    .form-select:focus, .form-input:focus { outline: none; border-color: #0e7490; }
     .form-select option { background: #0a1a24; }
 
-    /* SCALE BAR */
-    .scale-bar-img { width: 100%; height: 18px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08); display: block; }
-    .colorbar-img  { width: 100%; border-radius: 4px; border: 1px solid rgba(255,255,255,0.08); display: block; }
+    input[type=range]{ width:100%; accent-color:#eab308; }
 
     /* EV PANEL */
     .ev-panel {
@@ -175,14 +177,6 @@
     .ev-input:focus { outline: none; border-color: #0e7490; }
     .ev-filename { font-size: 11px; color: #4a8fa6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
 
-    /* ISOLINE HINT */
-    .iso-hint {
-      display: none; margin-top: 6px; padding: 8px 10px;
-      background: rgba(5,14,20,0.8); border: 1px solid rgba(14,116,144,0.25);
-      border-radius: 6px; font-size: 10px; color: #4a8fa6; line-height: 1.6;
-      font-family: 'Space Mono', monospace;
-    }
-
     /* INFO TAGS */
     .info-tag {
       display: inline-flex; align-items: center; gap: 4px;
@@ -194,7 +188,6 @@
     .info-tag.ok   { color: #34d399; border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.07); }
     .info-tag.warn { color: #eab308; border-color: rgba(234,179,8,0.35);  background: rgba(234,179,8,0.07); }
 
-    /* SPINNER */
     @keyframes spin { to { transform: rotate(360deg); } }
     .spin { animation: spin .7s linear infinite; display: inline-block; }
 
@@ -209,6 +202,53 @@
     .ref-table tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
     .ref-table tr:last-child { border-bottom: none; }
     .ref-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ── RENDER / CANVAS ── */
+    .render-wrap { position: relative; background:#000; line-height:0; overflow:hidden; }
+    .render-wrap canvas { display:block; width:100%; height:auto; image-rendering:auto; }
+    #renderCanvas { cursor: crosshair; }
+
+    /* Divisor A/B */
+    #abDivider {
+      position:absolute; top:0; bottom:0; width:2px; background:#eab308;
+      box-shadow:0 0 0 1px rgba(0,0,0,.6); cursor:ew-resize; display:none; z-index:5;
+    }
+    #abHandle {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:30px; height:30px; border-radius:50%; background:#eab308; color:#1a1a1a;
+      display:flex; align-items:center; justify-content:center; font-size:15px;
+      box-shadow:0 2px 8px rgba(0,0,0,.5);
+    }
+    .ab-badge {
+      position:absolute; top:8px; font-family:'Space Mono',monospace; font-size:11px; font-weight:700;
+      padding:3px 9px; border-radius:5px; z-index:4; pointer-events:none; letter-spacing:.04em;
+      background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.2);
+    }
+    #abBadgeA { left:8px; color:#67e8f9; }
+    #abBadgeB { right:8px; color:#fca5a5; }
+
+    /* PROBE BAR */
+    .probe-bar {
+      display:flex; flex-wrap:wrap; align-items:center; gap:14px;
+      padding:9px 14px; background:#081722; border-top:1px solid rgba(255,255,255,.07);
+      font-family:'Space Mono',monospace;
+    }
+    .probe-dot { width:16px; height:16px; border-radius:50%; border:1.5px solid rgba(255,255,255,.5); flex-shrink:0; }
+    .probe-k { font-size:11px; color:#4a8fa6; }
+    .probe-v { color:#fff; font-weight:700; font-size:17px; }
+    body.big-num .probe-v { font-size:22px; }
+
+    /* Side-by-side */
+    #sideWrap { display:none; gap:2px; background:#000; }
+    #sideWrap .side-col { flex:1; min-width:0; position:relative; line-height:0; }
+    #sideWrap canvas { display:block; width:100%; height:auto; }
+    .side-tag {
+      position:absolute; top:6px; left:6px; font-family:'Space Mono',monospace; font-size:11px; font-weight:700;
+      padding:2px 8px; border-radius:4px; background:rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.2); color:#e2e8f0; z-index:2;
+    }
+
+    .cbcanvas { display:block; }
+    .mini-label { font-family:'Space Mono',monospace; font-size:10px; color:#4a8fa6; }
   </style>
 </head>
 <body>
@@ -233,7 +273,7 @@
     <div class="mb-8 flex items-end justify-between flex-wrap gap-3">
       <div>
         <h1 class="font-Lobster text-3xl text-yellow-400 mb-1">Analisador HDR</h1>
-        <p class="text-cyan-400 text-sm">Fusão de múltiplas exposições + mapa de falsas cores de luminância</p>
+        <p class="text-cyan-400 text-sm">Fusão de múltiplas exposições + falsas cores de luminância com filtros quente/fria, isolinhas e comparação</p>
       </div>
       <span class="info-tag" id="methodBadge" style="display:none;font-size:11px;padding:4px 12px"></span>
     </div>
@@ -321,43 +361,18 @@
                 <input class="form-input mt-1" type="number" id="scaleMax" value="10000" min="10" step="100">
               </div>
             </div>
+            <p class="text-xs text-slate-600 mt-1">Ajuste a escala e a falsa cor se recalcula na hora (sem reprocessar).</p>
           </div>
         </div>
 
-        <!-- OPÇÕES -->
+        <!-- OPÇÕES DE PROCESSAMENTO -->
         <div class="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50">
-          <p class="text-sm font-bold text-cyan-200 mb-1"><i class="ri-equalizer-2-line mr-1 text-yellow-400"></i> Opções de processamento</p>
-
+          <p class="text-sm font-bold text-cyan-200 mb-1"><i class="ri-cpu-line mr-1 text-yellow-400"></i> Processamento</p>
           <div class="opt-row">
             <label class="toggle mt-0.5"><input type="checkbox" id="chkAlign" checked><span class="toggle-slider"></span></label>
             <div>
               <p class="text-sm font-semibold text-white">Auto-align images</p>
               <p class="text-xs text-slate-400">Desative apenas se usou tripé estável.</p>
-            </div>
-          </div>
-
-          <div class="opt-row">
-            <label class="toggle mt-0.5"><input type="checkbox" id="chkIsolines" onchange="toggleIsolines(this.checked)"><span class="toggle-slider"></span></label>
-            <div class="flex-1">
-              <p class="text-sm font-semibold text-white">Isolinhas de luminância</p>
-              <p class="text-xs text-slate-400">Contornos de igual luminância sobre a falsa cor.</p>
-              <div class="iso-hint" id="isoHint">
-                ◈ Décadas → traço espesso + pontos ciano<br>
-                ◈ Intermediárias → linha fina com sombra preta<br>
-                ◈ Labels com borda colorida no nível da LUT
-              </div>
-            </div>
-          </div>
-
-          <div class="opt-row" id="densityRow" style="display:none">
-            <div class="mt-0.5 w-10 flex-shrink-0"></div>
-            <div class="flex-1">
-              <p class="text-xs text-slate-400 mb-1 font-semibold">Densidade das isolinhas</p>
-              <select class="form-select" id="selDensity">
-                <option value="sparse">Esparsa (5 níveis)</option>
-                <option value="normal" selected>Normal (8 níveis)</option>
-                <option value="dense">Densa (14 níveis)</option>
-              </select>
             </div>
           </div>
         </div>
@@ -369,6 +384,93 @@
 
         <div id="logBox"   class="log-box hidden"></div>
         <div id="errorBox" class="hidden text-sm text-red-400 bg-red-900/20 rounded-lg p-3 border border-red-800/50"></div>
+
+        <!-- ═══ PAINEL DE VISUALIZAÇÃO (live, client-side) ═══ -->
+        <div class="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50" id="vizCard" style="opacity:.5;pointer-events:none">
+          <p class="text-sm font-bold text-cyan-200 mb-3"><i class="ri-palette-line mr-1 text-yellow-400"></i> Visualização
+            <span class="text-xs text-slate-500 font-normal ml-1">— ao vivo</span></p>
+
+          <!-- PALETA -->
+          <label class="text-xs text-slate-400 mb-1 block font-semibold">Paleta de cores</label>
+          <div class="seg mb-3" id="segPalette">
+            <button class="seg-btn active" data-pal="radiance" onclick="setPalette('radiance',this)">Radiance</button>
+            <button class="seg-btn warm"   data-pal="quente"   onclick="setPalette('quente',this)">Quente</button>
+            <button class="seg-btn cool"   data-pal="fria"     onclick="setPalette('fria',this)">Fria</button>
+            <button class="seg-btn neut"   data-pal="neutro"   onclick="setPalette('neutro',this)">Neutro</button>
+            <button class="seg-btn"        data-pal="cinza"    onclick="setPalette('cinza',this)">Cinza</button>
+          </div>
+
+          <!-- FILTRO QUENTE / FRIA / NEUTRA -->
+          <label class="text-xs text-slate-400 mb-1 block font-semibold">Filtro de cores <span class="text-slate-600 font-normal">(reduz poluição)</span></label>
+          <div class="seg mb-2" id="segFilter">
+            <button class="seg-btn active" data-f="all"     onclick="setFilter('all',this)">Tudo</button>
+            <button class="seg-btn warm"   data-f="warm"    onclick="setFilter('warm',this)">🔥 Só quentes</button>
+            <button class="seg-btn cool"   data-f="cool"    onclick="setFilter('cool',this)">❄ Só frias</button>
+            <button class="seg-btn neut"   data-f="neutral" onclick="setFilter('neutral',this)">◐ Só neutras</button>
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-xs text-slate-500 whitespace-nowrap">Limiar</span>
+            <input type="range" id="splitRange" min="5" max="95" value="50" oninput="onSplit()">
+            <span class="text-xs font-Mono text-cyan-300 whitespace-nowrap" id="splitLbl" style="min-width:70px;text-align:right">—</span>
+          </div>
+
+          <!-- REALCE DE ZONA -->
+          <label class="text-xs text-slate-400 mb-1 block font-semibold">Realçar zona</label>
+          <select class="form-select mb-3" id="selHighlight" onchange="onHighlight()">
+            <option value="">— desligado —</option>
+            <option value="0:50">Z0–Z1 · &lt; 50 cd/m² (escuro)</option>
+            <option value="50:200">Z2–Z3 · 50–200 (baixo)</option>
+            <option value="200:500">Z4 · 200–500 (conforto visual) ✓</option>
+            <option value="500:1000">Z5 · 500–1.000 (alto)</option>
+            <option value="1000:5000">Z6 · 1k–5k (muito alto)</option>
+            <option value="5000:1000000">Z7–Z8 · &gt; 5.000 (extremo)</option>
+          </select>
+
+          <!-- BANDAS DISCRETAS -->
+          <div class="opt-row">
+            <label class="toggle mt-0.5"><input type="checkbox" id="chkDiscrete" onchange="onDiscrete()"><span class="toggle-slider"></span></label>
+            <div class="flex-1">
+              <p class="text-sm font-semibold text-white">Bandas discretas</p>
+              <p class="text-xs text-slate-400">Poucas faixas sólidas em vez de gradiente — bem menos poluído.</p>
+              <div id="bandsRow" class="hidden mt-2 flex items-center gap-2">
+                <span class="text-xs text-slate-500 whitespace-nowrap">Faixas</span>
+                <input type="range" id="bandsRange" min="4" max="16" value="10" oninput="onBands()">
+                <span class="text-xs font-Mono text-cyan-300" id="bandsLbl" style="min-width:24px;text-align:right">10</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ISOLINHAS -->
+          <div class="opt-row">
+            <label class="toggle mt-0.5"><input type="checkbox" id="chkIso" onchange="onIso()"><span class="toggle-slider"></span></label>
+            <div class="flex-1">
+              <p class="text-sm font-semibold text-white">Isolinhas de luminância</p>
+              <p class="text-xs text-slate-400">Contornos de igual luminância sobre a falsa cor.</p>
+              <div id="isoOpts" class="hidden mt-2 flex flex-col gap-2">
+                <select class="form-select" id="selDensity" onchange="rerender()">
+                  <option value="sparse">Esparsa (décadas)</option>
+                  <option value="normal" selected>Normal</option>
+                  <option value="dense">Densa</option>
+                </select>
+                <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                  <input type="checkbox" id="chkIsoWC" checked onchange="rerender()"> Colorir por quente 🔴 / fria 🔵
+                </label>
+                <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+                  <input type="checkbox" id="chkIsoLabels" checked onchange="rerender()"> Mostrar rótulos (números)
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- NÚMEROS GRANDES -->
+          <div class="opt-row">
+            <label class="toggle mt-0.5"><input type="checkbox" id="chkBigNum" onchange="onBigNum()"><span class="toggle-slider"></span></label>
+            <div class="flex-1">
+              <p class="text-sm font-semibold text-white">Números grandes</p>
+              <p class="text-xs text-slate-400">Aumenta a fonte da sonda, escala e rótulos.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ═══ COLUNA DIREITA ═══ -->
@@ -389,58 +491,91 @@
           <!-- STATS -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="statsRow"></div>
 
-          <!-- VISUALIZAÇÕES: ABAS -->
+          <!-- VISUALIZAÇÃO -->
           <div class="result-panel">
             <div class="result-label">
               <span><i class="ri-palette-line mr-1"></i> Mapa de luminância</span>
               <div class="view-tabs">
-                <button class="view-tab active" id="tabFC"   onclick="switchView('fc',   this)">Falsa Cor</button>
-                <button class="view-tab"         id="tabISO" onclick="switchView('iso',  this)">Isolinhas</button>
-                <button class="view-tab"         id="tabHDR" onclick="switchView('hdr',  this)">Preview HDR</button>
+                <button class="view-tab active" id="tabSingle" onclick="setCompare('single',this)"><i class="ri-square-line"></i> Único</button>
+                <button class="view-tab"         id="tabSlider" onclick="setCompare('slider',this)"><i class="ri-contrast-line"></i> Slider A/B</button>
+                <button class="view-tab"         id="tabSide"   onclick="setCompare('side',this)"><i class="ri-layout-column-line"></i> Lado a lado</button>
               </div>
             </div>
 
-            <!-- IMAGEM + COLORBAR LATERAL -->
+            <!-- Vista base: Foto HDR (padrão) ↔ Falsa cor -->
+            <div class="flex items-center gap-2 px-4 py-2 border-b border-white/5 bg-black/10 flex-wrap">
+              <span class="text-xs text-slate-500 font-Mono">Vista:</span>
+              <button id="bvHDR" class="view-tab active" onclick="setBaseView('hdr',this)"><i class="ri-image-line"></i> Foto HDR</button>
+              <button id="bvFC"  class="view-tab"        onclick="setBaseView('fc',this)"><i class="ri-palette-line"></i> Falsa cor</button>
+              <span class="text-xs text-slate-500 ml-2 hidden sm:inline" id="bvHint">Passe o mouse para medir · escolha a análise no painel de Visualização →</span>
+            </div>
+
+            <!-- Barra de comparação (B) -->
+            <div id="compareBar" class="items-center gap-2 px-4 py-2 border-b border-white/5 bg-black/20" style="display:none">
+              <span class="text-xs font-Mono text-fuchsia-300 font-bold">B =</span>
+              <select class="form-select" id="selCompareB" style="max-width:260px" onchange="rerender()">
+                <option value="all">Tudo (falsa cor cheia)</option>
+                <option value="warm">🔥 Só quentes</option>
+                <option value="cool">❄ Só frias</option>
+                <option value="neutral">◐ Só neutras</option>
+                <option value="discrete">Bandas discretas</option>
+                <option value="cinza">Cinza (estrutura)</option>
+                <option value="hdr">Foto (preview HDR)</option>
+              </select>
+              <span class="text-xs text-slate-500 ml-auto hidden sm:inline">A = painel de Visualização à esquerda</span>
+            </div>
+
+            <!-- ÁREA DE IMAGEM + COLORBAR -->
             <div class="flex" id="imgRow">
-              <!-- Imagem principal: único elemento, src trocado pelo JS -->
-              <div class="flex-1 bg-black" style="line-height:0">
-                <img id="imgMain" class="w-full h-auto block" alt="Mapa de luminância">
+              <div class="flex-1 min-w-0">
+                <!-- Único / Slider -->
+                <div class="render-wrap" id="renderWrap">
+                  <canvas id="renderCanvas"></canvas>
+                  <span class="ab-badge" id="abBadgeA" style="display:none">A</span>
+                  <span class="ab-badge" id="abBadgeB" style="display:none">B</span>
+                  <div id="abDivider"><div id="abHandle"><i class="ri-arrow-left-right-line"></i></div></div>
+                </div>
+                <!-- Lado a lado -->
+                <div id="sideWrap">
+                  <div class="side-col"><span class="side-tag" id="sideTagA">A</span><canvas id="sideCanvasA"></canvas></div>
+                  <div class="side-col"><span class="side-tag" id="sideTagB">B</span><canvas id="sideCanvasB"></canvas></div>
+                </div>
+                <!-- PROBE -->
+                <div class="probe-bar" id="probeBar">
+                  <span class="probe-dot" id="probeDot" style="background:#333"></span>
+                  <span><span class="probe-k">pos</span> <span class="probe-v" id="probeXY">—</span></span>
+                  <span><span class="probe-k">luminância</span> <span class="probe-v" id="probeLum">—</span> <span class="probe-k">cd/m²</span></span>
+                  <span><span class="probe-k">zona</span> <span class="probe-v" id="probeZone" style="font-size:14px">—</span></span>
+                </div>
               </div>
-              <!-- COLORBAR — altura sincronizada com a imagem via JS -->
-              <div class="w-20 flex-shrink-0 bg-slate-900/60 border-l border-white/5 flex flex-col items-center p-2 gap-1" id="colorbarWrap">
-                <p class="text-xs font-Mono text-slate-500 text-center leading-tight">cd/m²<br>(log)</p>
-                <div id="cbMaxLbl" class="text-xs font-Mono text-cyan-400"></div>
-                <img id="imgColorbar" class="colorbar-img" style="flex:1;min-height:40px;width:100%;object-fit:fill" alt="Colorbar">
-                <div id="cbMinLbl" class="text-xs font-Mono text-cyan-400"></div>
+
+              <!-- COLORBAR grande -->
+              <div class="w-24 flex-shrink-0 bg-slate-900/60 border-l border-white/5 flex flex-col items-center p-2 gap-1">
+                <p class="text-xs font-Mono text-slate-400 text-center leading-tight">cd/m²<br>(log)</p>
+                <canvas id="cbCanvas" class="cbcanvas" width="92" height="360"></canvas>
               </div>
             </div>
 
             <!-- BARRA DE ESCALA -->
             <div class="px-4 py-3 border-t border-white/5">
-              <img id="imgScaleBar" class="scale-bar-img mb-1" alt="Escala">
-              <div id="scaleTicks" class="relative h-4 font-Mono text-slate-500" style="font-size:9px"></div>
+              <canvas id="scaleBarCanvas" width="900" height="46" style="width:100%;height:auto;display:block;border-radius:4px"></canvas>
             </div>
           </div>
 
-          <!-- HISTOGRAMA + LEGENDA LADO A LADO -->
+          <!-- HISTOGRAMA + LEGENDA -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
             <div class="result-panel">
               <div class="result-label"><i class="ri-bar-chart-line mr-1"></i> Histograma de luminância</div>
               <div class="p-3"><canvas class="histo" id="histCanvas"></canvas></div>
             </div>
-
             <div class="result-panel">
               <div class="result-label"><i class="ri-route-line mr-1"></i> Escala de cores</div>
               <div class="p-3">
-                <!-- Gradiente da ramp atualizado para a LUT corrigida -->
-                <div class="h-3 rounded mb-2" style="background:linear-gradient(to right,#000010,#000088,#0000ff,#00ffff,#00ff00,#ccff00,#ffff00,#ff7300,#ff0000,#ffffff)"></div>
+                <div class="h-3 rounded mb-2" id="legendRamp"></div>
                 <div class="flex justify-between text-xs text-slate-500 font-Mono mb-3">
                   <span>0</span><span>100</span><span>1k</span><span>10k</span><span>∞</span>
                 </div>
-                <table class="lc-table" id="lcTable">
-                  <!-- Preenchida pelo JS com cores da LUT corrigida -->
-                </table>
+                <table class="lc-table" id="lcTable"></table>
               </div>
             </div>
           </div>
@@ -450,14 +585,14 @@
 
           <!-- DOWNLOAD -->
           <div class="flex gap-3 flex-wrap">
-            <button onclick="downloadImg('fc','false_color.jpg')" class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-teal-800 hover:bg-teal-700 transition-colors font-semibold">
-              <i class="ri-palette-line"></i> Baixar Falsa Cor
+            <button onclick="downloadCanvas()" class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-teal-800 hover:bg-teal-700 transition-colors font-semibold">
+              <i class="ri-download-2-line"></i> Baixar vista atual (PNG)
             </button>
-            <button onclick="downloadImg('iso','false_color_isolinhas.jpg')" class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-cyan-800 hover:bg-cyan-700 transition-colors font-semibold">
-              <i class="ri-route-line"></i> Baixar c/ Isolinhas
+            <button onclick="downloadServer('fc')" class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors font-semibold">
+              <i class="ri-palette-line"></i> Falsa cor (servidor)
             </button>
-            <button onclick="downloadImg('hdr','hdr_preview.jpg')" class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors font-semibold">
-              <i class="ri-download-2-line"></i> Baixar HDR
+            <button onclick="downloadServer('hdr')" class="flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors font-semibold">
+              <i class="ri-image-line"></i> Preview HDR
             </button>
           </div>
         </div>
@@ -471,12 +606,7 @@
         <table class="ref-table">
           <thead>
             <tr class="bg-slate-800">
-              <th>Cor</th>
-              <th>Zona</th>
-              <th>Luminância (cd/m²)</th>
-              <th>Descrição</th>
-              <th>Contexto típico</th>
-              <th>Norma ref.</th>
+              <th>Cor</th><th>Zona</th><th>Luminância (cd/m²)</th><th>Descrição</th><th>Contexto típico</th><th>Norma ref.</th>
             </tr>
           </thead>
           <tbody id="refTableBody"></tbody>
@@ -492,60 +622,104 @@
   </footer>
 
   <script>
-  // ═══════════════════════════════════════════════
-  //  DADOS — LUT corrigida (menos laranja)
-  //  Espelha exatamente os stops do app.py _build_lut
-  // ═══════════════════════════════════════════════
-  const LUT_STOPS_JS = [
-    // [t, r, g, b]
-    [0.000,   0,   0,   0],
-    [0.020,   0,   0,  89],
-    [0.080,   0,   0, 166],
-    [0.220,   0,   0, 255],
-    [0.360,   0, 255, 255],
-    [0.500,   0, 255,   0],
-    [0.650, 255, 255,   0],
-    [0.750, 255, 115,   0],
-    [0.880, 255,   0,   0],
-    [1.000, 255, 255, 255],
-  ];
+  /* ══════════════════════════════════════════════════════════════
+     PALETAS (client-side) — cada uma é uma lista de stops {t,r,g,b}
+     ══════════════════════════════════════════════════════════════ */
+  const PALETTES = {
+    // Radiance corrigida (espelha o LUT do app.py)
+    radiance: [
+      {t:0.00, r:0,   g:0,   b:0  }, {t:0.02, r:0,   g:0,   b:89 },
+      {t:0.08, r:0,   g:0,   b:166}, {t:0.22, r:0,   g:0,   b:255},
+      {t:0.36, r:0,   g:255, b:255}, {t:0.50, r:0,   g:255, b:0  },
+      {t:0.65, r:255, g:255, b:0  }, {t:0.75, r:255, g:115, b:0  },
+      {t:0.88, r:255, g:0,   b:0  }, {t:1.00, r:255, g:255, b:255},
+    ],
+    // Quente (heat/inferno) — ênfase em altas luminâncias
+    quente: [
+      {t:0.00, r:0,   g:0,   b:0  }, {t:0.16, r:48,  g:8,   b:52 },
+      {t:0.34, r:130, g:20,  b:24 }, {t:0.52, r:205, g:45,  b:0  },
+      {t:0.68, r:255, g:110, b:0  }, {t:0.82, r:255, g:190, b:20 },
+      {t:0.92, r:255, g:240, b:130}, {t:1.00, r:255, g:255, b:255},
+    ],
+    // Fria — ênfase em baixas luminâncias
+    fria: [
+      {t:0.00, r:2,   g:4,   b:24 }, {t:0.20, r:0,   g:20,  b:120},
+      {t:0.40, r:0,   g:90,  b:200}, {t:0.60, r:0,   g:180, b:220},
+      {t:0.80, r:120, g:230, b:210}, {t:1.00, r:240, g:255, b:255},
+    ],
+    // Neutro — divergente frio→branco→quente (coolwarm)
+    neutro: [
+      {t:0.00, r:40,  g:90,  b:200}, {t:0.25, r:120, g:170, b:235},
+      {t:0.50, r:244, g:244, b:244}, {t:0.75, r:240, g:150, b:80 },
+      {t:1.00, r:200, g:30,  b:40 },
+    ],
+    // Cinza — só estrutura
+    cinza: [ {t:0.00, r:16, g:16, b:16}, {t:1.00, r:245, g:245, b:245} ],
+  };
 
-  function lutColor(t) {
-    t = Math.max(0, Math.min(1, t));
-    for (let i = 0; i < LUT_STOPS_JS.length - 1; i++) {
-      const [t0, r0, g0, b0] = LUT_STOPS_JS[i];
-      const [t1, r1, g1, b1] = LUT_STOPS_JS[i + 1];
-      if (t >= t0 && t <= t1) {
-        const f = (t - t0) / (t1 - t0);
-        return `rgb(${Math.round(r0+f*(r1-r0))},${Math.round(g0+f*(g1-g0))},${Math.round(b0+f*(b1-b0))})`;
+  // LUT pré-computada (256×3) por paleta p/ velocidade
+  const PAL_LUT = {};
+  function buildLUT(stops){
+    const lut = new Uint8ClampedArray(256*3);
+    for(let i=0;i<256;i++){
+      const t=i/255;
+      let a=stops[0], b=stops[stops.length-1];
+      for(let k=0;k<stops.length-1;k++){
+        if(t>=stops[k].t && t<=stops[k+1].t){ a=stops[k]; b=stops[k+1]; break; }
       }
+      const f = a.t===b.t?0:(t-a.t)/(b.t-a.t);
+      lut[i*3]   = Math.round(a.r+(b.r-a.r)*f);
+      lut[i*3+1] = Math.round(a.g+(b.g-a.g)*f);
+      lut[i*3+2] = Math.round(a.b+(b.b-a.b)*f);
     }
-    return 'white';
+    return lut;
   }
+  for(const k in PALETTES) PAL_LUT[k] = buildLUT(PALETTES[k]);
 
-  // Entradas da legenda — alinhadas com a nova LUT
+  /* Legenda (referência) */
   const LEGEND_ENTRIES = [
-    { solid:'#000010', grad:'linear-gradient(90deg,#000010,#000033)', range:'< 1',          label:'Não perceptível — câmara escura',             nivel:'Extremo-baixo', ctx:'—',                            norma:'—',            zona:'Z−' },
-    { solid:'#000055', grad:'linear-gradient(90deg,#000033,#000088)', range:'1 – 3',         label:'Nível noturno / cena estrelada',               nivel:'Muito baixo',   ctx:'Corredor sem luz',             norma:'—',            zona:'Z0' },
-    { solid:'#0000aa', grad:'linear-gradient(90deg,#000088,#0000cc)', range:'3 – 10',        label:'Clarão de vela / luz de emergência',           nivel:'Baixo',         ctx:'Hall de entrada',              norma:'—',            zona:'Z1' },
-    { solid:'#0000ee', grad:'linear-gradient(90deg,#0000cc,#0000ff)', range:'10 – 50',       label:'Corredor escuro / luz de fundo de monitor',   nivel:'Baixo-médio',   ctx:'Residência noturna',           norma:'—',            zona:'Z2' },
-    { solid:'#0077ff', grad:'linear-gradient(90deg,#0000ff,#00aaff)', range:'50 – 100',      label:'Hall / circulação sem iluminação direta',     nivel:'Médio-baixo',   ctx:'Corredor com janela',          norma:'NBR 8995',     zona:'Z3' },
-    { solid:'#00ccff', grad:'linear-gradient(90deg,#00aaff,#00ffff)', range:'100 – 200',     label:'Sala de estar com luz indireta',               nivel:'Médio',         ctx:'Living, quarto',               norma:'CIBSE 150–200',zona:'Z3b'},
-    { solid:'#00ff88', grad:'linear-gradient(90deg,#00ffcc,#00ff44)', range:'200 – 500',     label:'✓ Conforto visual — escritórios / salas de aula', nivel:'Adequado',   ctx:'Escritório (≈ 300 lux)',        norma:'ABNT/EN 12464',zona:'Z4' },
-    { solid:'#aaff00', grad:'linear-gradient(90deg,#88ff00,#ffff00)', range:'500 – 1.000',   label:'Bancada de trabalho preciso / vitrine',        nivel:'Alto',          ctx:'Showroom, lab',                norma:'CIBSE 500+',   zona:'Z5' },
-    { solid:'#ffcc00', grad:'linear-gradient(90deg,#ffff00,#ff9900)', range:'1.000 – 5.000', label:'Janela ensolarada (interior) / tela HDR',      nivel:'Muito alto',    ctx:'Janela fechada, refletor',     norma:'Radiance ref.',zona:'Z6' },
-    { solid:'#ff2200', grad:'linear-gradient(90deg,#ff6600,#ff0000)', range:'5.000 – 30k',   label:'Sol baixo / superfície especular',             nivel:'Extremo',       ctx:'Céu claro, espelho',           norma:'RADDisplay',   zona:'Z7' },
-    { solid:'#ffffff', grad:'linear-gradient(90deg,#ff4444,#ffffff)', range:'> 30.000',      label:'Sol direto / saturação de sensor',             nivel:'Saturado',      ctx:'Sol direto, overexposed',      norma:'—',            zona:'Z8' },
+    { grad:'linear-gradient(90deg,#000010,#000033)', range:'< 1',          label:'Não perceptível — câmara escura' },
+    { grad:'linear-gradient(90deg,#000033,#000088)', range:'1 – 3',         label:'Nível noturno / cena estrelada' },
+    { grad:'linear-gradient(90deg,#000088,#0000cc)', range:'3 – 10',        label:'Clarão de vela / luz de emergência' },
+    { grad:'linear-gradient(90deg,#0000cc,#0000ff)', range:'10 – 50',       label:'Corredor escuro / fundo de monitor' },
+    { grad:'linear-gradient(90deg,#0000ff,#00aaff)', range:'50 – 100',      label:'Hall / circulação sem luz direta' },
+    { grad:'linear-gradient(90deg,#00aaff,#00ffff)', range:'100 – 200',     label:'Sala de estar com luz indireta' },
+    { grad:'linear-gradient(90deg,#00ffcc,#00ff44)', range:'200 – 500',     label:'✓ Conforto visual — escritórios' },
+    { grad:'linear-gradient(90deg,#88ff00,#ffff00)', range:'500 – 1.000',   label:'Bancada de trabalho preciso / vitrine' },
+    { grad:'linear-gradient(90deg,#ffff00,#ff9900)', range:'1.000 – 5.000', label:'Janela ensolarada (interior) / HDR' },
+    { grad:'linear-gradient(90deg,#ff6600,#ff0000)', range:'5.000 – 30k',   label:'Sol baixo / superfície especular' },
+    { grad:'linear-gradient(90deg,#ff4444,#ffffff)', range:'> 30.000',      label:'Sol direto / saturação de sensor' },
   ];
 
-  // ═══════════════════════════════════════════════
-  //  ESTADO
-  // ═══════════════════════════════════════════════
-  let allFiles = [];
+  const ZONES = [
+    {hi:10,    z:'Z0 · Muito escuro'}, {hi:50,   z:'Z1 · Escuro'},
+    {hi:100,   z:'Z2 · Baixo'},        {hi:200,  z:'Z3 · Médio-baixo'},
+    {hi:500,   z:'Z4 · Conforto ✓'},   {hi:1000, z:'Z5 · Alto'},
+    {hi:5000,  z:'Z6 · Muito alto'},   {hi:30000,z:'Z7 · Extremo'},
+    {hi:Infinity, z:'Z8 · Saturado'},
+  ];
+  function zoneOf(l){ for(const zz of ZONES){ if(l<zz.hi) return zz.z; } return 'Z8'; }
 
-  // ═══════════════════════════════════════════════
-  //  UPLOAD
-  // ═══════════════════════════════════════════════
+  /* ══════════════════════════════════════════════════════════════
+     ESTADO
+     ══════════════════════════════════════════════════════════════ */
+  let allFiles = [];
+  const ENGINE = {
+    lum:null, tArr:null, w:0, h:0,
+    dispMin:1, dispMax:10000,
+    hdrImg:null, serverFC:'', serverHDR:'', big:false,
+  };
+  const VIZ = {
+    baseView:'hdr',   // 'hdr' = foto tonemapeada (padrão) · 'fc' = análise em falsa cor
+    palette:'radiance', filter:'all', splitT:0.5, neutW:0.07,
+    hl:null, discrete:false, bands:10,
+    iso:false, density:'normal', isoWC:true, isoLabels:true,
+    big:false, compare:'single',
+  };
+
+  /* ══════════════════════════════════════════════════════════════
+     UPLOAD
+     ══════════════════════════════════════════════════════════════ */
   const fileInput   = document.getElementById('fileInput');
   const dropzone    = document.getElementById('dropzone');
   const previewArea = document.getElementById('previewArea');
@@ -561,362 +735,677 @@
   });
   fileInput.addEventListener('change', e => { addFiles(Array.from(e.target.files)); fileInput.value = ''; });
 
-  // Badge de RSP ao selecionar arquivo
   document.getElementById('rspInput').addEventListener('change', function() {
     const badge = document.getElementById('rspBadge');
-    if (this.files.length > 0) {
-      badge.textContent = '✓ ' + this.files[0].name;
-      badge.classList.remove('hidden');
-    } else {
-      badge.classList.add('hidden');
-    }
+    if (this.files.length > 0) { badge.textContent = '✓ ' + this.files[0].name; badge.classList.remove('hidden'); }
+    else badge.classList.add('hidden');
   });
 
   function addFiles(files) {
-    files.forEach(f => {
-      if (!allFiles.some(x => x.name === f.name && x.size === f.size)) allFiles.push(f);
-    });
+    files.forEach(f => { if (!allFiles.some(x => x.name===f.name && x.size===f.size)) allFiles.push(f); });
     updateUI();
   }
-
-  function removeFile(i) { allFiles.splice(i, 1); updateUI(); }
-  function clearAll()     { allFiles = []; updateUI(); }
+  function removeFile(i){ allFiles.splice(i,1); updateUI(); }
+  function clearAll(){ allFiles=[]; updateUI(); }
 
   function updateUI() {
     const n = allFiles.length;
-    countBadge.textContent = n + (n === 1 ? ' selecionada' : ' selecionadas');
-    btnClear.classList.toggle('hidden', n === 0);
+    countBadge.textContent = n + (n===1?' selecionada':' selecionadas');
+    btnClear.classList.toggle('hidden', n===0);
     btnProcessar.disabled = n < 2;
-
     previewArea.innerHTML = '';
-    allFiles.forEach((f, i) => {
-      const div = document.createElement('div');
-      div.className = 'preview-item';
+    allFiles.forEach((f,i)=>{
+      const div=document.createElement('div'); div.className='preview-item';
       div.innerHTML = `<img src="${URL.createObjectURL(f)}" class="w-16 h-16 object-cover rounded-lg border border-slate-600">
         <button class="remove-btn" onclick="removeFile(${i})"><i class="ri-close-line"></i></button>`;
       previewArea.appendChild(div);
     });
     updateEVPanel();
   }
-
-  function toggleEVPanel() {
-    const show = document.getElementById('chkManualEV').checked;
-    document.getElementById('evPanel').style.display = show ? 'flex' : 'none';
-    if (show) updateEVPanel();
+  function toggleEVPanel(){
+    const show=document.getElementById('chkManualEV').checked;
+    document.getElementById('evPanel').style.display = show?'flex':'none';
+    if(show) updateEVPanel();
   }
-
-  function updateEVPanel() {
-    if (!document.getElementById('chkManualEV').checked) return;
-    const panel = document.getElementById('evPanel');
-    panel.innerHTML = '';
-    const defaults = [-2, -1, 0, 1, 2];
-    allFiles.forEach((f, i) => {
-      const row = document.createElement('div');
-      row.className = 'ev-row';
-      row.innerHTML = `
-        <img class="ev-thumb" src="${URL.createObjectURL(f)}">
+  function updateEVPanel(){
+    if(!document.getElementById('chkManualEV').checked) return;
+    const panel=document.getElementById('evPanel'); panel.innerHTML='';
+    const defaults=[-2,-1,0,1,2];
+    allFiles.forEach((f,i)=>{
+      const row=document.createElement('div'); row.className='ev-row';
+      row.innerHTML=`<img class="ev-thumb" src="${URL.createObjectURL(f)}">
         <span class="ev-filename">${f.name}</span>
         <input class="ev-input" type="number" step="0.5" id="ev_${i}" value="${defaults[i] ?? 0}">`;
       panel.appendChild(row);
     });
   }
 
-  function toggleIsolines(on) {
-    document.getElementById('densityRow').style.display = on ? 'flex' : 'none';
-    document.getElementById('isoHint').style.display    = on ? 'block' : 'none';
-  }
-
-  // ═══════════════════════════════════════════════
-  //  PROCESSAR
-  // ═══════════════════════════════════════════════
+  /* ══════════════════════════════════════════════════════════════
+     PROCESSAR (servidor)
+     ══════════════════════════════════════════════════════════════ */
   async function processar() {
     if (allFiles.length < 2) return;
-
-    const logBox   = document.getElementById('logBox');
-    const errorBox = document.getElementById('errorBox');
-
-    logBox.textContent = 'Processando… aguarde.';
-    logBox.classList.remove('hidden');
+    const logBox=document.getElementById('logBox'), errorBox=document.getElementById('errorBox');
+    logBox.textContent='Processando… aguarde.'; logBox.classList.remove('hidden');
     errorBox.classList.add('hidden');
-    document.getElementById('resultsArea').classList.add('hidden');
-    document.getElementById('emptyState').classList.remove('hidden');
-    btnProcessar.disabled = true;
-    btnProcessar.innerHTML = '<i class="ri-loader-4-line spin text-lg"></i> Processando…';
+    btnProcessar.disabled=true;
+    btnProcessar.innerHTML='<i class="ri-loader-4-line spin text-lg"></i> Processando…';
 
-    const fd = new FormData();
-    allFiles.forEach(f => fd.append('images', f));
+    const fd=new FormData();
+    allFiles.forEach(f=>fd.append('images',f));
     fd.append('auto_align',      document.getElementById('chkAlign').checked);
-    fd.append('show_isolines',   document.getElementById('chkIsolines').checked);
-    fd.append('isoline_density', document.getElementById('selDensity').value);
+    fd.append('show_isolines',   false);   // isolinhas agora são client-side
+    fd.append('isoline_density', 'normal');
     fd.append('merge_method',    document.getElementById('selMethod').value);
     fd.append('scale_min',       document.getElementById('scaleMin').value);
     fd.append('scale_max',       document.getElementById('scaleMax').value);
-
-    const rspInput = document.getElementById('rspInput');
-    if (rspInput.files.length > 0) fd.append('rsp_file', rspInput.files[0]);
-
-    if (document.getElementById('chkManualEV').checked) {
-      const evs = allFiles.map((_, i) => parseFloat(document.getElementById(`ev_${i}`)?.value ?? 0));
+    const rspInput=document.getElementById('rspInput');
+    if(rspInput.files.length>0) fd.append('rsp_file', rspInput.files[0]);
+    if(document.getElementById('chkManualEV').checked){
+      const evs=allFiles.map((_,i)=>parseFloat(document.getElementById(`ev_${i}`)?.value ?? 0));
       fd.append('ev_values', JSON.stringify(evs));
     }
 
-    try {
-      const res  = await fetch('/process', { method: 'POST', body: fd });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Erro desconhecido');
-
+    try{
+      const res=await fetch('/process',{method:'POST',body:fd});
+      const data=await res.json();
+      if(!res.ok) throw new Error(data.error||'Erro desconhecido');
       renderResults(data);
-      logBox.textContent = '✓ ' + data.log;
-    } catch (err) {
-      errorBox.textContent = '✗ ERRO: ' + err.message;
-      errorBox.classList.remove('hidden');
-      logBox.classList.add('hidden');
-    } finally {
-      btnProcessar.disabled = allFiles.length < 2;
-      btnProcessar.innerHTML = '<i class="ri-cpu-line text-lg"></i> Processar HDR';
+      logBox.textContent='✓ '+data.log;
+    }catch(err){
+      errorBox.textContent='✗ ERRO: '+err.message;
+      errorBox.classList.remove('hidden'); logBox.classList.add('hidden');
+    }finally{
+      btnProcessar.disabled = allFiles.length<2;
+      btnProcessar.innerHTML='<i class="ri-cpu-line text-lg"></i> Processar HDR';
     }
   }
 
-  // ═══════════════════════════════════════════════
-  //  RENDERIZAR
-  // ═══════════════════════════════════════════════
+  /* ══════════════════════════════════════════════════════════════
+     DECODIFICAR BUFFER DE LUMINÂNCIA
+     ══════════════════════════════════════════════════════════════ */
+  function decodeLum(ld){
+    const bin=atob(ld.buffer); const n=bin.length>>1;
+    const lum=new Float32Array(n);
+    const lo=ld.log_min, span=ld.log_max-ld.log_min;
+    for(let i=0;i<n;i++){
+      const v=(bin.charCodeAt(i*2) | (bin.charCodeAt(i*2+1)<<8));
+      lum[i]=Math.pow(10, lo+(v/65535)*span);
+    }
+    return lum;
+  }
 
-  // Guarda as srcs por view para troca instantânea
-  const VIEW_SRCS = { fc: '', iso: '', hdr: '' };
+  function recomputeT(){
+    const lo=Math.log10(Math.max(ENGINE.dispMin,1e-9));
+    const hi=Math.log10(Math.max(ENGINE.dispMax,ENGINE.dispMin*1.0001));
+    const span=hi-lo, N=ENGINE.w*ENGINE.h;
+    const t=new Float32Array(N), lum=ENGINE.lum;
+    for(let i=0;i<N;i++){
+      let tv=(Math.log10(Math.max(lum[i],1e-9))-lo)/span;
+      t[i]= tv<0?0:(tv>1?1:tv);
+    }
+    ENGINE.tArr=t;
+  }
 
-  function renderResults(data) {
-    document.getElementById('emptyState').classList.add('hidden');
-    document.getElementById('resultsArea').classList.remove('hidden');
-    document.getElementById('resultsArea').classList.add('flex');
+  /* ══════════════════════════════════════════════════════════════
+     RENDER DE UMA CONFIGURAÇÃO → canvas offscreen
+     ══════════════════════════════════════════════════════════════ */
+  function renderLayer(cfg){
+    const w=ENGINE.w, h=ENGINE.h, N=w*h;
+    const cv=document.createElement('canvas'); cv.width=w; cv.height=h;
+    const cx=cv.getContext('2d');
 
-    // Armazena as srcs
-    VIEW_SRCS.fc  = 'data:image/jpeg;base64,' + data.false_color_clean;
-    VIEW_SRCS.iso = 'data:image/jpeg;base64,' + data.false_color;
-    VIEW_SRCS.hdr = 'data:image/jpeg;base64,' + data.hdr_preview;
-
-    document.getElementById('imgColorbar').src = 'data:image/jpeg;base64,' + data.colorbar;
-    document.getElementById('imgScaleBar').src = 'data:image/jpeg;base64,' + data.lut_preview;
-
-    // Mostra falsa cor por padrão
-    switchView('fc', document.getElementById('tabFC'));
-
-    // Colorbar labels
-    document.getElementById('cbMaxLbl').textContent = data.scale_max >= 1000 ? (data.scale_max/1000).toFixed(0)+'k' : data.scale_max;
-    document.getElementById('cbMinLbl').textContent = data.scale_min >= 1    ? data.scale_min.toFixed(0) : data.scale_min.toFixed(2);
-
-    if (data.auto_scaled) {
-      document.getElementById('scaleMin').value = data.scale_min.toFixed(2);
-      document.getElementById('scaleMax').value = data.scale_max.toFixed(0);
+    if(cfg.hdr){
+      if(ENGINE.hdrImg && ENGINE.hdrImg.complete) cx.drawImage(ENGINE.hdrImg,0,0,w,h);
+      else { cx.fillStyle='#000'; cx.fillRect(0,0,w,h); }
+      let labels=[];
+      if(cfg.iso){
+        const im=cx.getImageData(0,0,w,h);
+        labels=drawIsolines(im.data,w,h,cfg);
+        cx.putImageData(im,0,0);
+        if(cfg.isoLabels && labels.length) drawLabels(cx,labels,w);
+      }
+      return {canvas:cv, labels};
     }
 
-    renderScaleTicks(data.scale_min, data.scale_max);
+    const img=cx.createImageData(w,h); const d=img.data;
+    const lut=PAL_LUT[cfg.palette]||PAL_LUT.radiance;
+    const t=ENGINE.tArr, lum=ENGINE.lum;
+    const nb = cfg.discrete ? cfg.bands : 0;
+
+    for(let i=0;i<N;i++){
+      const tv=t[i];
+      let tt=tv;
+      if(nb>0){ let bi=Math.floor(tv*nb); if(bi>=nb)bi=nb-1; tt=(bi+0.5)/nb; }
+      const colored = passFilter(tv,cfg) && passHL(lum[i],cfg);
+      let r,g,b;
+      if(colored){
+        const idx=((tt<0?0:tt>1?1:tt)*255)|0;
+        r=lut[idx*3]; g=lut[idx*3+1]; b=lut[idx*3+2];
+      }else{
+        const gv=(30+tv*110)|0; r=g=b=gv;   // cinza que preserva estrutura
+      }
+      const p=i<<2; d[p]=r; d[p+1]=g; d[p+2]=b; d[p+3]=255;
+    }
+
+    // separadores das bandas discretas
+    if(nb>0) drawBandEdges(d,w,h,t,nb);
+
+    // isolinhas
+    let labels=[];
+    if(cfg.iso) labels = drawIsolines(d,w,h,cfg);
+
+    cx.putImageData(img,0,0);
+    if(cfg.iso && cfg.isoLabels && labels.length) drawLabels(cx,labels,w);
+    return {canvas:cv, labels};
+  }
+
+  // desenha os rótulos de isolinha (texto grande, com halo)
+  function drawLabels(cx,labels,w){
+    const fs = ENGINE.big ? Math.max(20, w/34) : Math.max(14, w/48);
+    cx.font=`700 ${fs}px 'Space Mono', monospace`;
+    cx.textBaseline='middle'; cx.lineJoin='round';
+    for(const L of labels){
+      cx.lineWidth=Math.max(4,fs/4); cx.strokeStyle='rgba(0,0,0,0.9)';
+      cx.strokeText(L.txt, L.x, L.y);
+      cx.fillStyle = L.warm? '#ffd0c0' : (L.cool? '#c8f0ff' : '#ffffff');
+      cx.fillText(L.txt, L.x, L.y);
+    }
+  }
+
+  function passFilter(tv,cfg){
+    if(cfg.filter==='all') return true;
+    const s=cfg.splitT, n=cfg.neutW;
+    if(cfg.filter==='warm')    return tv >  s+n;
+    if(cfg.filter==='cool')    return tv <  s-n;
+    if(cfg.filter==='neutral') return tv>=s-n && tv<=s+n;
+    return true;
+  }
+  function passHL(lm,cfg){ if(!cfg.hl) return true; return lm>=cfg.hl[0] && lm<=cfg.hl[1]; }
+
+  // Bordas entre bandas discretas → linha escura fina
+  function drawBandEdges(d,w,h,t,nb){
+    const band=i=>{ let b=Math.floor(t[i]*nb); return b>=nb?nb-1:b; };
+    for(let y=0;y<h;y++){
+      for(let x=0;x<w;x++){
+        const i=y*w+x, bi=band(i);
+        if((x<w-1 && band(i+1)!==bi) || (y<h-1 && band(i+w)!==bi)){
+          const p=i<<2; d[p]=(d[p]*0.25)|0; d[p+1]=(d[p+1]*0.25)|0; d[p+2]=(d[p+2]*0.25)|0;
+        }
+      }
+    }
+  }
+
+  // Níveis "bonitos" em escala log dentro de [dispMin,dispMax]
+  function niceLevels(density){
+    const mults = density==='sparse'?[1] : density==='dense'?[1,2,3,5,7]:[1,2,5];
+    const lo=Math.floor(Math.log10(ENGINE.dispMin)), hi=Math.ceil(Math.log10(ENGINE.dispMax));
+    const out=[];
+    for(let dec=lo;dec<=hi;dec++) for(const m of mults){ const v=m*Math.pow(10,dec); if(v>=ENGINE.dispMin&&v<=ENGINE.dispMax) out.push(v); }
+    return [...new Set(out)].sort((a,b)=>a-b);
+  }
+
+  // Isolinhas via cruzamento em espaço-t + halo por dilatação 3×3
+  function drawIsolines(d,w,h,cfg){
+    const t=ENGINE.tArr, N=w*h;
+    const levels=niceLevels(cfg.density);
+    if(!levels.length) return [];
+    const lo=Math.log10(Math.max(ENGINE.dispMin,1e-9));
+    const hi=Math.log10(Math.max(ENGINE.dispMax,ENGINE.dispMin*1.0001));
+    const span=hi-lo;
+    const levelT = levels.map(v=>(Math.log10(v)-lo)/span);
+
+    const edge=new Int16Array(N);   // 0 = nada, senão idx+1
+    const samples = levels.map(()=>[]);
+    for(let y=0;y<h;y++){
+      for(let x=0;x<w;x++){
+        const i=y*w+x, tc=t[i];
+        const tr = x<w-1 ? t[i+1]   : tc;
+        const td = y<h-1 ? t[i+w]   : tc;
+        for(let k=0;k<levelT.length;k++){
+          const L=levelT[k];
+          if(((tc<L)!==(tr<L)) || ((tc<L)!==(td<L))){
+            edge[i]=k+1;
+            if(samples[k].length<400) samples[k].push(i);
+            break;
+          }
+        }
+      }
+    }
+    // halo (dilatação) — marca vizinhos de pixels de borda
+    const halo=new Uint8Array(N);
+    for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+      const i=y*w+x; if(!edge[i]) continue;
+      for(let dy=-1;dy<=1;dy++) for(let dx=-1;dx<=1;dx++){
+        const nx=x+dx, ny=y+dy; if(nx<0||ny<0||nx>=w||ny>=h) continue;
+        const j=ny*w+nx; if(!edge[j]) halo[j]=1;
+      }
+    }
+    for(let i=0;i<N;i++){
+      const p=i<<2;
+      if(edge[i]){
+        const k=edge[i]-1, lt=levelT[k];
+        let r,g,b;
+        if(cfg.isoWC){
+          if(lt> cfg.splitT+0.02){ r=255; g=70; b=40; }        // quente
+          else if(lt< cfg.splitT-0.02){ r=40; g=200; b=255; }  // fria
+          else { r=g=b=255; }                                  // neutra
+        }else{ r=g=b=255; }
+        d[p]=r; d[p+1]=g; d[p+2]=b;
+      }else if(halo[i]){
+        d[p]=0; d[p+1]=0; d[p+2]=0;
+      }
+    }
+    // posições de rótulo: ponto mediano de amostras, espaçados
+    const labels=[]; const used=[];
+    const minDist=Math.max(70, w*0.09);
+    for(let k=0;k<levels.length;k++){
+      const s=samples[k]; if(s.length<8) continue;
+      const mid=s[(s.length/2)|0];
+      let lx=mid%w, ly=(mid/w)|0;
+      if(used.some(u=>Math.abs(u[0]-lx)<minDist && Math.abs(u[1]-ly)<minDist)) continue;
+      const v=levels[k];
+      const txt = v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace('.0','')+'k'
+                : v>=1 ? Math.round(v).toString() : v.toFixed(1);
+      const lt=levelT[k];
+      labels.push({x:Math.min(lx,w-40), y:Math.min(Math.max(ly,14),h-14), txt,
+                   warm: cfg.isoWC && lt>cfg.splitT+0.02, cool: cfg.isoWC && lt<cfg.splitT-0.02});
+      used.push([lx,ly]);
+    }
+    return labels;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     COMPOSIÇÃO NA TELA (único / slider / lado a lado)
+     ══════════════════════════════════════════════════════════════ */
+  const mainCv=document.getElementById('renderCanvas');
+  const sideA=document.getElementById('sideCanvasA'), sideB=document.getElementById('sideCanvasB');
+  let abFrac=0.5, abDragging=false;
+
+  function cfgA(){
+    // Vista base = Foto HDR → mostra a foto tonemapeada (com isolinhas opcionais por cima)
+    if(VIZ.baseView==='hdr') return {
+      hdr:true, palette:VIZ.palette, filter:'all', splitT:VIZ.splitT, neutW:VIZ.neutW,
+      hl:null, discrete:false, bands:VIZ.bands,
+      iso:VIZ.iso, density:VIZ.density, isoWC:VIZ.isoWC, isoLabels:VIZ.isoLabels };
+    return {
+      palette:VIZ.palette, filter:VIZ.filter, splitT:VIZ.splitT, neutW:VIZ.neutW,
+      hl:VIZ.hl, discrete:VIZ.discrete, bands:VIZ.bands,
+      iso:VIZ.iso, density:VIZ.density, isoWC:VIZ.isoWC, isoLabels:VIZ.isoLabels };
+  }
+  function cfgB(){
+    const b=document.getElementById('selCompareB').value;
+    const base={ palette:VIZ.palette, splitT:VIZ.splitT, neutW:VIZ.neutW, hl:null,
+      discrete:false, bands:VIZ.bands, iso:VIZ.iso, density:VIZ.density,
+      isoWC:VIZ.isoWC, isoLabels:VIZ.isoLabels, filter:'all' };
+    if(b==='warm'||b==='cool'||b==='neutral'||b==='all') base.filter=b;
+    else if(b==='discrete'){ base.discrete=true; }
+    else if(b==='cinza'){ base.palette='cinza'; }
+    else if(b==='hdr'){ base.hdr=true; base.iso=false; }
+    return base;
+  }
+
+  function rerender(){
+    if(!ENGINE.lum) return;
+    VIZ.hl = (function(){ const v=document.getElementById('selHighlight').value;
+      if(!v) return null; const [a,b]=v.split(':').map(Number); return [a,b]; })();
+    const w=ENGINE.w, h=ENGINE.h;
+    mainCv.width=w; mainCv.height=h;
+    const mctx=mainCv.getContext('2d');
+
+    if(VIZ.compare==='side'){
+      const A=renderLayer(cfgA()), B=renderLayer(cfgB());
+      sideA.width=w; sideA.height=h; sideB.width=w; sideB.height=h;
+      sideA.getContext('2d').drawImage(A.canvas,0,0);
+      sideB.getContext('2d').drawImage(B.canvas,0,0);
+      updateColorbar(); updateScaleBar(); updateLegendRamp();
+      return;
+    }
+
+    const A=renderLayer(cfgA());
+    if(VIZ.compare==='slider'){
+      const B=renderLayer(cfgB());
+      const divX=Math.round(w*abFrac);
+      mctx.drawImage(A.canvas,0,0);
+      mctx.save(); mctx.beginPath(); mctx.rect(divX,0,w-divX,h); mctx.clip();
+      mctx.drawImage(B.canvas,0,0); mctx.restore();
+      positionDivider();
+    }else{
+      mctx.drawImage(A.canvas,0,0);
+    }
+    updateColorbar(); updateScaleBar(); updateLegendRamp();
+  }
+
+  function positionDivider(){ document.getElementById('abDivider').style.left=(abFrac*100)+'%'; }
+
+  /* Drag do divisor A/B */
+  (function(){
+    function setFromEvent(e){
+      const rect=mainCv.getBoundingClientRect();
+      const cx=(e.touches?e.touches[0].clientX:e.clientX);
+      abFrac=Math.min(0.98,Math.max(0.02,(cx-rect.left)/rect.width));
+      rerender();
+    }
+    const dh=document.getElementById('abDivider');
+    dh.addEventListener('mousedown', e=>{ abDragging=true; e.preventDefault(); });
+    dh.addEventListener('touchstart',()=>{ abDragging=true; }, {passive:true});
+    window.addEventListener('mousemove', e=>{ if(abDragging) setFromEvent(e); });
+    window.addEventListener('touchmove', e=>{ if(abDragging) setFromEvent(e); }, {passive:true});
+    window.addEventListener('mouseup', ()=>abDragging=false);
+    window.addEventListener('touchend',()=>abDragging=false);
+  })();
+
+  /* ══════════════════════════════════════════════════════════════
+     COLORBAR + SCALE BAR (números grandes)
+     ══════════════════════════════════════════════════════════════ */
+  function fmt(v){ return v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace('.0','')+'k'
+                  : v>=1 ? Math.round(v).toString() : v.toFixed(2); }
+
+  function updateColorbar(){
+    const cv=document.getElementById('cbCanvas');
+    const rectH = mainCv.getBoundingClientRect().height;
+    const H=Math.max(300, Math.min(560, rectH||360));
+    cv.height=H; const W=cv.width; const ctx=cv.getContext('2d');
+    ctx.clearRect(0,0,W,H);
+    const barW=34, lut=PAL_LUT[VIZ.palette]||PAL_LUT.radiance;
+    for(let y=0;y<H;y++){
+      const t=1-y/(H-1); const idx=(t*255)|0;
+      ctx.fillStyle=`rgb(${lut[idx*3]},${lut[idx*3+1]},${lut[idx*3+2]})`;
+      ctx.fillRect(0,y,barW,1);
+    }
+    const lo=Math.log10(ENGINE.dispMin), hi=Math.log10(ENGINE.dispMax), span=hi-lo;
+    const fs=ENGINE.big?15:12;
+    ctx.font=`700 ${fs}px 'Space Mono', monospace`; ctx.textBaseline='middle';
+    const dLo=Math.floor(lo), dHi=Math.ceil(hi);
+    for(let dec=dLo;dec<=dHi;dec++) for(const m of [1,2,5]){
+      const v=m*Math.pow(10,dec); if(v<ENGINE.dispMin||v>ENGINE.dispMax) continue;
+      const tt=(Math.log10(v)-lo)/span; const y=Math.round((1-tt)*(H-1));
+      ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(barW-6,y); ctx.lineTo(barW+3,y); ctx.stroke();
+      ctx.lineWidth=3; ctx.strokeStyle='rgba(0,0,0,.85)';
+      ctx.strokeText(fmt(v), barW+6, y);
+      ctx.fillStyle='#e2f4ff'; ctx.fillText(fmt(v), barW+6, y);
+    }
+  }
+
+  function updateScaleBar(){
+    const cv=document.getElementById('scaleBarCanvas'); const W=cv.width, H=cv.height;
+    const ctx=cv.getContext('2d'); ctx.clearRect(0,0,W,H);
+    const barH=18, lut=PAL_LUT[VIZ.palette]||PAL_LUT.radiance;
+    for(let x=0;x<W;x++){ const t=x/(W-1); const idx=(t*255)|0;
+      ctx.fillStyle=`rgb(${lut[idx*3]},${lut[idx*3+1]},${lut[idx*3+2]})`; ctx.fillRect(x,0,1,barH); }
+    const lo=Math.log10(ENGINE.dispMin), hi=Math.log10(ENGINE.dispMax), span=hi-lo;
+    const fs=ENGINE.big?17:13;
+    ctx.font=`700 ${fs}px 'Space Mono', monospace`; ctx.textAlign='center'; ctx.textBaseline='top';
+    const dLo=Math.floor(lo), dHi=Math.ceil(hi);
+    for(let dec=dLo;dec<=dHi;dec++) for(const m of [1,3,10]){
+      const v=m*Math.pow(10,dec); if(v<ENGINE.dispMin||v>ENGINE.dispMax) continue;
+      const tt=(Math.log10(v)-lo)/span; const x=Math.round(tt*(W-1));
+      ctx.strokeStyle='rgba(255,255,255,.7)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(x,barH); ctx.lineTo(x,barH+5); ctx.stroke();
+      ctx.lineWidth=3; ctx.strokeStyle='rgba(0,0,0,.85)';
+      ctx.strokeText(fmt(v), x, barH+7);
+      ctx.fillStyle='#cfe8f4'; ctx.fillText(fmt(v), x, barH+7);
+    }
+    ctx.textAlign='start';
+  }
+
+  function updateLegendRamp(){
+    const stops=PALETTES[VIZ.palette];
+    const g=stops.map(s=>`rgb(${s.r},${s.g},${s.b}) ${Math.round(s.t*100)}%`).join(',');
+    document.getElementById('legendRamp').style.background=`linear-gradient(to right,${g})`;
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     CONTROLES DE VISUALIZAÇÃO
+     ══════════════════════════════════════════════════════════════ */
+  // Alterna a vista base (Foto HDR ↔ Falsa cor)
+  function setBaseView(v,btn){
+    VIZ.baseView=v;
+    document.getElementById('bvHDR').classList.toggle('active', v==='hdr');
+    document.getElementById('bvFC').classList.toggle('active', v==='fc');
+    document.getElementById('bvHint').textContent = v==='hdr'
+      ? 'Passe o mouse para medir · escolha a análise no painel de Visualização →'
+      : 'Analisando em falsa cor — use paleta, filtros e isolinhas à esquerda';
+    rerender();
+  }
+  // Ao mexer num controle de análise, sai da foto e mostra a falsa cor
+  function ensureFC(){ if(VIZ.baseView==='hdr'){ setBaseView('fc',null); } }
+
+  function setPalette(p,btn){ VIZ.palette=p;
+    document.querySelectorAll('#segPalette .seg-btn').forEach(b=>b.classList.remove('active'));
+    if(btn) btn.classList.add('active'); ensureFC(); rerender(); }
+  function setFilter(f,btn){ VIZ.filter=f;
+    document.querySelectorAll('#segFilter .seg-btn').forEach(b=>b.classList.remove('active'));
+    if(btn) btn.classList.add('active'); ensureFC(); rerender(); }
+  function onSplit(){ VIZ.splitT=document.getElementById('splitRange').value/100; updateSplitLbl(); ensureFC(); rerender(); }
+  function updateSplitLbl(){
+    const lo=Math.log10(ENGINE.dispMin||1), hi=Math.log10(ENGINE.dispMax||10000);
+    const v=Math.pow(10, lo+VIZ.splitT*(hi-lo));
+    document.getElementById('splitLbl').textContent = fmt(v)+' cd/m²';
+  }
+  function onDiscrete(){ VIZ.discrete=document.getElementById('chkDiscrete').checked;
+    document.getElementById('bandsRow').classList.toggle('hidden',!VIZ.discrete); if(VIZ.discrete) ensureFC(); rerender(); }
+  function onBands(){ VIZ.bands=+document.getElementById('bandsRange').value;
+    document.getElementById('bandsLbl').textContent=VIZ.bands; ensureFC(); rerender(); }
+  function onHighlight(){ if(document.getElementById('selHighlight').value) ensureFC(); rerender(); }
+  function onIso(){ VIZ.iso=document.getElementById('chkIso').checked;
+    document.getElementById('isoOpts').classList.toggle('hidden',!VIZ.iso); rerender(); }
+  function onBigNum(){ VIZ.big=ENGINE.big=document.getElementById('chkBigNum').checked;
+    document.body.classList.toggle('big-num',VIZ.big); rerender(); }
+
+  document.getElementById('selDensity').addEventListener('change',()=>{ VIZ.density=document.getElementById('selDensity').value; });
+  document.getElementById('chkIsoWC').addEventListener('change',()=>{ VIZ.isoWC=document.getElementById('chkIsoWC').checked; });
+  document.getElementById('chkIsoLabels').addEventListener('change',()=>{ VIZ.isoLabels=document.getElementById('chkIsoLabels').checked; });
+
+  // escala ao vivo
+  ['scaleMin','scaleMax'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{
+    if(!ENGINE.lum) return;
+    const mn=parseFloat(document.getElementById('scaleMin').value);
+    const mx=parseFloat(document.getElementById('scaleMax').value);
+    if(mn>0 && mx>mn){ ENGINE.dispMin=mn; ENGINE.dispMax=mx; recomputeT(); updateSplitLbl(); rerender(); }
+  }));
+
+  function setCompare(mode,btn){
+    VIZ.compare=mode;
+    document.querySelectorAll('.view-tab').forEach(t=>t.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+    const isCmp = mode!=='single';
+    document.getElementById('compareBar').style.display = isCmp?'flex':'none';
+    document.getElementById('abDivider').style.display = mode==='slider'?'block':'none';
+    document.getElementById('abBadgeA').style.display = mode==='slider'?'block':'none';
+    document.getElementById('abBadgeB').style.display = mode==='slider'?'block':'none';
+    document.getElementById('renderWrap').style.display = mode==='side'?'none':'block';
+    document.getElementById('probeBar').style.display   = mode==='side'?'none':'flex';
+    document.getElementById('sideWrap').style.display   = mode==='side'?'flex':'none';
+    rerender();
+  }
+
+  /* ══════════════════════════════════════════════════════════════
+     SONDA (probe)
+     ══════════════════════════════════════════════════════════════ */
+  mainCv.addEventListener('mousemove', e=>{
+    if(!ENGINE.lum) return;
+    const rect=mainCv.getBoundingClientRect();
+    const x=Math.floor((e.clientX-rect.left)*(ENGINE.w/rect.width));
+    const y=Math.floor((e.clientY-rect.top)*(ENGINE.h/rect.height));
+    if(x<0||y<0||x>=ENGINE.w||y>=ENGINE.h) return;
+    const lm=ENGINE.lum[y*ENGINE.w+x];
+    const tv=ENGINE.tArr[y*ENGINE.w+x];
+    const lut=PAL_LUT[VIZ.palette]; const idx=(tv*255)|0;
+    document.getElementById('probeXY').textContent=`${x},${y}`;
+    document.getElementById('probeLum').textContent = lm<10?lm.toFixed(2):fmt(lm);
+    document.getElementById('probeZone').textContent = zoneOf(lm);
+    document.getElementById('probeDot').style.background=`rgb(${lut[idx*3]},${lut[idx*3+1]},${lut[idx*3+2]})`;
+  });
+
+  /* ══════════════════════════════════════════════════════════════
+     RENDERIZAR RESULTADOS DO SERVIDOR
+     ══════════════════════════════════════════════════════════════ */
+  function renderResults(data){
+    document.getElementById('emptyState').classList.add('hidden');
+    const ra=document.getElementById('resultsArea');
+    ra.classList.remove('hidden'); ra.classList.add('flex');
+    document.getElementById('vizCard').style.opacity='1';
+    document.getElementById('vizCard').style.pointerEvents='auto';
+
+    ENGINE.lum = decodeLum(data.lum_data);
+    ENGINE.w=data.lum_data.w; ENGINE.h=data.lum_data.h;
+    ENGINE.dispMin=data.scale_min; ENGINE.dispMax=data.scale_max;
+    ENGINE.serverFC='data:image/jpeg;base64,'+data.false_color_clean;
+    ENGINE.serverHDR='data:image/jpeg;base64,'+data.hdr_preview;
+    ENGINE.hdrImg=new Image(); ENGINE.hdrImg.onload=()=>rerender(); ENGINE.hdrImg.src=ENGINE.serverHDR;
+
+    // Nova análise → começa mostrando a foto HDR
+    setBaseView('hdr', null);
+
+    if(data.auto_scaled){
+      document.getElementById('scaleMin').value=data.scale_min.toFixed(2);
+      document.getElementById('scaleMax').value=data.scale_max.toFixed(0);
+    }
+
+    recomputeT();
+    updateSplitLbl();
+    rerender();
+
     renderStatusTags(data);
     renderStats(data.stats);
-    renderHistogram(data.histogram, data.scale_min, data.scale_max);
+    renderHistogram(data.histogram);
     renderLegendTable(data.stats);
     renderAmbiente(data.stats);
 
-    // Destaque aba isolinhas
-    const tabISO = document.getElementById('tabISO');
-    if (data.isoline_count > 0) {
-      tabISO.classList.add('has-data');
-      tabISO.textContent = `Isolinhas (${data.isoline_count})`;
-    } else {
-      tabISO.classList.remove('has-data');
-      tabISO.textContent = 'Isolinhas';
-    }
-
-    // Badge de método no título
-    const mb = document.getElementById('methodBadge');
-    mb.textContent = data.merge_method.toUpperCase();
-    mb.style.display = 'inline-flex';
-    mb.className = 'info-tag ok';
+    const mb=document.getElementById('methodBadge');
+    mb.textContent=data.merge_method.toUpperCase(); mb.style.display='inline-flex'; mb.className='info-tag ok';
   }
 
-  function renderStatusTags(data) {
-    const box = document.getElementById('statusTags');
-    const tags = [
-      { cls: 'ok',   txt: data.merge_method },
-      { cls: '',     txt: 'exp: ' + data.exposure_source },
-      data.auto_scaled  ? { cls: 'warn', txt: '⚡ auto-scale' }          : null,
-      data.rsp_applied  ? { cls: 'ok',   txt: '✓ RSP aplicada' }         : null,
-      data.isoline_count > 0 ? { cls: '', txt: `~ ${data.isoline_count} isolinhas` } : null,
+  function renderStatusTags(data){
+    const box=document.getElementById('statusTags');
+    const tags=[
+      {cls:'ok', txt:data.merge_method},
+      {cls:'',   txt:'exp: '+data.exposure_source},
+      data.auto_scaled ? {cls:'warn',txt:'⚡ auto-scale'} : null,
+      data.rsp_applied ? {cls:'ok',  txt:'✓ RSP aplicada'} : null,
+      {cls:'', txt:`buffer ${data.lum_data.w}×${data.lum_data.h}`},
     ].filter(Boolean);
-    box.innerHTML = tags.map(t =>
-      `<span class="info-tag ${t.cls}">${t.txt}</span>`
-    ).join('');
+    box.innerHTML=tags.map(t=>`<span class="info-tag ${t.cls}">${t.txt}</span>`).join('');
   }
 
-  function renderScaleTicks(lmin, lmax) {
-    const cont = document.getElementById('scaleTicks');
-    const ticks = [];
-    let decade = Math.floor(Math.log10(Math.max(lmin, 1e-9)));
-    while (decade <= Math.ceil(Math.log10(lmax))) {
-      for (const m of [1, 3, 10]) {
-        const v = m * Math.pow(10, decade);
-        if (v >= lmin && v <= lmax) ticks.push(v);
-      }
-      decade++;
-    }
-    cont.innerHTML = ticks.map(v => {
-      const pct = (Math.log10(v) - Math.log10(lmin)) / (Math.log10(lmax) - Math.log10(lmin)) * 100;
-      const lbl = v >= 1000 ? (v/1000).toFixed(0)+'k' : v >= 1 ? v.toFixed(0) : v.toFixed(1);
-      return `<span style="position:absolute;left:${pct}%;transform:translateX(-50%)">${lbl}</span>`;
-    }).join('');
-  }
-
-  function renderStats(stats) {
-    if (!stats) return;
-    const CARDS = [
-      { key:'min',              label:'Mínimo',           unit:'cd/m²' },
-      { key:'max',              label:'Máximo',           unit:'cd/m²' },
-      { key:'mean',             label:'Média',            unit:'cd/m²' },
-      { key:'log_mean',         label:'Média geom.',      unit:'cd/m²' },
-      { key:'median',           label:'Mediana',          unit:'cd/m²' },
-      { key:'p10',              label:'P10',              unit:'cd/m²' },
-      { key:'p90',              label:'P90',              unit:'cd/m²' },
-      { key:'dynamic_range_db', label:'Range dinâmico',  unit:'dB'    },
+  function renderStats(stats){
+    if(!stats) return;
+    const CARDS=[
+      {key:'min',label:'Mínimo',unit:'cd/m²'},{key:'max',label:'Máximo',unit:'cd/m²'},
+      {key:'mean',label:'Média',unit:'cd/m²'},{key:'log_mean',label:'Média geom.',unit:'cd/m²'},
+      {key:'median',label:'Mediana',unit:'cd/m²'},{key:'p10',label:'P10',unit:'cd/m²'},
+      {key:'p90',label:'P90',unit:'cd/m²'},{key:'dynamic_range_db',label:'Range dinâmico',unit:'dB'},
     ];
-    document.getElementById('statsRow').innerHTML = CARDS.map(c => {
-      const v = stats[c.key];
-      if (v === undefined) return '';
-      const disp = v >= 10000 ? (v/1000).toFixed(1)+'k' : v >= 100 ? v.toFixed(0) : v >= 1 ? v.toFixed(1) : v.toFixed(3);
+    document.getElementById('statsRow').innerHTML=CARDS.map(c=>{
+      const v=stats[c.key]; if(v===undefined) return '';
+      const disp = v>=10000?(v/1000).toFixed(1)+'k':v>=100?v.toFixed(0):v>=1?v.toFixed(1):v.toFixed(3);
       return `<div class="stat-pill text-center">
         <p class="text-xs text-slate-400 mb-1">${c.label}</p>
-        <p class="font-Mono text-sm font-bold text-white">${disp}</p>
-        <p class="text-xs text-slate-600">${c.unit}</p>
-      </div>`;
+        <p class="sv">${disp}</p>
+        <p class="text-xs text-slate-600">${c.unit}</p></div>`;
     }).join('');
   }
 
-  function renderHistogram(histData, lmin, lmax) {
-    if (!histData || !histData.length) return;
-    const canvas = document.getElementById('histCanvas');
-    const W = canvas.width  = canvas.offsetWidth || 300;
-    const H = canvas.height = 80;
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, W, H);
-
-    const maxY = Math.max(...histData.map(d => d.y), 1);
-    const n = histData.length;
-    histData.forEach((d, i) => {
-      const t = i / Math.max(n - 1, 1);
-      ctx.fillStyle = lutColor(t);
-      const bh = Math.max(Math.round((d.y / maxY) * H * 0.92), 1);
-      const bw = W / n;
-      ctx.fillRect(i * bw, H - bh, bw - 0.5, bh);
+  function renderHistogram(histData){
+    if(!histData||!histData.length) return;
+    const canvas=document.getElementById('histCanvas');
+    const W=canvas.width=canvas.offsetWidth||300, H=canvas.height=90;
+    const ctx=canvas.getContext('2d'); ctx.clearRect(0,0,W,H);
+    const maxY=Math.max(...histData.map(d=>d.y),1), n=histData.length;
+    const lut=PAL_LUT[VIZ.palette]||PAL_LUT.radiance;
+    histData.forEach((d,i)=>{
+      const t=i/Math.max(n-1,1); const idx=(t*255)|0;
+      ctx.fillStyle=`rgb(${lut[idx*3]},${lut[idx*3+1]},${lut[idx*3+2]})`;
+      const bh=Math.max(Math.round((d.y/maxY)*H*0.92),1), bw=W/n;
+      ctx.fillRect(i*bw,H-bh,bw-0.5,bh);
     });
   }
 
-  function renderLegendTable(stats) {
-    const mean = stats ? stats.mean : null;
-    const table = document.getElementById('lcTable');
-    table.innerHTML = LEGEND_ENTRIES.map(e => {
-      let isCurrent = false;
-      if (mean !== null) {
-        const [lo, hi] = parseRange(e.range);
-        if (mean >= lo && (hi === Infinity || mean < hi)) isCurrent = true;
-      }
-      const badge = isCurrent
-        ? `<span class="ml-1 text-cyan-400 font-Mono" style="font-size:9px">← média</span>` : '';
-      return `<tr class="${isCurrent ? 'lc-current' : ''}">
+  function renderLegendTable(stats){
+    const mean=stats?stats.mean:null;
+    document.getElementById('lcTable').innerHTML=LEGEND_ENTRIES.map(e=>{
+      let cur=false;
+      if(mean!==null){ const [lo,hi]=parseRange(e.range); if(mean>=lo && (hi===Infinity||mean<hi)) cur=true; }
+      const badge=cur?`<span class="ml-1 text-cyan-400 font-Mono" style="font-size:9px">← média</span>`:'';
+      return `<tr class="${cur?'lc-current':''}">
         <td><span class="lc-swatch" style="background:${e.grad}"></span></td>
         <td class="lc-label">${e.label}${badge}</td>
-        <td class="lc-range">${e.range}</td>
-      </tr>`;
+        <td class="lc-range">${e.range}</td></tr>`;
     }).join('');
   }
 
-  function renderAmbiente(stats) {
-    const box = document.getElementById('ambienteBox');
-    if (!stats || !stats.ambiente) { box.classList.add('hidden'); return; }
+  function renderAmbiente(stats){
+    const box=document.getElementById('ambienteBox');
+    if(!stats||!stats.ambiente){ box.classList.add('hidden'); return; }
     box.classList.remove('hidden');
-    box.innerHTML = `<span class="text-xs font-Mono text-slate-500 font-semibold tracking-widest uppercase">Classificação da cena</span>
+    box.innerHTML=`<span class="text-xs font-Mono text-slate-500 font-semibold tracking-widest uppercase">Classificação da cena</span>
       <p class="text-white mt-1">${stats.ambiente}</p>`;
   }
 
-  // ═══════════════════════════════════════════════
-  //  TABELA DE REFERÊNCIA (rodapé)
-  // ═══════════════════════════════════════════════
-  function buildRefTable() {
-    const tbody = document.getElementById('refTableBody');
-    const rows = [
-      { zona:'Z−', range:'< 1',           desc:'Não perceptível',    ctx:'Câmara escura',                   norma:'—' },
-      { zona:'Z0', range:'1 – 3',          desc:'Nível noturno',      ctx:'Cena estrelada / vela',            norma:'—' },
-      { zona:'Z1', range:'3 – 50',         desc:'Muito escuro',       ctx:'Corredor / jardim noturno',        norma:'—' },
-      { zona:'Z2', range:'50 – 100',       desc:'Baixo',              ctx:'Hall, circulação',                 norma:'NBR 8995' },
-      { zona:'Z3', range:'100 – 200',      desc:'Médio-baixo',        ctx:'Sala de estar, luz indireta',      norma:'CIBSE 150–200' },
-      { zona:'Z4', range:'200 – 500',      desc:'Conforto visual ✓',  ctx:'Escritório (≈ 300 lux)',           norma:'ABNT / EN 12464' },
-      { zona:'Z5', range:'500 – 1.000',    desc:'Alto',               ctx:'Vitrines, showrooms',              norma:'CIBSE 500+' },
-      { zona:'Z6', range:'1.000 – 5.000',  desc:'Muito alto',         ctx:'Janela em dia nublado',            norma:'Radiance ref.' },
-      { zona:'Z7', range:'5.000 – 30.000', desc:'Extremo',            ctx:'Céu claro, janelas em dia de sol', norma:'RADDisplay' },
-      { zona:'Z8', range:'> 30.000',       desc:'Saturado',           ctx:'Sol direto, especular',            norma:'—' },
+  /* ══════════════════════════════════════════════════════════════
+     TABELA DE REFERÊNCIA
+     ══════════════════════════════════════════════════════════════ */
+  function buildRefTable(){
+    const rows=[
+      {zona:'Z−',range:'< 1',desc:'Não perceptível',ctx:'Câmara escura',norma:'—'},
+      {zona:'Z0',range:'1 – 3',desc:'Nível noturno',ctx:'Cena estrelada / vela',norma:'—'},
+      {zona:'Z1',range:'3 – 50',desc:'Muito escuro',ctx:'Corredor / jardim noturno',norma:'—'},
+      {zona:'Z2',range:'50 – 100',desc:'Baixo',ctx:'Hall, circulação',norma:'NBR 8995'},
+      {zona:'Z3',range:'100 – 200',desc:'Médio-baixo',ctx:'Sala, luz indireta',norma:'CIBSE 150–200'},
+      {zona:'Z4',range:'200 – 500',desc:'Conforto visual ✓',ctx:'Escritório (≈ 300 lux)',norma:'ABNT / EN 12464'},
+      {zona:'Z5',range:'500 – 1.000',desc:'Alto',ctx:'Vitrines, showrooms',norma:'CIBSE 500+'},
+      {zona:'Z6',range:'1.000 – 5.000',desc:'Muito alto',ctx:'Janela em dia nublado',norma:'Radiance ref.'},
+      {zona:'Z7',range:'5.000 – 30.000',desc:'Extremo',ctx:'Céu claro, sol nas janelas',norma:'RADDisplay'},
+      {zona:'Z8',range:'> 30.000',desc:'Saturado',ctx:'Sol direto, especular',norma:'—'},
     ];
-    const colors = ['#000033','#000066','#0000cc','#0077ff','#00ccff','#00ff88','#aaff00','#ffcc00','#ff2200','#ffffff'];
-    tbody.innerHTML = rows.map((r, i) => `
-      <tr class="${i%2===0 ? 'bg-slate-800/40' : 'bg-slate-800/20'}">
+    const colors=['#000033','#000066','#0000cc','#0077ff','#00ccff','#00ff88','#aaff00','#ffcc00','#ff2200','#ffffff'];
+    document.getElementById('refTableBody').innerHTML=rows.map((r,i)=>`
+      <tr class="${i%2===0?'bg-slate-800/40':'bg-slate-800/20'}">
         <td><span style="display:inline-block;width:26px;height:14px;border-radius:3px;background:${colors[i]};border:1px solid rgba(255,255,255,0.15)"></span></td>
         <td class="text-yellow-400 font-Mono">${r.zona}</td>
         <td class="text-cyan-300 font-Mono">${r.range}</td>
         <td class="text-white font-semibold">${r.desc}</td>
         <td class="text-slate-400">${r.ctx}</td>
-        <td class="text-slate-500">${r.norma}</td>
-      </tr>`).join('');
+        <td class="text-slate-500">${r.norma}</td></tr>`).join('');
   }
 
-  // ═══════════════════════════════════════════════
-  //  TROCA DE VIEW — troca src do imgMain único
-  // ═══════════════════════════════════════════════
-  function switchView(view, tabEl) {
-    document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-    if (tabEl) tabEl.classList.add('active');
-
-    const imgMain = document.getElementById('imgMain');
-    const src = VIEW_SRCS[view];
-    if (src) imgMain.src = src;
-
-    // Sincroniza colorbar quando a imagem carrega (garante mesma altura)
-    imgMain.onload = syncColorbarHeight;
-    syncColorbarHeight();
+  /* ══════════════════════════════════════════════════════════════
+     DOWNLOAD
+     ══════════════════════════════════════════════════════════════ */
+  function downloadCanvas(){
+    if(!ENGINE.lum){ return; }
+    let src;
+    if(VIZ.compare==='side'){
+      const w=ENGINE.w,h=ENGINE.h; const cv=document.createElement('canvas');
+      cv.width=w*2+4; cv.height=h; const cx=cv.getContext('2d');
+      cx.fillStyle='#000'; cx.fillRect(0,0,cv.width,cv.height);
+      cx.drawImage(sideA,0,0); cx.drawImage(sideB,w+4,0); src=cv.toDataURL('image/png');
+    }else src=mainCv.toDataURL('image/png');
+    const a=document.createElement('a'); a.download='hdr_visualizacao.png'; a.href=src; a.click();
+  }
+  function downloadServer(which){
+    const src = which==='hdr'?ENGINE.serverHDR:ENGINE.serverFC;
+    if(!src) return;
+    const a=document.createElement('a'); a.download= which==='hdr'?'hdr_preview.jpg':'false_color.jpg'; a.href=src; a.click();
   }
 
-  function syncColorbarHeight() {
-    const imgMain     = document.getElementById('imgMain');
-    const colorbarWrap = document.getElementById('colorbarWrap');
-    if (imgMain.naturalHeight && imgMain.offsetHeight) {
-      colorbarWrap.style.height = imgMain.offsetHeight + 'px';
-    }
+  /* UTILS */
+  function parseRange(str){
+    str=str.replace(/\./g,'').replace(/k/gi,'000').trim();
+    if(str.startsWith('<')) return [0,parseFloat(str.slice(1))];
+    if(str.startsWith('>')) return [parseFloat(str.slice(1)),Infinity];
+    const p=str.split('–').map(s=>parseFloat(s.trim()));
+    return [p[0]||0, p[1]||Infinity];
   }
 
-  // Re-sincroniza no resize da janela
-  window.addEventListener('resize', syncColorbarHeight);
+  window.addEventListener('resize', ()=>{ if(ENGINE.lum){ updateColorbar(); } });
 
-  // ═══════════════════════════════════════════════
-  //  DOWNLOAD
-  // ═══════════════════════════════════════════════
-  function downloadImg(view, filename) {
-    const src = VIEW_SRCS[view] || document.getElementById('imgMain').src;
-    if (!src || src === window.location.href) return;
-    const a = document.createElement('a');
-    a.download = filename; a.href = src; a.click();
-  }
-
-  // ═══════════════════════════════════════════════
-  //  UTILS
-  // ═══════════════════════════════════════════════
-  function parseRange(str) {
-    str = str.replace(/\./g, '').replace(/k/gi, '000').trim();
-    if (str.startsWith('<')) return [0, parseFloat(str.slice(1))];
-    if (str.startsWith('>')) return [parseFloat(str.slice(1)), Infinity];
-    const p = str.split('–').map(s => parseFloat(s.trim()));
-    return [p[0] || 0, p[1] || Infinity];
-  }
-
-  // ═══════════════════════════════════════════════
-  //  INIT
-  // ═══════════════════════════════════════════════
+  /* INIT */
   buildRefTable();
   renderLegendTable(null);
+  updateLegendRamp();
   </script>
 </body>
 </html>

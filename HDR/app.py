@@ -608,6 +608,53 @@ def _b64(img):
     return base64.b64encode(buf).decode()
 
 
+def encode_lum_buffer(lum_map, max_side=760):
+    """
+    Empacota o mapa de luminância para o cliente re-renderizar tudo em JS
+    (falsa cor, filtros quente/fria, isolinhas, sonda) sem reprocessar no servidor.
+
+    Estratégia:
+      • Downsample para no máx. `max_side` px no lado maior (INTER_AREA).
+      • Log10 da luminância, normalizado ao intervalo real dos dados.
+      • Quantizado em uint16 (0–65535) → precisão de ~16 bits em escala log.
+      • Bytes little-endian → base64.
+
+    O cliente reconstrói:  lum = 10 ** (log_min + (v/65535) * (log_max - log_min))
+    """
+    h, w = lum_map.shape[:2]
+    scale = min(1.0, float(max_side) / max(h, w))
+    if scale < 1.0:
+        nw, nh = max(1, int(round(w * scale))), max(1, int(round(h * scale)))
+        small = cv2.resize(lum_map, (nw, nh), interpolation=cv2.INTER_AREA)
+    else:
+        small = lum_map
+        nw, nh = w, h
+
+    small = np.clip(small, 1e-6, None).astype(np.float32)
+    log_L = np.log10(small)
+
+    valid = log_L[np.isfinite(log_L)]
+    if valid.size == 0:
+        log_min, log_max = -6.0, 0.0
+    else:
+        log_min = float(np.min(valid))
+        log_max = float(np.max(valid))
+    if log_max - log_min < 1e-6:
+        log_max = log_min + 1e-6
+
+    norm = np.clip((log_L - log_min) / (log_max - log_min), 0.0, 1.0)
+    q    = (norm * 65535.0).astype('<u2')  # uint16 little-endian
+    b64  = base64.b64encode(q.tobytes()).decode()
+
+    return {
+        "buffer":  b64,
+        "w":       int(nw),
+        "h":       int(nh),
+        "log_min": log_min,
+        "log_max": log_max,
+    }
+
+
 def ev_to_time(ev, base=0.5):
     return base * (2.0 ** float(ev))
 
@@ -746,6 +793,9 @@ def process():
         stats     = compute_stats(lum)
         histogram = compute_histogram(lum, scale_min, scale_max, bins=32)
 
+        # ── Buffer de luminância p/ renderização client-side ──────
+        lum_data = encode_lum_buffer(lum, max_side=760)
+
         log_parts = [
             f"Merge: {used_meth}",
             f"Exposição: {exp_source}",
@@ -770,6 +820,7 @@ def process():
             "isoline_count":     drawn_count,
             "rsp_applied":       rsp_used,
             "log":               " | ".join(log_parts),
+            "lum_data":          lum_data,
         })
 
     except Exception as e:
