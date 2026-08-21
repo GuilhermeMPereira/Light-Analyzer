@@ -272,6 +272,24 @@
       background:#fff; border-radius:50%; transform:translate(-50%,-50%);
       box-shadow:0 0 0 1px rgba(0,0,0,.7);
     }
+
+    /* MARCADORES DE PONTO + REGIÃO */
+    #markerLayer { position:absolute; inset:0; pointer-events:none; z-index:6; }
+    .mk { position:absolute; transform:translate(-50%,-100%); display:flex; flex-direction:column; align-items:center; }
+    .mk-lbl { font-family:'Space Mono',monospace; font-size:12px; font-weight:700; color:#fff;
+      background:rgba(5,14,20,.92); border:1px solid #eab308; border-radius:5px; padding:2px 6px; white-space:nowrap; line-height:1.15; }
+    body.big-num .mk-lbl { font-size:15px; }
+    .mk-lbl .mk-idx { color:#eab308; }
+    .mk-stem { width:2px; height:9px; background:#eab308; }
+    .mk-dot { width:11px; height:11px; border-radius:50%; background:#eab308; border:2px solid #0a1a24;
+      margin-top:-1px; box-shadow:0 0 0 1px rgba(0,0,0,.6); }
+    #regionBox { position:absolute; border:2px solid #eab308; background:rgba(234,179,8,.14);
+      pointer-events:none; z-index:6; display:none; }
+    .meas-stat { display:inline-flex; flex-direction:column; gap:1px; background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:8px 12px; min-width:84px; }
+    .meas-stat .ms-k { font-size:10px; color:#4a8fa6; }
+    .meas-stat .ms-v { font-family:'Space Mono',monospace; font-weight:700; color:#fff; font-size:17px; }
+    body.big-num .meas-stat .ms-v { font-size:21px; }
   </style>
 </head>
 <body>
@@ -533,6 +551,18 @@
               <span class="text-xs text-slate-500 ml-2 hidden sm:inline" id="bvHint">Passe o mouse para medir · escolha a análise no painel de Visualização →</span>
             </div>
 
+            <!-- Ferramentas de medição -->
+            <div class="flex items-center gap-2 px-4 py-2 border-b border-white/5 bg-black/10 flex-wrap">
+              <span class="text-xs text-slate-500 font-Mono">Ferramenta:</span>
+              <button id="toolProbe" class="view-tab active" onclick="setTool('probe',this)"><i class="ri-focus-3-line"></i> Sonda</button>
+              <button id="toolPoint" class="view-tab"        onclick="setTool('point',this)"><i class="ri-map-pin-2-line"></i> Marcar ponto</button>
+              <button id="toolArea"  class="view-tab"        onclick="setTool('area',this)"><i class="ri-crop-line"></i> Medir área</button>
+              <div class="ml-auto flex items-center gap-2">
+                <button id="btnClearMeas" class="view-tab" onclick="clearMeasurements()" style="display:none"><i class="ri-eraser-line"></i> Limpar</button>
+                <button id="btnCSV" class="view-tab" onclick="exportCSV()" style="display:none"><i class="ri-file-download-line"></i> CSV</button>
+              </div>
+            </div>
+
             <!-- Barra de comparação (B) -->
             <div id="compareBar" class="items-center gap-2 px-4 py-2 border-b border-white/5 bg-black/20" style="display:none">
               <span class="text-xs font-Mono text-fuchsia-300 font-bold">B =</span>
@@ -557,6 +587,8 @@
                   <span class="ab-badge" id="abBadgeA" style="display:none">A</span>
                   <span class="ab-badge" id="abBadgeB" style="display:none">B</span>
                   <div id="abDivider"><div id="abHandle"><i class="ri-arrow-left-right-line"></i></div></div>
+                  <div id="markerLayer"></div>
+                  <div id="regionBox"></div>
                 </div>
                 <!-- Lado a lado -->
                 <div id="sideWrap">
@@ -582,6 +614,20 @@
             <!-- BARRA DE ESCALA -->
             <div class="px-4 py-3 border-t border-white/5">
               <canvas id="scaleBarCanvas" width="900" height="46" style="width:100%;height:auto;display:block;border-radius:4px"></canvas>
+            </div>
+          </div>
+
+          <!-- MEDIÇÕES -->
+          <div class="result-panel" id="measPanel" style="display:none">
+            <div class="result-label">
+              <span><i class="ri-ruler-2-line mr-1"></i> Medições</span>
+              <span class="text-xs text-slate-500 normal-case" id="measHint" style="letter-spacing:0"></span>
+            </div>
+            <div class="p-4 flex flex-col gap-4">
+              <div id="regionStats" class="flex flex-wrap gap-2 items-stretch" style="display:none"></div>
+              <div id="pointsWrap" style="display:none">
+                <table class="lc-table" id="pointsTable"></table>
+              </div>
             </div>
           </div>
 
@@ -1318,6 +1364,136 @@
   window.addEventListener('scroll', hideCursor, {passive:true});
 
   /* ══════════════════════════════════════════════════════════════
+     MEDIÇÕES — sonda / marcar ponto / medir área
+     ══════════════════════════════════════════════════════════════ */
+  const MEAS = { mode:'probe', points:[], region:null, dragging:false, start:null };
+  const markerLayer=document.getElementById('markerLayer');
+  const regionBox=document.getElementById('regionBox');
+
+  function setTool(mode,btn){
+    MEAS.mode=mode;
+    ['toolProbe','toolPoint','toolArea'].forEach(id=>document.getElementById(id).classList.remove('active'));
+    if(btn) btn.classList.add('active');
+    document.getElementById('bvHint').textContent =
+      mode==='point' ? 'Clique na imagem para fixar um ponto de medição' :
+      mode==='area'  ? 'Arraste um retângulo para medir mín/média/máx + uniformidade' :
+      'Passe o mouse para medir · escolha a análise no painel de Visualização →';
+    mainCv.style.cursor = mode==='point' ? 'cell' : 'crosshair';
+    if(mode!=='area'){ MEAS.dragging=false; }
+  }
+
+  // clique → fixa ponto
+  mainCv.addEventListener('click', e=>{
+    if(MEAS.mode!=='point' || !ENGINE.lum) return;
+    const r=readAt(e.clientX, e.clientY, mainCv); if(!r) return;
+    MEAS.points.push({x:r.x, y:r.y, lum:r.lum});
+    renderMarkers(); renderPointsTable(); updateMeasUI();
+  });
+
+  // arraste → mede área
+  mainCv.addEventListener('mousedown', e=>{
+    if(MEAS.mode!=='area' || !ENGINE.lum) return;
+    e.preventDefault(); MEAS.dragging=true; MEAS.start={cx:e.clientX, cy:e.clientY};
+  });
+  window.addEventListener('mousemove', e=>{ if(MEAS.dragging) drawRegionBox(MEAS.start.cx,MEAS.start.cy,e.clientX,e.clientY); });
+  window.addEventListener('mouseup',   e=>{ if(!MEAS.dragging) return; MEAS.dragging=false; finalizeRegion(MEAS.start.cx,MEAS.start.cy,e.clientX,e.clientY); });
+
+  function clientToBuffer(cx,cy){
+    const rect=mainCv.getBoundingClientRect();
+    const x=(cx-rect.left)*(ENGINE.w/rect.width);
+    const y=(cy-rect.top)*(ENGINE.h/rect.height);
+    return { x:Math.max(0,Math.min(ENGINE.w-1,x)), y:Math.max(0,Math.min(ENGINE.h-1,y)) };
+  }
+  function drawRegionBox(cx0,cy0,cx1,cy1){
+    const wrap=document.getElementById('renderWrap').getBoundingClientRect();
+    const x0=Math.min(cx0,cx1), y0=Math.min(cy0,cy1), x1=Math.max(cx0,cx1), y1=Math.max(cy0,cy1);
+    regionBox.style.display='block';
+    regionBox.style.left=(x0-wrap.left)+'px'; regionBox.style.top=(y0-wrap.top)+'px';
+    regionBox.style.width=(x1-x0)+'px'; regionBox.style.height=(y1-y0)+'px';
+  }
+  function finalizeRegion(cx0,cy0,cx1,cy1){
+    const a=clientToBuffer(cx0,cy0), b=clientToBuffer(cx1,cy1);
+    const x0=Math.floor(Math.min(a.x,b.x)), x1=Math.ceil(Math.max(a.x,b.x));
+    const y0=Math.floor(Math.min(a.y,b.y)), y1=Math.ceil(Math.max(a.y,b.y));
+    if(x1-x0<2 || y1-y0<2){ MEAS.region=null; regionBox.style.display='none'; renderRegionStats(); updateMeasUI(); return; }
+    MEAS.region={x0,y0,x1,y1}; renderRegionStats(); updateMeasUI();
+  }
+
+  function renderMarkers(){
+    markerLayer.innerHTML = MEAS.points.map((p,i)=>{
+      const left=(p.x/ENGINE.w*100), top=(p.y/ENGINE.h*100);
+      const val=p.lum<10?p.lum.toFixed(2):fmt(p.lum);
+      return `<div class="mk" style="left:${left}%;top:${top}%">
+        <div class="mk-lbl"><span class="mk-idx">P${i+1}</span> ${val}</div>
+        <div class="mk-stem"></div><div class="mk-dot"></div></div>`;
+    }).join('');
+  }
+  function renderPointsTable(){
+    const wrap=document.getElementById('pointsWrap'), tb=document.getElementById('pointsTable');
+    if(!MEAS.points.length){ wrap.style.display='none'; return; }
+    wrap.style.display='block';
+    tb.innerHTML = `<tr style="color:#4a8fa6"><td>#</td><td>cd/m²</td><td>Zona</td><td>x,y</td><td></td></tr>`+
+      MEAS.points.map((p,i)=>{
+        const val=p.lum<10?p.lum.toFixed(2):fmt(p.lum);
+        return `<tr><td class="lc-label" style="color:#eab308;font-weight:700">P${i+1}</td>
+          <td class="lc-label" style="font-family:'Space Mono',monospace">${val}</td>
+          <td class="lc-range">${zoneOf(p.lum)}</td>
+          <td class="lc-range">${p.x},${p.y}</td>
+          <td><button onclick="removePoint(${i})" style="color:#ef4444;cursor:pointer" title="remover"><i class="ri-close-line"></i></button></td></tr>`;
+      }).join('');
+  }
+  function removePoint(i){ MEAS.points.splice(i,1); renderMarkers(); renderPointsTable(); updateMeasUI(); }
+
+  function renderRegionStats(){
+    const box=document.getElementById('regionStats');
+    if(!MEAS.region){ box.style.display='none'; box.innerHTML=''; return; }
+    const {x0,y0,x1,y1}=MEAS.region;
+    let mn=Infinity,mx=0,sum=0,n=0;
+    for(let y=y0;y<y1;y++) for(let x=x0;x<x1;x++){
+      const l=ENGINE.lum[y*ENGINE.w+x]; if(l<mn)mn=l; if(l>mx)mx=l; sum+=l; n++;
+    }
+    const mean=sum/Math.max(n,1), u1=mn/mean, u0=mn/mx;
+    const cards=[
+      ['Mín', mn<10?mn.toFixed(2):fmt(mn), 'cd/m²'],
+      ['Média', mean<10?mean.toFixed(2):fmt(mean), 'cd/m²'],
+      ['Máx', fmt(mx), 'cd/m²'],
+      ['Unif. mín/méd', u1.toFixed(2), 'U1'],
+      ['Unif. mín/máx', u0.toFixed(2), 'U0'],
+      ['Área', `${x1-x0}×${y1-y0}`, 'px'],
+    ];
+    box.style.display='flex';
+    box.innerHTML = cards.map(c=>`<div class="meas-stat"><span class="ms-k">${c[0]}</span><span class="ms-v">${c[1]}</span><span class="ms-k">${c[2]}</span></div>`).join('');
+  }
+
+  function updateMeasUI(){
+    const has = MEAS.points.length || MEAS.region;
+    document.getElementById('measPanel').style.display = has?'block':'none';
+    document.getElementById('btnClearMeas').style.display = has?'inline-flex':'none';
+    document.getElementById('btnCSV').style.display = MEAS.points.length?'inline-flex':'none';
+    document.getElementById('measHint').textContent = MEAS.points.length ? `${MEAS.points.length} ponto(s) marcado(s)` : '';
+  }
+  function clearMeasurements(){
+    MEAS.points=[]; MEAS.region=null;
+    markerLayer.innerHTML=''; regionBox.style.display='none';
+    renderPointsTable(); renderRegionStats(); updateMeasUI();
+  }
+  function exportCSV(){
+    if(!MEAS.points.length) return;
+    let csv='ponto,cd_m2,zona,x,y\n';
+    MEAS.points.forEach((p,i)=>{ csv+=`P${i+1},${p.lum.toFixed(3)},"${zoneOf(p.lum)}",${p.x},${p.y}\n`; });
+    if(MEAS.region){
+      const {x0,y0,x1,y1}=MEAS.region; let mn=Infinity,mx=0,sum=0,n=0;
+      for(let y=y0;y<y1;y++) for(let x=x0;x<x1;x++){ const l=ENGINE.lum[y*ENGINE.w+x]; if(l<mn)mn=l; if(l>mx)mx=l; sum+=l; n++; }
+      const mean=sum/Math.max(n,1);
+      csv+=`\nregiao,min,media,max,unif_u1,unif_u0\n`;
+      csv+=`"${x0},${y0}-${x1},${y1}",${mn.toFixed(3)},${mean.toFixed(3)},${mx.toFixed(3)},${(mn/mean).toFixed(3)},${(mn/mx).toFixed(3)}\n`;
+    }
+    const blob=new Blob([csv],{type:'text/csv'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='medicoes_luminancia.csv'; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  /* ══════════════════════════════════════════════════════════════
      RENDERIZAR RESULTADOS DO SERVIDOR
      ══════════════════════════════════════════════════════════════ */
   function renderResults(data){
@@ -1326,6 +1502,7 @@
     ra.classList.remove('hidden'); ra.classList.add('flex');
     document.getElementById('vizCard').style.opacity='1';
     document.getElementById('vizCard').style.pointerEvents='auto';
+    clearMeasurements();   // nova imagem → zera medições antigas
 
     ENGINE.lum = decodeLum(data.lum_data);
     ENGINE.w=data.lum_data.w; ENGINE.h=data.lum_data.h;
@@ -1460,8 +1637,37 @@
       cv.width=w*2+4; cv.height=h; const cx=cv.getContext('2d');
       cx.fillStyle='#000'; cx.fillRect(0,0,cv.width,cv.height);
       cx.drawImage(sideA,0,0); cx.drawImage(sideB,w+4,0); src=cv.toDataURL('image/png');
-    }else src=mainCv.toDataURL('image/png');
+    }else{
+      // inclui marcadores e região no PNG
+      const w=ENGINE.w,h=ENGINE.h; const cv=document.createElement('canvas');
+      cv.width=w; cv.height=h; const cx=cv.getContext('2d');
+      cx.drawImage(mainCv,0,0);
+      bakeOverlays(cx,w,h);
+      src=cv.toDataURL('image/png');
+    }
     const a=document.createElement('a'); a.download='hdr_visualizacao.png'; a.href=src; a.click();
+  }
+  // desenha marcadores + região sobre o canvas exportado
+  function bakeOverlays(cx,w,h){
+    if(MEAS.region){
+      const {x0,y0,x1,y1}=MEAS.region;
+      cx.strokeStyle='#eab308'; cx.lineWidth=Math.max(2,w/500);
+      cx.strokeRect(x0,y0,x1-x0,y1-y0);
+    }
+    const fs=Math.max(13, w/48);
+    cx.font=`700 ${fs}px 'Space Mono', monospace`; cx.textBaseline='bottom';
+    MEAS.points.forEach((p,i)=>{
+      const val=p.lum<10?p.lum.toFixed(2):fmt(p.lum);
+      // ponto
+      cx.beginPath(); cx.arc(p.x,p.y,Math.max(4,w/220),0,7); cx.fillStyle='#eab308';
+      cx.strokeStyle='#0a1a24'; cx.lineWidth=2; cx.fill(); cx.stroke();
+      // rótulo
+      const txt=`P${i+1} ${val}`; const tw=cx.measureText(txt).width;
+      const bx=Math.min(Math.max(p.x-tw/2-5,2), w-tw-9), by=Math.max(p.y-12, fs+8);
+      cx.fillStyle='rgba(5,14,20,.92)'; cx.strokeStyle='#eab308'; cx.lineWidth=1.5;
+      cx.fillRect(bx,by-fs-6,tw+10,fs+8); cx.strokeRect(bx,by-fs-6,tw+10,fs+8);
+      cx.fillStyle='#fff'; cx.fillText(txt,bx+5,by);
+    });
   }
   function downloadServer(which){
     const src = which==='hdr'?ENGINE.serverHDR:ENGINE.serverFC;
