@@ -249,6 +249,29 @@
 
     .cbcanvas { display:block; }
     .mini-label { font-family:'Space Mono',monospace; font-size:10px; color:#4a8fa6; }
+
+    /* IDENTIFICADOR DE PONTO (segue o mouse) */
+    #cursorTip {
+      position:fixed; z-index:60; pointer-events:none; display:none;
+      background:rgba(5,14,20,.95); border:1px solid rgba(234,179,8,.55); border-radius:8px;
+      padding:6px 11px; font-family:'Space Mono',monospace; box-shadow:0 4px 18px rgba(0,0,0,.55);
+    }
+    #cursorTip .ct-val  { font-size:22px; font-weight:700; color:#fff; line-height:1.05; white-space:nowrap; }
+    body.big-num #cursorTip .ct-val { font-size:28px; }
+    #cursorTip .ct-unit { font-size:11px; color:#9fb3c0; font-weight:400; }
+    #cursorTip .ct-zone { font-size:12px; color:#eab308; margin-top:3px; display:flex; align-items:center; gap:6px; white-space:nowrap; }
+    #cursorTip .ct-sw   { width:12px; height:12px; border-radius:3px; border:1px solid rgba(255,255,255,.35); display:inline-block; flex-shrink:0; }
+    #cursorTip .ct-xy   { font-size:10px; color:#4a8fa6; margin-top:2px; }
+    #cursorRing {
+      position:fixed; z-index:59; pointer-events:none; display:none;
+      width:20px; height:20px; margin:-10px 0 0 -10px; border-radius:50%;
+      border:2px solid #fff; box-shadow:0 0 0 1.5px rgba(0,0,0,.75), inset 0 0 0 1px rgba(0,0,0,.55);
+    }
+    #cursorRing::after {
+      content:''; position:absolute; left:50%; top:50%; width:3px; height:3px;
+      background:#fff; border-radius:50%; transform:translate(-50%,-50%);
+      box-shadow:0 0 0 1px rgba(0,0,0,.7);
+    }
   </style>
 </head>
 <body>
@@ -620,6 +643,10 @@
     <a href="../index.html" class="text-cyan-700 hover:text-cyan-500 transition-colors">← Voltar para Light Photo Analyzer</a>
     <span class="mx-3">·</span>© 2025 Light Photo Analyzer
   </footer>
+
+  <!-- Identificador de ponto flutuante (segue o mouse) -->
+  <div id="cursorTip"></div>
+  <div id="cursorRing"></div>
 
   <script>
   /* ══════════════════════════════════════════════════════════════
@@ -1101,51 +1128,65 @@
   function fmt(v){ return v>=1000 ? (v/1000).toFixed(v>=10000?0:1).replace('.0','')+'k'
                   : v>=1 ? Math.round(v).toString() : v.toFixed(2); }
 
+  // Ajusta um canvas para densidade de pixels do monitor (texto/traços nítidos)
+  function hidpi(cv, cssW, cssH){
+    const dpr=Math.min(window.devicePixelRatio||1, 3);
+    cv.width=Math.round(cssW*dpr); cv.height=Math.round(cssH*dpr);
+    cv.style.height=cssH+'px';
+    const ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.imageSmoothingEnabled=false;
+    return ctx;
+  }
+
   function updateColorbar(){
     const cv=document.getElementById('cbCanvas');
     const rectH = mainCv.getBoundingClientRect().height;
     const H=Math.max(300, Math.min(560, rectH||360));
-    cv.height=H; const W=cv.width; const ctx=cv.getContext('2d');
+    const W=88;
+    cv.style.width=W+'px';
+    const ctx=hidpi(cv, W, H);
     ctx.clearRect(0,0,W,H);
     const barW=34, lut=PAL_LUT[VIZ.palette]||PAL_LUT.radiance;
     for(let y=0;y<H;y++){
       const t=1-y/(H-1); const idx=(t*255)|0;
       ctx.fillStyle=`rgb(${lut[idx*3]},${lut[idx*3+1]},${lut[idx*3+2]})`;
-      ctx.fillRect(0,y,barW,1);
+      ctx.fillRect(0,y,barW,1.2);
     }
     const lo=Math.log10(ENGINE.dispMin), hi=Math.log10(ENGINE.dispMax), span=hi-lo;
-    const fs=ENGINE.big?15:12;
+    const fs=ENGINE.big?16:13;
     ctx.font=`700 ${fs}px 'Space Mono', monospace`; ctx.textBaseline='middle';
     const dLo=Math.floor(lo), dHi=Math.ceil(hi);
     for(let dec=dLo;dec<=dHi;dec++) for(const m of [1,2,5]){
       const v=m*Math.pow(10,dec); if(v<ENGINE.dispMin||v>ENGINE.dispMax) continue;
-      const tt=(Math.log10(v)-lo)/span; const y=Math.round((1-tt)*(H-1));
-      ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.lineWidth=1;
+      const tt=(Math.log10(v)-lo)/span; const y=(1-tt)*(H-1);
+      ctx.strokeStyle='rgba(255,255,255,.9)'; ctx.lineWidth=1;
       ctx.beginPath(); ctx.moveTo(barW-6,y); ctx.lineTo(barW+3,y); ctx.stroke();
-      ctx.lineWidth=3; ctx.strokeStyle='rgba(0,0,0,.85)';
+      ctx.lineWidth=3.5; ctx.strokeStyle='rgba(0,0,0,.9)'; ctx.lineJoin='round';
       ctx.strokeText(fmt(v), barW+6, y);
-      ctx.fillStyle='#e2f4ff'; ctx.fillText(fmt(v), barW+6, y);
+      ctx.fillStyle='#eaf6ff'; ctx.fillText(fmt(v), barW+6, y);
     }
   }
 
   function updateScaleBar(){
-    const cv=document.getElementById('scaleBarCanvas'); const W=cv.width, H=cv.height;
-    const ctx=cv.getContext('2d'); ctx.clearRect(0,0,W,H);
+    const cv=document.getElementById('scaleBarCanvas');
+    const W=Math.round(cv.clientWidth||cv.parentElement.clientWidth||760), H=46;
+    const ctx=hidpi(cv, W, H);
+    ctx.clearRect(0,0,W,H);
     const barH=18, lut=PAL_LUT[VIZ.palette]||PAL_LUT.radiance;
     for(let x=0;x<W;x++){ const t=x/(W-1); const idx=(t*255)|0;
-      ctx.fillStyle=`rgb(${lut[idx*3]},${lut[idx*3+1]},${lut[idx*3+2]})`; ctx.fillRect(x,0,1,barH); }
+      ctx.fillStyle=`rgb(${lut[idx*3]},${lut[idx*3+1]},${lut[idx*3+2]})`; ctx.fillRect(x,0,1.2,barH); }
     const lo=Math.log10(ENGINE.dispMin), hi=Math.log10(ENGINE.dispMax), span=hi-lo;
-    const fs=ENGINE.big?17:13;
-    ctx.font=`700 ${fs}px 'Space Mono', monospace`; ctx.textAlign='center'; ctx.textBaseline='top';
+    const fs=ENGINE.big?18:14;
+    ctx.font=`700 ${fs}px 'Space Mono', monospace`; ctx.textAlign='center'; ctx.textBaseline='top'; ctx.lineJoin='round';
     const dLo=Math.floor(lo), dHi=Math.ceil(hi);
     for(let dec=dLo;dec<=dHi;dec++) for(const m of [1,3,10]){
       const v=m*Math.pow(10,dec); if(v<ENGINE.dispMin||v>ENGINE.dispMax) continue;
-      const tt=(Math.log10(v)-lo)/span; const x=Math.round(tt*(W-1));
-      ctx.strokeStyle='rgba(255,255,255,.7)'; ctx.lineWidth=1;
+      const tt=(Math.log10(v)-lo)/span; const x=tt*(W-1);
+      ctx.strokeStyle='rgba(255,255,255,.75)'; ctx.lineWidth=1;
       ctx.beginPath(); ctx.moveTo(x,barH); ctx.lineTo(x,barH+5); ctx.stroke();
-      ctx.lineWidth=3; ctx.strokeStyle='rgba(0,0,0,.85)';
+      ctx.lineWidth=3.5; ctx.strokeStyle='rgba(0,0,0,.9)';
       ctx.strokeText(fmt(v), x, barH+7);
-      ctx.fillStyle='#cfe8f4'; ctx.fillText(fmt(v), x, barH+7);
+      ctx.fillStyle='#d7eef8'; ctx.fillText(fmt(v), x, barH+7);
     }
     ctx.textAlign='start';
   }
@@ -1222,22 +1263,59 @@
   }
 
   /* ══════════════════════════════════════════════════════════════
-     SONDA (probe)
+     SONDA (probe) — identificador de ponto que segue o mouse
      ══════════════════════════════════════════════════════════════ */
-  mainCv.addEventListener('mousemove', e=>{
-    if(!ENGINE.lum) return;
-    const rect=mainCv.getBoundingClientRect();
-    const x=Math.floor((e.clientX-rect.left)*(ENGINE.w/rect.width));
-    const y=Math.floor((e.clientY-rect.top)*(ENGINE.h/rect.height));
-    if(x<0||y<0||x>=ENGINE.w||y>=ENGINE.h) return;
-    const lm=ENGINE.lum[y*ENGINE.w+x];
-    const tv=ENGINE.tArr[y*ENGINE.w+x];
-    const lut=PAL_LUT[VIZ.palette]; const idx=(tv*255)|0;
-    document.getElementById('probeXY').textContent=`${x},${y}`;
-    document.getElementById('probeLum').textContent = lm<10?lm.toFixed(2):fmt(lm);
-    document.getElementById('probeZone').textContent = zoneOf(lm);
-    document.getElementById('probeDot').style.background=`rgb(${lut[idx*3]},${lut[idx*3+1]},${lut[idx*3+2]})`;
+  const cursorTip=document.getElementById('cursorTip');
+  const cursorRing=document.getElementById('cursorRing');
+
+  function readAt(clientX, clientY, canvasEl){
+    const rect=canvasEl.getBoundingClientRect();
+    if(!rect.width||!rect.height) return null;
+    const x=Math.floor((clientX-rect.left)*(ENGINE.w/rect.width));
+    const y=Math.floor((clientY-rect.top)*(ENGINE.h/rect.height));
+    if(x<0||y<0||x>=ENGINE.w||y>=ENGINE.h) return null;
+    const i=y*ENGINE.w+x;
+    return { x, y, lum:ENGINE.lum[i], t:ENGINE.tArr[i] };
+  }
+
+  function showCursor(e, canvasEl){
+    if(!ENGINE.lum){ hideCursor(); return; }
+    const r=readAt(e.clientX, e.clientY, canvasEl);
+    if(!r){ hideCursor(); return; }
+    const lut=PAL_LUT[VIZ.palette]||PAL_LUT.radiance; const idx=(r.t*255)|0;
+    const col=`rgb(${lut[idx*3]},${lut[idx*3+1]},${lut[idx*3+2]})`;
+    const val = r.lum<10 ? r.lum.toFixed(2) : fmt(r.lum);
+
+    // etiqueta flutuante
+    cursorTip.innerHTML =
+      `<div class="ct-val">${val} <span class="ct-unit">cd/m²</span></div>`+
+      `<div class="ct-zone"><span class="ct-sw" style="background:${col}"></span>${zoneOf(r.lum)}</div>`+
+      `<div class="ct-xy">x ${r.x} · y ${r.y}</div>`;
+    cursorTip.style.display='block';
+    const tw=cursorTip.offsetWidth, th=cursorTip.offsetHeight;
+    let px=e.clientX+16, py=e.clientY+16;
+    if(px+tw>window.innerWidth-8)  px=e.clientX-tw-16;
+    if(py+th>window.innerHeight-8) py=e.clientY-th-16;
+    cursorTip.style.left=px+'px'; cursorTip.style.top=py+'px';
+
+    // mira no ponto exato
+    cursorRing.style.display='block';
+    cursorRing.style.left=e.clientX+'px'; cursorRing.style.top=e.clientY+'px';
+    cursorRing.style.borderColor = (r.t>0.55)?'#fff':'#fff';
+
+    // barra inferior (mantida)
+    document.getElementById('probeXY').textContent=`${r.x},${r.y}`;
+    document.getElementById('probeLum').textContent=val;
+    document.getElementById('probeZone').textContent=zoneOf(r.lum);
+    document.getElementById('probeDot').style.background=col;
+  }
+  function hideCursor(){ cursorTip.style.display='none'; cursorRing.style.display='none'; }
+
+  [mainCv, sideA, sideB].forEach(cv=>{
+    cv.addEventListener('mousemove', e=>showCursor(e, cv));
+    cv.addEventListener('mouseleave', hideCursor);
   });
+  window.addEventListener('scroll', hideCursor, {passive:true});
 
   /* ══════════════════════════════════════════════════════════════
      RENDERIZAR RESULTADOS DO SERVIDOR
@@ -1400,7 +1478,7 @@
     return [p[0]||0, p[1]||Infinity];
   }
 
-  window.addEventListener('resize', ()=>{ if(ENGINE.lum){ updateColorbar(); } });
+  window.addEventListener('resize', ()=>{ if(ENGINE.lum){ updateColorbar(); updateScaleBar(); } });
 
   /* INIT */
   buildRefTable();
